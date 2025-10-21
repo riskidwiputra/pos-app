@@ -1,0 +1,12 @@
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "./template/core.css";
+@import "./template/demo.css";
+@import "./template/theme-default.css";
+@import "./template/perfect-scrollbar.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
