@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('restrict');
             $table->foreignId('sub_category_id')->constrained('sub_categories')->onDelete('restrict');
             $table->foreignId('unit_id')->constrained('units')->onDelete('restrict');
+            $table->string('kode_produk', 20);
             $table->string('nama_produk');
             $table->text('deskripsi')->nullable();
             $table->decimal('harga_jual', 15, 2);
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->integer('stok_minimum')->default(0);
             $table->string('barcode_product')->unique();
             $table->string('gambar_barang')->nullable();
-            $table->enum('status_product', ['Aktif', 'Tidak Aktif'])->default('Aktif');
+            $table->enum('status_product', ['Tersedia', 'Tidak-Tersedia'])->default('Tersedia');
             $table->softDeletes();
             $table->timestamps();
 

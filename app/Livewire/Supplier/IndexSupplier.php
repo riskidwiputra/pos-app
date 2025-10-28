@@ -21,23 +21,22 @@ class IndexSupplier extends Component
     public $message = '';
 
     protected $updatesQueryString = ['search', 'perPage'];
-    protected $paginationTheme = 'tailwind'; // Livewire pagination Tailwind
+    protected $paginationTheme = 'tailwind'; 
 
-    // Ambil data supplier
+
     public function suppliers()
     {
         return Supplier::where(function($query) {
             $query->where('nama_supplier', 'like', '%' . $this->search . '%')
-                  ->orWhere('no_telepon', 'like', '%' . $this->search . '%')
-                  ->orWhere('alamat', 'like', '%' . $this->search . '%');
+                  ->orWhere('no_telepon', 'like', '%' . $this->search . '%');
         })->latest()->paginate($this->perPage);
     }
 
-    // Reset halaman saat search/perPage berubah
+
     public function updatingSearch() { $this->resetPage(); }
     public function updatingPerPage() { $this->resetPage(); }
 
-    // Delete modal
+
     public function confirmDelete($id)
     {
         $this->supplierId = $id;

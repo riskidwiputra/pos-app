@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_kategori', 20)->unique();
+            $table->string('kode_kategori', 20);
             $table->string('nama_kategori')->unique();
             $table->text('deskripsi')->nullable();
             $table->softDeletes();

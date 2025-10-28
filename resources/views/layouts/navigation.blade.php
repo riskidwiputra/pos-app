@@ -25,9 +25,6 @@
         </a>
       </li>
 
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Master Data</span>
-      </li>
 
       <!-- Supplier -->
       <li class="menu-item {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
@@ -36,35 +33,67 @@
           <div data-i18n="Supplier">Supplier</div>
         </a>
       </li>
+      
+      <li class="menu-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
+        <a href="{{ route('product.index') }}" class="menu-link" wire:navigate.hover>
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="product">Manajemen Produk</div>
+        </a>
+      </li>
+      
 
       <!-- Data Karyawan -->
       <li class="menu-item {{ request()->routeIs('karyawan.*') ? 'active' : '' }}">
-        <a href="#" class="menu-link" wire:navigate>
+        <a href="{{ route('karyawan.index') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Karyawan">Data Karyawan</div>
         </a>
       </li>
-
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Pengaturan</span>
-      </li>
+      <li class="menu-item open  {{ request()->routeIs('category.*','unit.*','subcategory.*') ? 'active' : '' }}" >
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Master Data</div>
+              </a>
+              <ul class="menu-sub">
+                
+                 <li class="menu-item {{ request()->routeIs('category.*') ? 'active' : '' }}">
+                    <a href="{{ route('category.index') }}" class="menu-link" wire:navigate.hover>
+                     
+                      <div data-i18n="kategori">Kategori</div>
+                    </a>
+                  </li>
+                  <li class="menu-item {{ request()->routeIs('subcategory.*') ? 'active' : '' }}">
+                      <a href="{{ route('subcategory.index') }}" class="menu-link" wire:navigate.hover>
+                     
+                      <div data-i18n="kategori">Sub Kategori</div>
+                    </a>
+                  </li>
+                 
+                  <li class="menu-item {{ request()->routeIs('unit.*') ? 'active' : '' }}">
+                    <a href="{{ route('unit.index') }}" class="menu-link" wire:navigate.hover>
+                     
+                      <div data-i18n="kategori">Unit</div>
+                    </a>
+                  </li>
+              </ul>
+            </li>
 
       <!-- Profile -->
-      <li class="menu-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+      <!-- <li class="menu-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
         <a href="{{ route('profile.edit') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user-circle"></i>
           <div data-i18n="Profile">Profile</div>
         </a>
-      </li>
+      </li> -->
 
       <!-- Logout -->
-      <li class="menu-item">
+      <!-- <li class="menu-item">
         <a href="{{ route('logout') }}" class="menu-link" 
            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="menu-icon tf-icons bx bx-log-out"></i>
           <div data-i18n="Logout">Logout</div>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </aside>

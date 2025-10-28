@@ -26,14 +26,4 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
-        
-    //     static::creating(function ($category) {
-    //         if (empty($category->kode_kategori)) {
-    //             $category->kode_kategori = 'KAT' . str_pad(Category::max('id') + 1, 4, '0', STR_PAD_LEFT);
-    //         }
-    //     });
-    // }
 }

@@ -10,6 +10,8 @@ class SubCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'sub_categories'; 
+
     protected $fillable = [
         'category_id',
         'kode_subkategori',
@@ -27,14 +29,14 @@ class SubCategory extends Model
         return $this->hasMany(Product::class);
     }
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
         
-        static::creating(function ($subCategory) {
-            if (empty($subCategory->kode_subkategori)) {
-                $subCategory->kode_subkategori = 'SUB' . str_pad(SubCategory::max('id') + 1, 4, '0', STR_PAD_LEFT);
-            }
-        });
-    }
+    //     static::creating(function ($subCategory) {
+    //         if (empty($subCategory->kode_subkategori)) {
+    //             $subCategory->kode_subkategori = 'SUB' . str_pad(SubCategory::max('id') + 1, 4, '0', STR_PAD_LEFT);
+    //         }
+    //     });
+    // }
 }

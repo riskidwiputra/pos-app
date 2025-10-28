@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->string('kode_subkategori', 20)->unique();
+            $table->string('kode_subkategori', 20);
             $table->string('nama_subkategori')->unique();
             $table->text('deskripsi')->nullable();
             $table->softDeletes();

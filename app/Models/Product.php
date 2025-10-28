@@ -14,6 +14,7 @@ class Product extends Model
         'category_id',
         'sub_category_id',
         'unit_id',
+        'kode_produk',
         'nama_produk',
         'deskripsi',
         'harga_jual',
@@ -65,26 +66,5 @@ class Product extends Model
         return $query->whereColumn('stok_tersedia', '<=', 'stok_minimum');
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-        
-        static::creating(function ($product) {
-            if (empty($product->barcode_product)) {
-                $category = Category::find($product->category_id);
-                $subCategory = SubCategory::find($product->sub_category_id);
-                $unit = Unit::find($product->unit_id);
-                
-                $randomCode = strtoupper(substr(md5(uniqid(rand(), true)), 0, 4));
-                
-                $product->barcode_product = sprintf(
-                    '%s-%s-%s-%s',
-                    $category->kode_kategori ?? 'KAT',
-                    $subCategory->kode_subkategori ?? 'SUB',
-                    $unit->kode_unit ?? 'UNIT',
-                    $randomCode
-                );
-            }
-        });
-    }
+    
 }

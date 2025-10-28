@@ -21,14 +21,4 @@ class Unit extends Model
         return $this->hasMany(Product::class);
     }
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
-        
-    //     static::creating(function ($unit) {
-    //         if (empty($unit->kode_unit)) {
-    //             $unit->kode_unit = 'UNIT' . str_pad(Unit::max('id') + 1, 4, '0', STR_PAD_LEFT);
-    //         }
-    //     });
-    // }
 }

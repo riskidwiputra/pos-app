@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_unit', 20)->unique();
+            $table->string('kode_unit', 20);
             $table->string('nama_unit');
             $table->string('singkatan', 10);
             $table->softDeletes();

@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-8 px-4 sm:px-6 lg:px-8">
-    <div class=" container-xxl max-w-2xl mx-auto">
+    <div class=" container-xxl w-full">
         
         <!-- Header with Back Button -->
         <div class="mb-8">
