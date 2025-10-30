@@ -8,33 +8,30 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('purchase_items', function (Blueprint $table) {
+        Schema::create('purchase_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchase_id')->constrained('purchases')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->decimal('harga_beli', 15, 2);
-            $table->integer('qty');
-            $table->decimal('subtotal', 15, 2);
+            $table->date('tanggal_bayar');
+            $table->decimal('jumlah_bayar', 15, 2);
+            $table->enum('metode_bayar', ['Cash', 'Transfer', 'E-Wallet'])->default('Cash');
+            $table->text('catatan')->nullable();
             $table->timestamps();
             
             // Indexes
             $table->index('purchase_id');
-            $table->index('product_id');
+            $table->index('tanggal_bayar');
+            $table->index('metode_bayar');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('purchase_items');
+        Schema::dropIfExists('purchase_payment');
     }
 };

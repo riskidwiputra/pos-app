@@ -10,29 +10,40 @@ class Purchase extends Model
 {
    use HasFactory, SoftDeletes;
 
-    protected $fillable = [
+     protected $fillable = [
+        'purchase_code',
         'supplier_id',
-        'nama_invoice',
+        'nomor_invoice',
         'tgl_invoice',
         'tanggal_terima_barang',
+        'total_harga',
+        'jumlah_dibayar',
+        'sisa_tagihan',
+        'status_pembayaran',
         'status',
-        'total_pembelian',
+        'catatan',
     ];
 
     protected $casts = [
         'tgl_invoice' => 'date',
         'tanggal_terima_barang' => 'date',
-        'total_pembelian' => 'decimal:2',
+        'total_harga' => 'integer:2',
+        'jumlah_dibayar' => 'integer:2',
+        'sisa_tagihan' => 'integer:2',
     ];
-
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
     }
 
-    public function purchaseItems()
+     public function items()
     {
         return $this->hasMany(PurchaseItem::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(PurchasePayment::class)->orderBy('tanggal_bayar', 'desc');
     }
 
     public function purchaseReturns()
@@ -40,15 +51,4 @@ class Purchase extends Model
         return $this->hasMany(PurchaseReturn::class);
     }
 
-    // Auto generate invoice number
-    protected static function boot()
-    {
-        parent::boot();
-        
-        static::creating(function ($purchase) {
-            if (empty($purchase->nama_invoice)) {
-                $purchase->nama_invoice = 'INV-' . date('Ymd') . '-' . str_pad(Purchase::whereDate('created_at', today())->count() + 1, 4, '0', STR_PAD_LEFT);
-            }
-        });
-    }
 }

@@ -10,6 +10,10 @@ use App\Livewire\Employee\UpdateEmployee;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\IndexProduct;
 use App\Livewire\Product\UpdateProduct;
+use App\Livewire\Purchase\CreatePurchase;
+use App\Livewire\Purchase\DetailPurchase;
+use App\Livewire\Purchase\IndexPurchase;
+use App\Livewire\Purchase\UpdatePurchase;
 use App\Livewire\SubCategory\CreateSubCategory;
 use App\Livewire\SubCategory\IndexSubCategory;
 use App\Livewire\SubCategory\UpdateSubCategory;
@@ -69,6 +73,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', IndexProduct::class)->name('index');
         Route::get('/create', CreateProduct::class)->name('create');
         Route::get('/{id}/edit', UpdateProduct::class)->name('edit');
+    });
+    Route::prefix('purchase')->name('purchase.')->group(function () {
+        Route::get('/', IndexPurchase::class)->name('index');
+        Route::get('/create', CreatePurchase::class)->name('create');
+        Route::get('/{id}/edit', UpdatePurchase::class)->name('edit');
+        Route::get('/{id}/detail', DetailPurchase::class)->name('detail');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

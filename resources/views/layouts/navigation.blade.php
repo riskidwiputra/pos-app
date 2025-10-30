@@ -40,7 +40,12 @@
           <div data-i18n="product">Manajemen Produk</div>
         </a>
       </li>
-      
+      <li class="menu-item {{ request()->routeIs('purchase.*') ? 'active' : '' }}">
+        <a href="{{ route('purchase.index') }}" class="menu-link" wire:navigate.hover>
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="purchase">Pembelian</div>
+        </a>
+      </li>
 
       <!-- Data Karyawan -->
       <li class="menu-item {{ request()->routeIs('karyawan.*') ? 'active' : '' }}">
