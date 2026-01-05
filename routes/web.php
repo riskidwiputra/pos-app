@@ -1,9 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admin\CreateAdmin;
+use App\Livewire\Admin\IndexAdmin;
+use App\Livewire\Admin\UpdateAdmin;
 use App\Livewire\Category\CreateCategory;
 use App\Livewire\Category\IndexCategory;
 use App\Livewire\Category\UpdateCategory;
+use App\Livewire\Customer\CreateCustomer;
+use App\Livewire\Customer\IndexCustomer;
+use App\Livewire\Customer\UpdateCustomer;
+// use App\Livewire\Dashboard;
 use App\Livewire\Employee\CreateEmployee;
 use App\Livewire\Employee\IndexEmployee;
 use App\Livewire\Employee\UpdateEmployee;
@@ -14,6 +21,8 @@ use App\Livewire\Purchase\CreatePurchase;
 use App\Livewire\Purchase\DetailPurchase;
 use App\Livewire\Purchase\IndexPurchase;
 use App\Livewire\Purchase\UpdatePurchase;
+use App\Livewire\Roles\ManagePermissions;
+use App\Livewire\Setting\MenuManagement;
 use App\Livewire\SubCategory\CreateSubCategory;
 use App\Livewire\SubCategory\IndexSubCategory;
 use App\Livewire\SubCategory\UpdateSubCategory;
@@ -43,6 +52,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::prefix('supplier')->name('supplier.')->group(function () {
         Route::get('/', IndexSupplier::class)->name('index');
@@ -80,6 +90,30 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', UpdatePurchase::class)->name('edit');
         Route::get('/{id}/detail', DetailPurchase::class)->name('detail');
     });
+
+     Route::prefix('admin-management')->group(function () {
+        Route::get('/', IndexAdmin::class)->name('admin.index');
+        Route::get('/create', CreateAdmin::class)->name('admin.create');
+        Route::get('/{id}/edit', UpdateAdmin::class)->name('admin.edit');
+    });
+     Route::prefix('customer')->group(function () {
+        Route::get('/', IndexCustomer::class)->name('customer.index');
+        Route::get('/create', CreateCustomer::class)->name('customer.create');
+        Route::get('/{id}/edit', UpdateCustomer::class)->name('customer.edit');
+    });
+    Route::get('/roles/manage-permissions', ManagePermissions::class)
+        ->name('roles.manage-permissions');
+    Route::get('/setting/manage-menu', MenuManagement::class)
+        ->name('setting.manage-menu');
+    Route::get('/setting/role-management', \App\Livewire\Setting\RoleManagement::class)
+        ->name('setting.role-management');
+    Route::get('/setting/permission-management', \App\Livewire\Setting\PermissionManagement::class)
+        ->name('setting.permission-management');
+    Route::get('/setting/user-role-management', \App\Livewire\Setting\UserRoleManagement::class)
+        ->name('setting.user-role-management');
+    Route::get('/setting/role-permission-management', \App\Livewire\Setting\RolePermissionManagement::class)
+        ->name('setting.role-permission-management');
+        
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

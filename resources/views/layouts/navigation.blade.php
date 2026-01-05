@@ -46,14 +46,66 @@
           <div data-i18n="purchase">Pembelian</div>
         </a>
       </li>
-
-      <!-- Data Karyawan -->
-      <li class="menu-item {{ request()->routeIs('karyawan.*') ? 'active' : '' }}">
-        <a href="{{ route('karyawan.index') }}" class="menu-link" wire:navigate.hover>
+    <!-- <li class="menu-item {{ request()->routeIs('setting.manage-menu') ? 'active' : '' }}">
+        <a href="{{ route('setting.manage-menu') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user"></i>
-          <div data-i18n="Karyawan">Data Karyawan</div>
+          <div data-i18n="purchase">Pembelian</div>
         </a>
       </li>
+      <li class="menu-item {{ request()->routeIs('setting.role-management') ? 'active' : '' }}">
+        <a href="{{ route('setting.role-management') }}" class="menu-link" wire:navigate.hover>
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="purchase">Role Management</div>
+        </a>
+      </li>
+      <li class="menu-item {{ request()->routeIs('setting.permission-management') ? 'active' : '' }}">
+        <a href="{{ route('setting.permission-management') }}" class="menu-link" wire:navigate.hover>
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="purchase">Permission Management</div>
+        </a> -->
+      <!-- </li>
+      <li class="menu-item {{ request()->routeIs('setting.user-role-management') ? 'active' : '' }}">
+        <a href="{{ route('setting.user-role-management') }}" class="menu-link" wire:navigate.hover>
+          <i class="menu-icon tf-icons bx bx-user"></i>
+          <div data-i18n="purchase">user-role-management</div>
+        </a>
+      </li>
+
+      <li class="menu-item open " >
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons 
+          bx bx-user"></i>
+          <div data-i18n="Account Settings">Data User</div>
+        </a>
+        <ul class="menu-sub">
+          
+            <li class="menu-item {{ request()->routeIs('karyawan.*') ? 'active' : '' }}">
+              <a href="{{ route('karyawan.index') }}" class="menu-link" wire:navigate.hover>
+                
+                <div data-i18n="Karyawan">Data Karyawan</div>
+              </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.index') }}" class="menu-link">
+                 
+                    <div>Data Admin</div>
+                </a>
+            </li>
+
+            <li class="menu-item {{ request()->routeIs('customer.*') ? 'active' : '' }}">
+                <a href="{{ route('customer.index') }}" class="menu-link">
+                    
+                    <div>Data Pelanggan</div>
+                </a>
+            </li>
+           
+           
+            
+            
+        </ul>
+      </li>
+      <!-- Data Karyawan -->
+      
       <li class="menu-item open  {{ request()->routeIs('category.*','unit.*','subcategory.*') ? 'active' : '' }}" >
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
