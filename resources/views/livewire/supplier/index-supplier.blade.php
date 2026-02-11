@@ -78,7 +78,7 @@
         <!-- Search & Per Page -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
             <div class="md:col-span-9 relative">
-                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari supplier, alamat, atau nomor telepon..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari supplier, alamat, atau nomor telepon..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-3">
                 <select wire:model.live="perPage" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
@@ -147,7 +147,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        @forelse($suppliers as $index => $supplier)
+                        @forelse($this->suppliers as $index => $supplier)
                             <tr wire:key="supplier-{{ $supplier->id }}" 
                                 class="group hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-blue-50 transition-all duration-300 border-l-4 border-transparent hover:border-indigo-500">
                                 
@@ -155,7 +155,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 text-sm font-bold text-indigo-700 group-hover:from-indigo-500 group-hover:to-blue-500 group-hover:text-white transition-all duration-300 shadow-sm">
-                                            {{ $suppliers->firstItem() + $index }}
+                                            {{ $this->suppliers->firstItem() + $index }}
                                         </span>
                                     </div>
                                 </td>
@@ -275,7 +275,7 @@
 
         <!-- Pagination -->
         <div class="mt-6">
-            {{ $suppliers->links() }}
+            {{ $this->suppliers->links() }}
         </div>
 
         <!-- Delete Modal -->

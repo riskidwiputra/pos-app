@@ -46,7 +46,7 @@
           <div data-i18n="purchase">Pembelian</div>
         </a>
       </li>
-    <!-- <li class="menu-item {{ request()->routeIs('setting.manage-menu') ? 'active' : '' }}">
+    <!-- <li class="menu-item {{ request( )->routeIs('setting.manage-menu') ? 'active' : '' }}">
         <a href="{{ route('setting.manage-menu') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="purchase">Pembelian</div>
@@ -63,7 +63,7 @@
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="purchase">Permission Management</div>
         </a> -->
-      <!-- </li>
+       <!-- </li> -->
       <li class="menu-item {{ request()->routeIs('setting.user-role-management') ? 'active' : '' }}">
         <a href="{{ route('setting.user-role-management') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user"></i>
@@ -144,13 +144,13 @@
       </li> -->
 
       <!-- Logout -->
-      <!-- <li class="menu-item">
+      <li class="menu-item">
         <a href="{{ route('logout') }}" class="menu-link" 
            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <i class="menu-icon tf-icons bx bx-log-out"></i>
           <div data-i18n="Logout">Logout</div>
         </a>
-      </li> -->
+      </li>
     </ul>
   </div>
 </aside>

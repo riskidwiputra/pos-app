@@ -56,7 +56,7 @@
         <!-- Search & Per Page -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
             <div class="md:col-span-9 relative">
-                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari kode atau nama sub kategori..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari kode atau nama sub kategori..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-3">
                 <select wire:model.live="perPage" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">

@@ -47,7 +47,7 @@
                         <input 
                             type="text" 
                             wire:model="nama_kategori" 
-                            placeholder="PT. Maju Jaya Indonesia"
+                            placeholder="Nama category"
                             class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_category') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         >
                     </div>
