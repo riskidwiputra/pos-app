@@ -29,21 +29,27 @@
       <!-- Supplier -->
       <li class="menu-item {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
         <a href="{{ route('supplier.index') }}" class="menu-link" wire:navigate.hover>
-          <i class="menu-icon tf-icons bx bx-store"></i>
+        <i class="menu-icon tf-icons bx bx-building-house"></i>
           <div data-i18n="Supplier">Supplier</div>
         </a>
       </li>
       
       <li class="menu-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
         <a href="{{ route('product.index') }}" class="menu-link" wire:navigate.hover>
-          <i class="menu-icon tf-icons bx bx-user"></i>
+        <i class="menu-icon tf-icons bx bx-box"></i>
           <div data-i18n="product">Manajemen Produk</div>
         </a>
       </li>
       <li class="menu-item {{ request()->routeIs('purchase.*') ? 'active' : '' }}">
         <a href="{{ route('purchase.index') }}" class="menu-link" wire:navigate.hover>
-          <i class="menu-icon tf-icons bx bx-user"></i>
+        <i class="menu-icon tf-icons bx bx-basket"></i>
           <div data-i18n="purchase">Pembelian</div>
+        </a>
+      </li>
+      <li class="menu-item {{ request()->routeIs('sale.*') ? 'active' : '' }}">
+        <a href="{{ route('sale.index') }}" class="menu-link" wire:navigate.hover>
+       <i class="menu-icon tf-icons bx bx-receipt"></i>
+          <div data-i18n="sale">Penjualan</div>
         </a>
       </li>
     <!-- <li class="menu-item {{ request( )->routeIs('setting.manage-menu') ? 'active' : '' }}">
@@ -64,12 +70,12 @@
           <div data-i18n="purchase">Permission Management</div>
         </a> -->
        <!-- </li> -->
-      <li class="menu-item {{ request()->routeIs('setting.user-role-management') ? 'active' : '' }}">
+      <!-- <li class="menu-item {{ request()->routeIs('setting.user-role-management') ? 'active' : '' }}">
         <a href="{{ route('setting.user-role-management') }}" class="menu-link" wire:navigate.hover>
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="purchase">user-role-management</div>
         </a>
-      </li>
+      </li> -->
 
       <li class="menu-item open " >
         <a href="javascript:void(0);" class="menu-link menu-toggle">

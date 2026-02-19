@@ -7,9 +7,11 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Computed;
 
 #[Layout('layouts.app')]
 #[Title('Manajemen Supplier')]
+
 class IndexSupplier extends Component
 {
     use WithPagination;
@@ -23,8 +25,8 @@ class IndexSupplier extends Component
     protected $updatesQueryString = ['search', 'perPage'];
     protected $paginationTheme = 'tailwind'; 
 
-
-    public function suppliers()
+    #[Computed]
+    public function suppliers() 
     {
         return Supplier::where(function($query) {
             $query->where('nama_supplier', 'like', '%' . $this->search . '%')
@@ -61,8 +63,6 @@ class IndexSupplier extends Component
 
     public function render()
     {
-        return view('livewire.supplier.index-supplier', [
-            'suppliers' => $this->suppliers(),
-        ]);
+        return view('livewire.supplier.index-supplier');
     }
 }

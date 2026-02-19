@@ -10,6 +10,7 @@ use App\Livewire\Category\UpdateCategory;
 use App\Livewire\Customer\CreateCustomer;
 use App\Livewire\Customer\IndexCustomer;
 use App\Livewire\Customer\UpdateCustomer;
+
 // use App\Livewire\Dashboard;
 use App\Livewire\Employee\CreateEmployee;
 use App\Livewire\Employee\IndexEmployee;
@@ -20,8 +21,10 @@ use App\Livewire\Product\UpdateProduct;
 use App\Livewire\Purchase\CreatePurchase;
 use App\Livewire\Purchase\DetailPurchase;
 use App\Livewire\Purchase\IndexPurchase;
-use App\Livewire\Purchase\UpdatePurchase;
+use App\Livewire\Purchase\updatePurchase;
 use App\Livewire\Roles\ManagePermissions;
+use App\Livewire\Sale\CreateSale;
+use App\Livewire\Sale\DetailSale;
 use App\Livewire\Setting\MenuManagement;
 use App\Livewire\SubCategory\CreateSubCategory;
 use App\Livewire\SubCategory\IndexSubCategory;
@@ -32,6 +35,7 @@ use App\Livewire\Supplier\UpdateSupplier;
 use App\Livewire\Unit\CreateUnit;
 use App\Livewire\Unit\IndexUnit;
 use App\Livewire\Unit\UpdateUnit;
+use App\Livewire\Sale\IndexSale;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,7 +94,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', UpdatePurchase::class)->name('edit');
         Route::get('/{id}/detail', DetailPurchase::class)->name('detail');
     });
-
+     Route::prefix('sale')->name('sale.')->group(function () {
+            Route::get('/', IndexSale::class)->name('index');
+            Route::get('/create', CreateSale::class)->name('create');
+            Route::get('/{id}/detail', DetailSale::class)->name('detail');
+        });
      Route::prefix('admin-management')->group(function () {
         Route::get('/', IndexAdmin::class)->name('admin.index');
         Route::get('/create', CreateAdmin::class)->name('admin.create');
