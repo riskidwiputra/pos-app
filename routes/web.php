@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Cashier\Kasir;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\CreateAdmin;
 use App\Livewire\Admin\IndexAdmin;
@@ -15,6 +16,14 @@ use App\Livewire\Customer\UpdateCustomer;
 use App\Livewire\Employee\CreateEmployee;
 use App\Livewire\Employee\IndexEmployee;
 use App\Livewire\Employee\UpdateEmployee;
+use App\Livewire\Laporan\LaporanPenjualan;
+use App\Livewire\Laporan\LaporanPenjualanPerItem;
+use App\Livewire\Laporan\LaporanPenjualanTransaksi;
+use App\Livewire\Laporan\LaporanStok;
+use App\Livewire\OrderJasa\CreateOrderJasa;
+use App\Livewire\OrderJasa\IndexOrderJasa;
+use App\Livewire\OrderJasa\SettingKategoriOrder;
+use App\Livewire\OrderJasa\UpdateOrderJasa;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\IndexProduct;
 use App\Livewire\Product\UpdateProduct;
@@ -25,6 +34,7 @@ use App\Livewire\Purchase\updatePurchase;
 use App\Livewire\Roles\ManagePermissions;
 use App\Livewire\Sale\CreateSale;
 use App\Livewire\Sale\DetailSale;
+
 use App\Livewire\Setting\MenuManagement;
 use App\Livewire\SubCategory\CreateSubCategory;
 use App\Livewire\SubCategory\IndexSubCategory;
@@ -58,6 +68,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 // Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
+
+    Route::get('/cashier', Kasir::class)->name('cashier');
+
     Route::prefix('supplier')->name('supplier.')->group(function () {
         Route::get('/', IndexSupplier::class)->name('index');
         Route::get('/create', CreateSupplier::class)->name('create');
@@ -104,11 +117,42 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', CreateAdmin::class)->name('admin.create');
         Route::get('/{id}/edit', UpdateAdmin::class)->name('admin.edit');
     });
-     Route::prefix('customer')->group(function () {
+    Route::prefix('customer')->group(function () {
         Route::get('/', IndexCustomer::class)->name('customer.index');
         Route::get('/create', CreateCustomer::class)->name('customer.create');
         Route::get('/{id}/edit', UpdateCustomer::class)->name('customer.edit');
     });
+     Route::prefix('laporan')->group(function () {
+        Route::get('/penjualan', LaporanPenjualan::class)->name('laporan.penjualan');
+        // Route::get('/penjualan', LaporanPenjualan::class)->name('laporan.penjualan');
+        // Route::get('/produk', LaporanProduk::class)->name('laporan.produk');
+    });
+      Route::prefix('laporan')->name('laporan.')->group(function () {
+        // Penjualan
+        Route::get('/penjualan/transaksi', LaporanPenjualanTransaksi::class)
+            ->name('penjualan.transaksi');
+        
+        Route::get('/penjualan/per-item', LaporanPenjualanPerItem::class)
+            ->name('penjualan.per-item');
+        
+        
+        // Stok (coming soon)
+       Route::get('/stok', LaporanStok::class)
+            ->name('stok');
+
+       
+    });
+      Route::prefix('order-jasa')->name('order-jasa.')->group(function () {
+            Route::get('/', IndexOrderJasa::class)
+                    ->name('index');
+            Route::get('/{id}/edit', UpdateOrderJasa::class)
+                    ->name('edit');
+            Route::get('/create', CreateOrderJasa::class)
+                    ->name('create');
+             Route::get('/setting-kategori', SettingKategoriOrder::class)->name('setting-kategori');
+                    
+      });
+ 
     Route::get('/roles/manage-permissions', ManagePermissions::class)
         ->name('roles.manage-permissions');
     Route::get('/setting/manage-menu', MenuManagement::class)

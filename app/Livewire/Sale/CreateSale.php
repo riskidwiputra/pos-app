@@ -68,7 +68,6 @@ class CreateSale extends Component
             'stock_available' => 0,
             'subtotal' => 0,
         ];
-        dump($this->items);
     }
 
     public function removeItem($index)
@@ -119,7 +118,7 @@ class CreateSale extends Component
                 $this->total += $subtotal;
             }
         }
-        // dump($this->total);
+      
         $this->change_amount = (float) $this->paid_amount - (float) $this->total;
     }
 
@@ -175,26 +174,31 @@ class CreateSale extends Component
                 'total' => $this->total,
                 'paid_amount' => $this->paid_amount,
                 'change_amount' => $this->change_amount,
-                'status' => 'Lunas',
+                'status' => 'lunas',
                 'created_by' => Auth::id(),
             ]);
             
             // Create sale items and update stock
             foreach ($this->items as $item) {
+                
+                
+                $product = Product::find($item['product_id']);
+               
                 SaleItem::create([
                     'sale_id' => $sale->id,
                     'product_id' => $item['product_id'],
                     'product_name' => $item['product_name'],
                     'price' => $item['price'],
+                    'price_purchase' => $product->harga_beli ?? 0,
                     'quantity' => $item['quantity'],
                     'unit' => $item['unit'],
                     'subtotal' => $item['subtotal'],
                 ]);
                 
-                // Update product stock
-                $product = Product::find($item['product_id']);
                 $product->stok_tersedia -= $item['quantity'];
                 $product->save();
+                // Update product stock
+              
             }
             
             DB::commit();

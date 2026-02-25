@@ -17,13 +17,21 @@ class SubCategory extends Model
         'kode_subkategori',
         'nama_subkategori',
         'deskripsi',
+        'is_service',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+    protected $casts = [
+        'is_service' => 'boolean',
+    ];
 
+    public function scopeService($query)
+    {
+        return $query->where('is_service', true);
+    }
     public function products()
     {
         return $this->hasMany(Product::class);

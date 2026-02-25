@@ -37,7 +37,7 @@ class CreatePurchase extends Component
         'nomor_invoice' => 'required|string|max:100',
         'tgl_invoice' => 'required|date',
         'tanggal_terima_barang' => 'required|date',
-        'jumlah_dibayar' => 'required|numeric|min:0',
+        'jumlah_dibayar' => 'required|integer|min:0',
         'items.*.product_id' => 'required|exists:products,id',
         'items.*.harga_beli' => 'required|integer|min:0',
         'items.*.qty' => 'required|integer|min:1',
@@ -91,12 +91,14 @@ class CreatePurchase extends Component
     public function calculateTotal()
     {
         $this->total_harga = 0;
-        
+       
         foreach ($this->items as $index => $item) {
             if (isset($item['harga_beli']) && isset($item['qty'])) {
+                $harga = isset($item['harga_beli']) ? (int) filter_var($item['harga_beli'], FILTER_SANITIZE_NUMBER_INT) : 0;
+                $qty   = isset($item['qty']) ? (int) $item['qty'] : 0;
                 
-                $subtotal = (int)$item['harga_beli'] * (int)$item['qty'];
-              
+                $subtotal = $harga * $qty;
+
                 $this->items[$index]['subtotal'] = $subtotal;
                 $this->total_harga += $subtotal;
                 //   dd($this->total_harga);
@@ -104,7 +106,7 @@ class CreatePurchase extends Component
             }
         }
         
-        $this->sisa_tagihan = $this->total_harga - $this->jumlah_dibayar;
+        $this->sisa_tagihan = (int) $this->total_harga - (int) $this->jumlah_dibayar;
         
         if ($this->jumlah_dibayar >= $this->total_harga) {
             $this->status_pembayaran = 'Lunas';
@@ -167,6 +169,9 @@ class CreatePurchase extends Component
                 
                 // Update product stock
                 $product = Product::find($item['product_id']);
+                if ($product->harga_beli <= $item['harga_beli']) {
+                    $product->harga_beli = $item['harga_beli'];
+                }
                 $product->stok_tersedia += $item['qty'];
                 $product->save();
             }

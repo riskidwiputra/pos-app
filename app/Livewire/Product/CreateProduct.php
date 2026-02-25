@@ -38,9 +38,7 @@ class CreateProduct extends Component
     
     #[Validate('required|numeric|min:0')]
     public $harga_jual = '';
-    
-    #[Validate('required|integer|min:0')]
-    public $stok_tersedia = '';
+
     
     #[Validate('required|integer|min:0')]
     public $stok_minimum = '';
@@ -61,7 +59,6 @@ class CreateProduct extends Component
         'nama_produk.required' => 'Nama produk wajib diisi',
         'harga_jual.required' => 'Harga jual wajib diisi',
         'harga_jual.numeric' => 'Harga jual harus berupa angka',
-        'stok_tersedia.required' => 'Stok tersedia wajib diisi',
         'stok_minimum.required' => 'Stok minimum wajib diisi',
         'gambar_barang.image' => 'File harus berupa gambar',
         'gambar_barang.max' => 'Ukuran gambar maksimal 2MB',
@@ -105,7 +102,6 @@ class CreateProduct extends Component
             'nama_produk' => $this->nama_produk,
             'deskripsi' => $this->deskripsi,
             'harga_jual' => $this->harga_jual,
-            'stok_tersedia' => $this->stok_tersedia,
             'stok_minimum' => $this->stok_minimum,
             'gambar_barang' => $imagePath,
             'barcode_product' => $barcode,

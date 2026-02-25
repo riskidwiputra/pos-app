@@ -1,0 +1,141 @@
+<?php
+
+namespace App\Livewire\Laporan;
+
+use App\Models\Product;
+use App\Models\Sale;
+use Livewire\Component;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+#[Layout('layouts.app')]
+#[Title('Laporan Penjualan - Per Transaksi')]
+class LaporanPenjualanTransaksi extends Component
+{
+    use WithPagination;
+
+    public $tanggalMulai;
+    public $tanggalSelesai;
+    public $pencarian = '';
+    public $statusFilter = '';
+    public $perPage = 15;
+
+    protected $queryString = [
+        'tanggalMulai',
+        'tanggalSelesai',
+        'pencarian',
+        'statusFilter'
+    ];
+
+    public function mount()
+    {
+        $this->tanggalMulai = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $this->tanggalSelesai = Carbon::now()->format('Y-m-d');
+    }
+
+    #[Computed]
+    public function laporanTransaksi()
+    {
+        return Sale::with(['users', 'items.product'])
+            ->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->when($this->pencarian, function($query) {
+                $query->where(function($q) {
+                    $q->where('invoice_number', 'like', '%' . $this->pencarian . '%')
+                      ->orWhereHas('users', function($cq) {
+                          $cq->where('name', 'like', '%' . $this->pencarian . '%');
+                      });
+                });
+            })
+            ->when($this->statusFilter, function($query) {
+                $query->where('status', $this->statusFilter);
+            })
+            ->latest('transaction_date')
+            ->paginate($this->perPage);
+    }
+
+    #[Computed]
+    public function ringkasanTransaksi()
+    {
+        $sales = Sale::whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->where('status', 'Lunas')
+            ->when($this->statusFilter, function($query) {
+                $query->where('status', $this->statusFilter);
+            });
+
+        $totalKeuntungan = 0;
+        $totalItemTerjual = 0;
+        
+        foreach($sales->get() as $sale) {
+            foreach($sale->items as $item) {
+          
+                $keuntungan = ($item->price - $item->price_purchase) * $item->quantity;
+                $totalKeuntungan += $keuntungan;
+                $totalItemTerjual += $item->quantity;
+            }
+        }
+
+        return [
+            'total_transaksi' => $sales->count(),
+            'total_pendapatan' => $sales->sum('total'),
+            'total_keuntungan' => $totalKeuntungan,
+            'total_item_terjual' => $totalItemTerjual,
+        ];
+    }
+
+    #[Computed]
+    public function grafikHarian()
+    {
+        $data = Sale::whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->where('status', 'Lunas')
+            ->selectRaw('DATE(transaction_date) as tanggal, SUM(total) as total_harian, COUNT(*) as jumlah')
+            ->groupBy('tanggal')
+            ->orderBy('tanggal')
+            ->get();
+
+        return [
+            'labels' => $data->pluck('tanggal')->map(fn($d) => Carbon::parse($d)->format('d M'))->toArray(),
+            'values' => $data->pluck('total_harian')->toArray(),
+            'counts' => $data->pluck('jumlah')->toArray(),
+        ];
+    }
+
+    public function hitungKeuntungan($sale)
+    {
+        $totalKeuntungan = 0;
+        
+        foreach($sale->items as $item) {
+            $keuntungan = ($item->price - $item->price_purchase) * $item->quantity;
+            $totalKeuntungan += $keuntungan;
+        }
+        
+        return $totalKeuntungan;
+    }
+
+    public function resetFilter()
+    {
+        $this->tanggalMulai = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $this->tanggalSelesai = Carbon::now()->format('Y-m-d');
+        $this->pencarian = '';
+        $this->statusFilter = '';
+        $this->resetPage();
+    }
+
+    public function updatingPencarian()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingStatusFilter()
+    {
+        $this->resetPage();
+    }
+
+    public function render()
+    {
+        return view('livewire.laporan.laporan-penjualan-transaksi');
+    }
+}

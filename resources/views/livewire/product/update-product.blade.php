@@ -166,7 +166,7 @@
                 </div>
 
                 <!-- Grid: Harga & Stok -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Harga Jual -->
                     <div class="group">
                         <label class="block text-sm font-semibold text-gray-800 mb-2">
@@ -196,33 +196,7 @@
                         @enderror
                     </div>
 
-                    <!-- Stok Tersedia -->
-                    <div class="group">
-                        <label class="block text-sm font-semibold text-gray-800 mb-2">
-                            Stok Tersedia <span class="text-red-500 font-bold">*</span>
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                </svg>
-                            </div>
-                            <input 
-                                type="number" 
-                                wire:model="stok_tersedia" 
-                                min="0"
-                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('stok_tersedia') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
-                            >
-                        </div>
-                        @error('stok_tersedia') 
-                            <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    
 
                     <!-- Stok Minimum -->
                     <div class="group">

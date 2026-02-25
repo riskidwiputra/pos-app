@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('product_name', 200);
             $table->decimal('price', 15, 2);
             $table->decimal('quantity', 10, 2);
+            $table->integer('price_purchase');
             $table->string('unit', 20)->nullable()->comment('Satuan (pcs, box, dll)');
             $table->decimal('subtotal', 15, 2)->comment('Harga x Qty');
             $table->timestamps();

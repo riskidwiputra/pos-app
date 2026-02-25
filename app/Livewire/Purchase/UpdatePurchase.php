@@ -160,6 +160,7 @@ class UpdatePurchase extends Component
                 if ($item) {
                     // Adjust stock back
                     $product = Product::find($item->product_id);
+                    
                     $product->stok_tersedia -= $item->qty;
                     $product->save();
                     
@@ -199,6 +200,9 @@ class UpdatePurchase extends Component
                     
                     // Update stock
                     $product = Product::find($itemData['product_id']);
+                    if ($product->harga_beli <= $itemData['harga_beli']) {
+                        $product->harga_beli = $itemData['harga_beli'];
+                    }
                     $product->stok_tersedia += $itemData['qty'];
                     $product->save();
                 }

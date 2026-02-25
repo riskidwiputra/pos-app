@@ -140,7 +140,7 @@
                                 </td>
 
                                 <td class="px-6 py-4 text-center">
-                                    @if($sale->status === 'Lunas')
+                                    @if($sale->status === 'lunas')
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
                                             <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
                                             Lunas
