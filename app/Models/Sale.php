@@ -25,9 +25,9 @@ class Sale extends Model
 
      protected $casts = [
         'transaction_date' => 'date',
-        'total' => 'decimal:2',
-        'paid_amount' => 'decimal:2',
-        'change_amount' => 'decimal:2',
+        'total' => 'integer',
+        'paid_amount' => 'integer',
+        'change_amount' => 'integer',
     ];
 
     public function supplier()
@@ -36,6 +36,11 @@ class Sale extends Model
     }
 
     public function users()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id');
     }

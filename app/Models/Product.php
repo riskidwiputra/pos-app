@@ -26,7 +26,7 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'harga_jual' => 'decimal:2',
+        'harga_jual' => 'integer',
     ];
 
     public function category()

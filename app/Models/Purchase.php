@@ -41,10 +41,6 @@ class Purchase extends Model
         return $this->hasMany(PurchaseItem::class);
     }
 
-    public function payments()
-    {
-        return $this->hasMany(PurchasePayment::class)->orderBy('tanggal_bayar', 'desc');
-    }
 
     public function purchaseReturns()
     {

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->date('transaction_date')->comment('Tanggal transaksi');
             $table->enum('payment_method', ['cash', 'transfer'])->default('cash')->comment('Metode pembayaran');
             $table->text('notes')->nullable()->comment('Catatan transaksi');
-            $table->decimal('total', 15, 2)->default(0)->comment('Total akhir');
+            $table->integer('total')->default(0)->comment('Total akhir');
             
             // Pembayaran
-            $table->decimal('paid_amount', 15, 2)->default(0)->comment('Uang dibayar');
-            $table->decimal('change_amount', 15, 2)->default(0)->comment('Kembalian');
+            $table->integer('paid_amount')->default(0)->comment('Uang dibayar');
+            $table->integer('change_amount')->default(0)->comment('Kembalian');
             
             $table->enum('status', ['lunas','Dibatalan', 'belum-lunas'])->default('lunas');
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();

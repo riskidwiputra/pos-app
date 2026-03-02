@@ -204,7 +204,7 @@ class CreateSale extends Component
             DB::commit();
             
             session()->flash('message', 'Penjualan berhasil! Invoice: ' . $invoiceNumber);
-            return redirect()->route('sale.Index');
+            return redirect()->route('sale.index');
             
         } catch (\Exception $e) {
             DB::rollBack();

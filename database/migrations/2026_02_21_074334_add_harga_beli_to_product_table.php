@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('harga_beli', 15, 2)->nullable()->after('harga_jual');
+            $table->integer('harga_beli')->nullable()->after('harga_jual');
         });
     }
 

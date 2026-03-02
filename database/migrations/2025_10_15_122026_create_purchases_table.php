@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('nomor_invoice', 100);
             $table->date('tgl_invoice');
             $table->date('tanggal_terima_barang');
-            $table->decimal('total_harga', 15, 2)->default(0);
-            $table->decimal('jumlah_dibayar', 15, 2)->default(0);
-            $table->decimal('sisa_tagihan', 15, 2)->default(0);
+            $table->integer('total_harga')->default(0);
+            $table->integer('jumlah_dibayar')->default(0);
+            $table->integer('sisa_tagihan')->default(0);
             $table->enum('status_pembayaran', ['Lunas', 'Belum Lunas'])->default('Belum Lunas');
             $table->enum('status', ['Aktif', 'Dibatalkan'])->default('Aktif');
             $table->text('catatan')->nullable();

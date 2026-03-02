@@ -22,7 +22,7 @@ class PurchaseReturn extends Model
 
     protected $casts = [
         'tanggal_return' => 'date',
-        'total_return' => 'decimal:2',
+        'total_return' => 'integer',
     ];
 
     public function purchase()

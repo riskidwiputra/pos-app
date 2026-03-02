@@ -35,6 +35,7 @@ return new class extends Migration
             
             // Pricing
             $table->integer('total_price');
+            $table->integer('down_payment')->nullable()->default(0);
             $table->integer('payment')->default(0);
             
             // Files

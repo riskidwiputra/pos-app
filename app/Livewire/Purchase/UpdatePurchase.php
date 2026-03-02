@@ -6,6 +6,8 @@ use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Sale;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -122,9 +124,9 @@ class UpdatePurchase extends Component
         $this->sisa_tagihan = $this->total_harga - $this->jumlah_dibayar;
         
         if ($this->jumlah_dibayar >= $this->total_harga) {
-            $this->status_pembayaran = 'Lunas';
+            $this->status_pembayaran = 'lunas';
         } else {
-            $this->status_pembayaran = 'Belum Lunas';
+            $this->status_pembayaran = 'belum-lunas';
         }
     }
 
@@ -218,6 +220,7 @@ class UpdatePurchase extends Component
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+     
 
     public function render()
     {

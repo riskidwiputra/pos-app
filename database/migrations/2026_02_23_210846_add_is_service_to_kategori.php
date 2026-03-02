@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Schema::table('categories', function (Blueprint $table) {
-        //     $table->boolean('is_service');
-        // });
+        Schema::table('categories', function (Blueprint $table) {
+            $table->boolean('is_service');
+        });
 
         Schema::table('sub_categories', function (Blueprint $table) {
             $table->boolean('is_service');

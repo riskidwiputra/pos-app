@@ -26,6 +26,7 @@ class ServiceOrder extends Model
         'actual_completion_date',
         'total_price',
         'payment',
+        'down_payment',
         'design_file',
         'notes',
         'status',

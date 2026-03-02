@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('kode_produk', 20);
             $table->string('nama_produk');
             $table->text('deskripsi')->nullable();
-            $table->decimal('harga_jual', 15, 2);
+            $table->integer('harga_jual');
             $table->integer('stok_tersedia')->default(0);
             $table->integer('stok_minimum')->default(0);
             $table->string('barcode_product')->unique();
