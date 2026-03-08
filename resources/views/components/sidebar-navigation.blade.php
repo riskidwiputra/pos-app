@@ -267,9 +267,16 @@
                         <a 
                             href="{{ route('laporan.penjualan.transaksi') }}"
                             @click="closeSidebar()"
-                            class="nav-sub-item {{ request()->routeIs('laporan.penjualan.*') ? 'active' : '' }}">
+                            class="nav-sub-item {{ request()->routeIs('laporan.penjualan.transaksi') ? 'active' : '' }}">
                             <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                             Laporan Penjualan
+                        </a>
+                        <a 
+                            href="{{ route('laporan.penjualan.per-item') }}"
+                            @click="closeSidebar()"
+                            class="nav-sub-item {{ request()->routeIs('laporan.penjualan.per-item') ? 'active' : '' }}">
+                            <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                            Laporan Penjualan Per Item
                         </a>
                         <a 
                             href="{{ route('laporan.stok') }}"
@@ -281,7 +288,13 @@
                     </div>
                 </div>
 
-                {{-- Logout --}}
+               
+            </nav>
+
+            {{-- User Profile Footer --}}
+            <div class="border-t border-gray-200 p-4">
+                <div class="flex items-center gap-3">
+                     {{-- Logout --}}
                 <button 
                     onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin keluar?')) document.getElementById('logout-form').submit();"
                     class="nav-item text-red-600 hover:bg-red-50"
@@ -292,18 +305,6 @@
                     <span>Logout</span>
                 </button>
 
-            </nav>
-
-            {{-- User Profile Footer --}}
-            <div class="border-t border-gray-200 p-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                        {{ substr(Auth::user()->fullname ?? 'U', 0, 1) }}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-semibold text-gray-900 truncate">{{ Auth::user()->fullname ?? 'User' }}</p>
-                        <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email ?? '' }}</p>
-                    </div>
                 </div>
             </div>
 

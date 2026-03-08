@@ -1,0 +1,73 @@
+/* Custom spacing untuk content area */
+.content-area {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Table responsive improvements */
+.table-container {
+    overflow-x: auto;
+}
+
+.table-container table {
+    font-size: 0.875rem; /* 14px */
+}
+
+.table-container th {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem; /* 12px */
+}
+
+.table-container td {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem; /* 14px */
+}
+
+/* Card spacing */
+.card {
+    padding: 1.25rem;
+}
+
+.card-header {
+    font-size: 1.25rem; /* 20px */
+    margin-bottom: 1rem;
+}
+
+/* Button sizing */
+.btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem; /* 14px */
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem; /* 13px */
+}
+
+/* Form input sizing */
+.form-input,
+.form-select,
+.form-textarea {
+    font-size: 0.875rem; /* 14px */
+    padding: 0.625rem 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .content-area {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    .table-container th,
+    .table-container td {
+        padding: 0.625rem 0.75rem;
+    }
+}
+
+@media (min-width: 1441px) {
+    .content-area {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

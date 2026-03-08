@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="container mx-auto px-4 sm:px-4 lg:px-8 py-8">
 
         <!-- Header -->
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -9,7 +9,7 @@
                 </h1>
                 <p class="text-sm text-gray-500 mt-1">Kelola data supplier dengan mudah dan efisien</p>
             </div>
-            <a href="{{ route('supplier.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
+            <a href="{{ route('supplier.create') }}" class="inline-flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
                 Tambah Supplier
             </a>
         </div>
@@ -17,7 +17,7 @@
         <!-- Flash Message -->
         @if($message)
         <div class="mb-6 animate-in slide-in-from-top fade-in">
-            <div class="flex items-center justify-between gap-4 px-6 py-4 bg-gradient-to-r from-emerald-50 to-green-50 border-l-4 border-emerald-500 rounded-lg shadow-md backdrop-blur-sm">
+            <div class="flex items-center justify-between gap-4 px-4 py-4 bg-gradient-to-r from-emerald-50 to-green-50 border-l-4 border-emerald-500 rounded-lg shadow-md backdrop-blur-sm">
                 <p class="text-sm font-medium text-emerald-800">{{ $message }}</p>
                 <button wire:click="$set('message','')" class="text-emerald-600 hover:text-emerald-800">✖</button>
             </div>
@@ -32,7 +32,7 @@
             <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400/20 via-green-300/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <!-- Content Container -->
-            <div class="relative px-6 py-4 flex items-start gap-4">
+            <div class="relative px-4 py-4 flex items-start gap-4">
                 
                 <!-- Icon dengan animated background -->
                 <div class="flex-shrink-0 relative">
@@ -96,13 +96,13 @@
                 <table class="min-w-full">
                     <thead>
                         <tr class="bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 border-b-2 border-gray-200">
-                            <th class="px-6 py-4 text-left">
+                            <th class="px-3 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
                                     
                                     No
                                 </span>
                             </th>
-                            <th class="px-6 py-4 text-left">
+                            <th class="px-3 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -110,7 +110,7 @@
                                     Nama Supplier
                                 </span>
                             </th>
-                            <th class="px-6 py-4 text-left">
+                            <th class="px-3 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -119,7 +119,7 @@
                                     Alamat
                                 </span>
                             </th>
-                            <th class="px-6 py-4 text-left">
+                            <th class="px-3 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
@@ -128,7 +128,7 @@
                                     No Telepon
                                 </span>
                             </th>
-                            <th class="px-6 py-4 text-left">
+                            <th class="px-3 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -136,7 +136,7 @@
                                     Email
                                 </span>
                             </th>
-                            <th class="px-6 py-4 text-center">
+                            <th class="px-3 py-4 text-center">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center justify-center gap-2">
                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
@@ -152,7 +152,7 @@
                                 class="group hover:bg-gradient-to-r hover:from-blue-50 hover:via-indigo-50 hover:to-blue-50 transition-all duration-300 border-l-4 border-transparent hover:border-indigo-500">
                                 
                                 <!-- No -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-3 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 text-sm font-bold text-indigo-700 group-hover:from-indigo-500 group-hover:to-blue-500 group-hover:text-white transition-all duration-300 shadow-sm">
                                             {{ $this->suppliers->firstItem() + $index }}
@@ -161,7 +161,7 @@
                                 </td>
 
                                 <!-- Nama Supplier -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-3 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-3">
                                         
                                         <div>
@@ -174,7 +174,7 @@
                                 </td>
 
                                 <!-- Alamat -->
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-4">
                                     <div class="flex items-start gap-2">
                                        
                                         <div class="max-w-xs">
@@ -186,7 +186,7 @@
                                 </td>
 
                                 <!-- No Telepon -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-3 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-2">
                                         
                                         <span class="text-sm font-medium text-gray-700">{{ $supplier->no_telepon }}</span>
@@ -194,7 +194,7 @@
                                 </td>
 
                                 <!-- Email -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-3 py-4 whitespace-nowrap">
                                     @if($supplier->email)
                                         <div class="flex items-center gap-2">
                                             
@@ -213,17 +213,17 @@
                                 </td>
 
                                 <!-- Aksi -->
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-3 py-4 whitespace-nowrap">
                                     <div class=" items-center justify-center ">
                                         <a href="{{ route('supplier.edit', $supplier->id) }}" 
-                                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                                        class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                             </svg>
                                             Edit
                                         </a>
                                         <button wire:click.prevent="confirmDelete({{ $supplier->id }})" 
-                                                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                                                class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                             </svg>
@@ -234,7 +234,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-16 text-center">
+                                <td colspan="6" class="px-3 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
                                         <!-- Icon Empty State -->
                                         <div class="relative">
@@ -256,7 +256,7 @@
 
                                         <!-- CTA Button -->
                                         <a href="{{ route('supplier.create') }}" 
-                                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+                                        class="inline-flex items-center gap-2 px-3 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
@@ -285,7 +285,7 @@
                 <h3 class="text-lg font-bold text-center mb-4">Hapus Supplier?</h3>
                 <p class="text-center mb-6">Apakah Anda yakin ingin menghapus supplier ini? Data yang dihapus tidak dapat dikembalikan.</p>
                 <div class="flex gap-3">
-                    <button wire:click.prevent="closeDeleteModal" class="flex-1 px-4 py-2 bg-gray-100 rounded-lg">Batal</button>
+                    <button wire:click.prevent="closeDeleteModal" class="flex-1 px-3 py-2 bg-gray-100 rounded-lg">Batal</button>
                     <button wire:click.prevent="delete" class="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg">Hapus Sekarang</button>
                 </div>
             </div>

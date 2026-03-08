@@ -41,24 +41,43 @@
                     </div>
                     @error('name') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
-
-                <div class="group">
-                    <label class="block text-sm font-semibold text-gray-800 mb-2">
-                        Email <span class="text-red-500 font-bold">*</span>
-                    </label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">    
+                    <div class="group">
+                        <label class="block text-sm font-semibold text-gray-800 mb-2">
+                            Email <span class="text-red-500 font-bold">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <input 
+                                type="email" 
+                                wire:model="email" 
+                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 @error('email') border-red-500 @enderror"
+                            >
                         </div>
-                        <input 
-                            type="email" 
-                            wire:model="email" 
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 @error('email') border-red-500 @enderror"
-                        >
+                        @error('email') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
-                    @error('email') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
+                    <div class="group">
+                        <label class="block text-sm font-semibold text-gray-800 mb-2">
+                            Username <span class="text-red-500 font-bold">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <input 
+                                type="text" 
+                                wire:model="username" 
+                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 @error('username') border-red-500 @enderror"
+                            >
+                        </div>
+                        @error('username') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
+                    </div>
                 </div>
 
                 <div class="group">
@@ -76,36 +95,36 @@
                     @error('role_id') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="border-t border-gray-200 pt-6">
+                <!-- <div class="border-t border-gray-200 pt-6">
                     <p class="text-sm text-gray-600 mb-4">Kosongkan jika tidak ingin mengubah password</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="group">
-                            <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                Password Baru
-                            </label>
-                            <input 
-                                type="password" 
-                                wire:model="password" 
-                                placeholder="••••••••"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 @error('password') border-red-500 @enderror"
-                            >
-                            @error('password') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
-                        </div>
+                  
+                </div> -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="group">
+                        <label class="block text-sm font-semibold text-gray-800 mb-2">
+                            Password Baru
+                        </label>
+                        <input 
+                            type="password" 
+                            wire:model="password" 
+                            placeholder="••••••••"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 @error('password') border-red-500 @enderror"
+                        >
+                        @error('password') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
+                    </div>
 
-                        <div class="group">
-                            <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                Konfirmasi Password
-                            </label>
-                            <input 
-                                type="password" 
-                                wire:model="password_confirmation" 
-                                placeholder="••••••••"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
-                            >
-                        </div>
+                    <div class="group">
+                        <label class="block text-sm font-semibold text-gray-800 mb-2">
+                            Konfirmasi Password
+                        </label>
+                        <input 
+                            type="password" 
+                            wire:model="password_confirmation" 
+                            placeholder="••••••••"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200"
+                        >
                     </div>
                 </div>
-
                 <div class="flex gap-3 pt-6 border-t border-gray-200">
                     <a 
                         href="{{ route('admin.index') }}"

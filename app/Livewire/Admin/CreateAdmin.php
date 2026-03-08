@@ -19,7 +19,10 @@ class CreateAdmin extends Component
     
     #[Validate('required|email|unique:users,email')]
     public $email = '';
-    
+
+    #[Validate('required|unique:users,username')]
+    public $username = '';
+
     #[Validate('required|string|min:6|confirmed')]
     public $password = '';
     
@@ -34,6 +37,8 @@ class CreateAdmin extends Component
         'email.required' => 'Email wajib diisi',
         'email.email' => 'Format email tidak valid',
         'email.unique' => 'Email sudah terdaftar',
+        'username.required' => 'Username wajib diisi',
+        'username.unique' => 'Username sudah terdaftar',
         'password.required' => 'Password wajib diisi',
         'password.min' => 'Password minimal 6 karakter',
         'password.confirmed' => 'Konfirmasi password tidak cocok',
@@ -48,6 +53,7 @@ class CreateAdmin extends Component
         User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'username' => $this->username,
             'password' => Hash::make($this->password),
             'role_id' => $this->role_id,
         ]);

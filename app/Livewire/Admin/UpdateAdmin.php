@@ -17,6 +17,7 @@ class UpdateAdmin extends Component
     public $name = '';
     public $email = '';
     public $role_id = '';
+    public $username = '';
     public $password = '';
     public $password_confirmation = '';
 
@@ -27,6 +28,7 @@ class UpdateAdmin extends Component
             'email' => 'required|email|unique:users,email,' . $this->admin->id,
             'role_id' => 'required|exists:roles,id',
             'password' => 'nullable|string|min:6|confirmed',
+            'username' => 'required|unique:users,username,' . $this->admin->id,
         ];
     }
 
@@ -38,6 +40,8 @@ class UpdateAdmin extends Component
         'role_id.required' => 'Role wajib dipilih',
         'password.min' => 'Password minimal 6 karakter',
         'password.confirmed' => 'Konfirmasi password tidak cocok',
+        'username.required' => 'Username wajib diisi',
+        'username.unique' => 'Username sudah terdaftar',
     ];
 
     public function mount($id)
@@ -45,6 +49,7 @@ class UpdateAdmin extends Component
         $this->admin = User::admins()->findOrFail($id);
         $this->name = $this->admin->name;
         $this->email = $this->admin->email;
+        $this->username = $this->admin->username;
         $this->role_id = $this->admin->role_id;
     }
 
@@ -56,6 +61,7 @@ class UpdateAdmin extends Component
             'name' => $this->name,
             'email' => $this->email,
             'role_id' => $this->role_id,
+            'username' => $this->username,
         ];
 
         if (!empty($this->password)) {

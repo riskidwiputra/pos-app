@@ -19,6 +19,9 @@ class CreateCustomer extends Component
     
     #[Validate('required|email|unique:users,email')]
     public $email = '';
+
+    #[Validate('required|string|min:6|confirmed')]
+    public $username = '';
     
     #[Validate('required|string|min:6|confirmed')]
     public $password = '';
@@ -48,6 +51,7 @@ class CreateCustomer extends Component
         User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'username' => $this->username,
             'password' => Hash::make($this->password),
             'role_id' => $this->role_id,
         ]);

@@ -29,7 +29,7 @@
                 </div>
                 <div class="flex flex-wrap gap-3">
                     
-                    <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
+                    <button  wire:click="printInvoice" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
@@ -333,7 +333,7 @@
 
                         <!-- Action Buttons -->
                         <div class="space-y-3 pt-4 border-t border-gray-200">
-                            <button onclick="window.print()" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                            <button wire:click="printNota" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                                 <span class="flex items-center justify-center gap-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
@@ -352,4 +352,39 @@
         </div>
 
     </div>
+    {{-- Modal Print Nota (Hidden) --}}
+<div 
+    x-data="{ 
+        showPrintModal: false,
+        printContent: ''
+    }"
+    x-on:print-nota.window="
+        showPrintModal = true;
+        fetch('/nota/{{ $sale->id }}')
+            .then(response => response.text())
+            .then(html => {
+                printContent = html;
+                setTimeout(() => {
+                    let printFrame = document.getElementById('printFrame');
+                    let doc = printFrame.contentWindow.document;
+                    doc.open();
+                    doc.write(printContent);
+                    doc.close();
+                    setTimeout(() => {
+                        printFrame.contentWindow.print();
+                        showPrintModal = false;
+                    }, 500);
+                }, 100);
+            });
+    "
+    x-show="showPrintModal"
+    style="display: none;"
+    class="fixed inset-0 z-50">
+    
+    <iframe 
+        id="printFrame" 
+        style="position: absolute; width: 0; height: 0; border: none;">
+    </iframe>
 </div>
+</div>
+

@@ -42,12 +42,7 @@
                         </svg>
                         Edit
                     </a>
-                    <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                        </svg>
-                        Cetak
-                    </button>
+                  
                 </div>
             </div>
         </div>
@@ -249,78 +244,7 @@
                     </div>
                 </div>
 
-                <!-- Riwayat Pembayaran -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                    <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900">Riwayat Pembayaran</h2>
-                        @if($purchase->payments && $purchase->payments->count() > 0)
-                            <span class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-700">
-                                {{ $purchase->payments->count() }} Pembayaran
-                            </span>
-                        @endif
-                    </div>
-                    
-                    <div class="p-6">
-                        @if($purchase->payments && $purchase->payments->count() > 0)
-                            <div class="space-y-4">
-                                @foreach($purchase->payments as $payment)
-                                    <div class="group relative overflow-hidden bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-4 hover:from-green-50 hover:to-emerald-50 transition-all duration-300 border border-gray-200 hover:border-green-300">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-4">
-                                                <div class="relative">
-                                                    <div class="absolute inset-0 bg-green-400 rounded-full blur-md opacity-30 group-hover:opacity-50 transition"></div>
-                                                    <div class="relative w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-                                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors">
-                                                        Rp {{ number_format($payment->jumlah_bayar, 0, ',', '.') }}
-                                                    </p>
-                                                    <div class="flex items-center gap-4 mt-1">
-                                                        <p class="text-sm text-gray-600">
-                                                            <span class="font-semibold">{{ Carbon\Carbon::parse($payment->tanggal_bayar)->format('d M Y') }}</span>
-                                                        </p>
-                                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ 
-                                                            $payment->metode_bayar === 'Cash' ? 'bg-green-100 text-green-800' : 
-                                                            ($payment->metode_bayar === 'Transfer' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800') 
-                                                        }}">
-                                                            {{ $payment->metode_bayar }}
-                                                        </span>
-                                                    </div>
-                                                    @if($payment->catatan)
-                                                        <p class="text-xs text-gray-500 italic mt-1">"{{ $payment->catatan }}"</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @if($purchase->status === 'Aktif')
-                                                <button wire:click="deletePayment({{ $payment->id }})" 
-                                                        wire:confirm="Apakah Anda yakin ingin menghapus pembayaran ini?" 
-                                                        class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-lg p-2 transition-all duration-200">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                    </svg>
-                                                </button>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="text-center py-12">
-                                <div class="w-20 h-20 mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mb-4">
-                                    <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <p class="text-gray-500 font-medium">Belum ada pembayaran</p>
-                                <p class="text-sm text-gray-400 mt-1">Klik tombol "Tambah Pembayaran" untuk memulai</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+               
             </div>
 
             <!-- Right Side - Summary -->
@@ -430,14 +354,7 @@
                                 Edit Pembelian
                             </a>
                             
-                            <button onclick="window.print()" class="w-full px-6 py-3 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-800 font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
-                                <span class="flex items-center justify-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                                    </svg>
-                                    Cetak Bukti
-                                </span>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>

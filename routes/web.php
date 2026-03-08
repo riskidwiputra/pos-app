@@ -26,6 +26,7 @@ use App\Livewire\OrderJasa\SettingKategoriOrder;
 use App\Livewire\OrderJasa\UpdateOrderJasa;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\IndexProduct;
+use App\Livewire\Product\MassUpload;
 use App\Livewire\Product\UpdateProduct;
 use App\Livewire\Purchase\CreatePurchase;
 use App\Livewire\Purchase\DetailPurchase;
@@ -46,6 +47,8 @@ use App\Livewire\Unit\CreateUnit;
 use App\Livewire\Unit\IndexUnit;
 use App\Livewire\Unit\UpdateUnit;
 use App\Livewire\Sale\IndexSale;
+use App\Livewire\Print\PrintNota;
+use App\Livewire\Sale\updateSale;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,7 +63,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('livewire.home.index');
 });
 
 Route::get('/dashboard', function () {
@@ -100,6 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', IndexProduct::class)->name('index');
         Route::get('/create', CreateProduct::class)->name('create');
         Route::get('/{id}/edit', UpdateProduct::class)->name('edit');
+        Route::get('/mass-upload',MassUpload::class)->name('mass-upload');
     });
     Route::prefix('purchase')->name('purchase.')->group(function () {
         Route::get('/', IndexPurchase::class)->name('index');
@@ -111,6 +115,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', IndexSale::class)->name('index');
             Route::get('/create', CreateSale::class)->name('create');
             Route::get('/{id}/detail', DetailSale::class)->name('detail');
+            Route::get('/{id}/update', updateSale::class)->name('update');
         });
      Route::prefix('admin-management')->group(function () {
         Route::get('/', IndexAdmin::class)->name('admin.index');
@@ -122,12 +127,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', CreateCustomer::class)->name('customer.create');
         Route::get('/{id}/edit', UpdateCustomer::class)->name('customer.edit');
     });
-     Route::prefix('laporan')->group(function () {
-        Route::get('/penjualan', LaporanPenjualan::class)->name('laporan.penjualan');
-        // Route::get('/penjualan', LaporanPenjualan::class)->name('laporan.penjualan');
-        // Route::get('/produk', LaporanProduk::class)->name('laporan.produk');
-    });
-      Route::prefix('laporan')->name('laporan.')->group(function () {
+
+    Route::prefix('laporan')->name('laporan.')->group(function () {
         // Penjualan
         Route::get('/penjualan/transaksi', LaporanPenjualanTransaksi::class)
             ->name('penjualan.transaksi');
@@ -152,7 +153,16 @@ Route::middleware('auth')->group(function () {
              Route::get('/setting-kategori', SettingKategoriOrder::class)->name('setting-kategori');
                     
       });
- 
+    Route::prefix('print')->name('print.')->group(function () {
+        Route::get('/nota/{sale}', PrintNota::class)->name('nota');
+        
+    });
+    Route::get('test-print/{sale}', PrintNota::class)->name('test-print');
+    Route::get('/nota/{sale}', function($id) {
+            $sale = \App\Models\Sale::with(['items.product'])->findOrFail($id);
+            return view('livewire.print.nota-content', compact('sale'));
+        });
+
     Route::get('/roles/manage-permissions', ManagePermissions::class)
         ->name('roles.manage-permissions');
     Route::get('/setting/manage-menu', MenuManagement::class)

@@ -72,6 +72,8 @@ class IndexSale extends Component
                     $product->stok_tersedia += $item->quantity;
                     $product->save();
                 }
+                // delete produk item 
+                $sale->items()->delete();
                 
                 $sale->delete();
                 

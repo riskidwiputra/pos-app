@@ -18,6 +18,7 @@ class Product extends Model
         'nama_produk',
         'deskripsi',
         'harga_jual',
+        'harga_beli',
         'stok_tersedia',
         'stok_minimum',
         'barcode_product',
