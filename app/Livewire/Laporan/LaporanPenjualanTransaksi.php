@@ -4,6 +4,7 @@ namespace App\Livewire\Laporan;
 
 use App\Models\Product;
 use App\Models\Sale;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -61,7 +62,6 @@ class LaporanPenjualanTransaksi extends Component
     public function ringkasanTransaksi()
     {
         $sales = Sale::whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
-            ->where('status', 'Lunas')
             ->when($this->statusFilter, function($query) {
                 $query->where('status', $this->statusFilter);
             });
@@ -132,6 +132,48 @@ class LaporanPenjualanTransaksi extends Component
     public function updatingStatusFilter()
     {
         $this->resetPage();
+    }
+    public function exportPDF()
+    {
+        $sales = Sale::with(['users', 'items.product'])
+            ->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->when($this->pencarian, function($query) {
+                $query->where(function($q) {
+                    $q->where('invoice_number', 'like', '%' . $this->pencarian . '%')
+                      ->orWhereHas('users', function($cq) {
+                          $cq->where('name', 'like', '%' . $this->pencarian . '%');
+                      });
+                });
+            })
+            ->when($this->statusFilter, function($query) {
+                $query->where('status', $this->statusFilter);
+            })
+            ->latest('transaction_date')
+            ->get();
+
+        $ringkasan = $this->ringkasanTransaksi();
+
+        $filters = [
+            'tanggal_mulai' => Carbon::parse($this->tanggalMulai)->format('d F Y'),
+            'tanggal_selesai' => Carbon::parse($this->tanggalSelesai)->format('d F Y'),
+            'status' => $this->statusFilter ?: 'Semua Status',
+            'pencarian' => $this->pencarian ?: '-',
+        ];
+
+        $pdf = Pdf::loadView('livewire.print.laporan-penjualan-transaksi', [
+            'sales' => $sales,
+            'ringkasan' => $ringkasan,
+            'filters' => $filters,
+            'component' => $this, // Pass component untuk akses method hitungKeuntungan
+        ]);
+
+        $pdf->setPaper('a4', 'landscape'); // Landscape karena banyak kolom
+
+        $filename = 'Laporan-Penjualan-' . date('Y-m-d-His') . '.pdf';
+
+        return response()->streamDownload(function() use ($pdf) {
+            echo $pdf->output();
+        }, $filename);
     }
 
     public function render()

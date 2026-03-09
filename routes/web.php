@@ -16,13 +16,13 @@ use App\Livewire\Customer\UpdateCustomer;
 use App\Livewire\Employee\CreateEmployee;
 use App\Livewire\Employee\IndexEmployee;
 use App\Livewire\Employee\UpdateEmployee;
-use App\Livewire\Laporan\LaporanPenjualan;
 use App\Livewire\Laporan\LaporanPenjualanPerItem;
 use App\Livewire\Laporan\LaporanPenjualanTransaksi;
 use App\Livewire\Laporan\LaporanStok;
 use App\Livewire\OrderJasa\CreateOrderJasa;
+use App\Livewire\OrderJasa\DetailOrderJasa;
 use App\Livewire\OrderJasa\IndexOrderJasa;
-use App\Livewire\OrderJasa\SettingKategoriOrder;
+use App\Livewire\OrderJasa\ServiceCategoryJasa;
 use App\Livewire\OrderJasa\UpdateOrderJasa;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\IndexProduct;
@@ -146,11 +146,13 @@ Route::middleware('auth')->group(function () {
       Route::prefix('order-jasa')->name('order-jasa.')->group(function () {
             Route::get('/', IndexOrderJasa::class)
                     ->name('index');
-            Route::get('/{id}/edit', UpdateOrderJasa::class)
-                    ->name('edit');
+            Route::get('/{id}/update', UpdateOrderJasa::class)
+                    ->name('update');
             Route::get('/create', CreateOrderJasa::class)
                     ->name('create');
-             Route::get('/setting-kategori', SettingKategoriOrder::class)->name('setting-kategori');
+            Route::get('/{id}/detail', DetailOrderJasa::class)
+                    ->name('detail');
+             Route::get('/setting-kategori', ServiceCategoryJasa::class)->name('setting-kategori');
                     
       });
     Route::prefix('print')->name('print.')->group(function () {

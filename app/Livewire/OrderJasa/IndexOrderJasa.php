@@ -40,7 +40,7 @@ class IndexOrderJasa extends Component
     #[Computed]
     public function orders()
     {
-        return ServiceOrder::with(['user', 'category', 'subCategory', 'approver'])
+        return ServiceOrder::with(['user', 'approver'])
             ->when($this->pencarian, function($query) {
                 $query->where(function($q) {
                     $q->where('order_code', 'like', '%' . $this->pencarian . '%')

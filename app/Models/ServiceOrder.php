@@ -23,7 +23,6 @@ class ServiceOrder extends Model
         'unit',
         'order_date',
         'estimated_completion_date',
-        'actual_completion_date',
         'total_price',
         'payment',
         'down_payment',
@@ -31,6 +30,7 @@ class ServiceOrder extends Model
         'notes',
         'status',
         'rejection_reason',
+        'status_pembayaran',
         'approved_by',
         'approved_at',
         'created_by',
@@ -39,7 +39,6 @@ class ServiceOrder extends Model
     protected $casts = [
         'order_date' => 'date',
         'estimated_completion_date' => 'date',
-        'actual_completion_date' => 'date',
         'approved_at' => 'datetime',
     ];
 
@@ -51,12 +50,7 @@ class ServiceOrder extends Model
             if (empty($model->order_code)) {
                 $model->order_code = self::generateOrderCode();
             }
-            $model->remaining_payment = $model->total_price - $model->down_payment;
-        });
-
-        static::updating(function ($model) {
-            // Update sisa pembayaran jika total_price atau down_payment berubah
-            $model->remaining_payment = $model->total_price - $model->down_payment;
+            
         });
     }
 
@@ -80,7 +74,7 @@ class ServiceOrder extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(ServiceCategory::class);
     }
 
     

@@ -4,6 +4,7 @@ namespace App\Livewire\OrderJasa;
 
 use App\Models\ServiceOrder;
 use App\Models\Category;
+use App\Models\ServiceCategory;
 use App\Models\SubCategory;
 use App\Models\User;
 use Livewire\Component;
@@ -40,10 +41,12 @@ class CreateOrderJasa extends Component
     // Pricing
     public $total_price = 0;
     public $payment = 0;
+    public $down_payment = 0;
 
     // Files & Notes
     public $design_file;
     public $notes = '';
+    public $kategori ;
 
     // Status
     public $status = 'pending';
@@ -53,12 +56,13 @@ class CreateOrderJasa extends Component
     {
         $this->order_date = Carbon::now()->format('Y-m-d');
         $this->estimated_completion_date = Carbon::now()->addDays(7)->format('Y-m-d');
+        $this->kategori =  ServiceCategory::orderBy('nama_jasa')->get();
     }
 
     #[Computed]
     public function categories()
     {
-        return Category::orderBy('nama_kategori')->get();
+        return ServiceCategory::orderBy('nama_jasa')->get();
     }
 
     
@@ -69,15 +73,16 @@ class CreateOrderJasa extends Component
             'customer_name' => 'required|string|max:255',
             'customer_phone' => 'required|string|max:20',
             'customer_email' => 'nullable|email|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:service_categories,id',
             'order_title' => 'required|string|max:255',
             'order_description' => 'required|string',
             'quantity' => 'required|integer|min:1',
             'unit' => 'required|string|max:50',
             'order_date' => 'required|date',
             'estimated_completion_date' => 'required|date|after_or_equal:order_date',
-            'total_price' => 'required|numeric|min:0',
-            'payment' => 'required|numeric|min:0',
+            'total_price' => 'required|integer|min:0',
+            'payment' => 'required|integer|min:0',
+            'down_payment' => 'nullable|integer|min:0',
             'design_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,zip,rar,ai,psd,cdr|max:10240',
             'notes' => 'nullable|string',
             'status' => 'required|in:pending,approved,in_progress,completed',
@@ -99,6 +104,7 @@ class CreateOrderJasa extends Component
             'total_price.min' => 'Total harga tidak boleh negatif',
             'payment.required' => 'Pembayaran wajib diisi',
             'payment.min' => 'Pembayaran tidak boleh negatif',
+            'down_payment.min' => 'Down payment tidak boleh negatif',
             'design_file.mimes' => 'File harus berformat: pdf, jpg, jpeg, png, zip, rar, ai, psd, cdr',
             'design_file.max' => 'Ukuran file maksimal 10MB',
         ]);
@@ -119,6 +125,11 @@ class CreateOrderJasa extends Component
                     $userId = $customer->id;
                 }
             }
+            if($this->total_price > 0 && $this->payment >= $this->total_price) {
+                $statusPembayaran = 'lunas';
+            }else {
+                $statusPembayaran = 'belum_lunas';
+            }
 
             ServiceOrder::create([
                 'user_id' => $userId,
@@ -134,9 +145,11 @@ class CreateOrderJasa extends Component
                 'estimated_completion_date' => $this->estimated_completion_date,
                 'total_price' => $this->total_price,
                 'payment' => $this->payment,
+                'down_payment' => $this->down_payment,
                 'design_file' => $designFilePath,
                 'notes' => $this->notes,
                 'status' => $this->status,
+                'status_pembayaran' => $statusPembayaran,
                 'created_by' => Auth::id(),
             ]);
 
@@ -145,6 +158,7 @@ class CreateOrderJasa extends Component
 
         } catch (\Exception $e) {
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            dd($e->getMessage());
         }
     }
 

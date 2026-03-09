@@ -41,6 +41,7 @@ return new class extends Migration
             // Files
             $table->string('design_file')->nullable();
             $table->text('notes')->nullable();
+            $table->enum('status_pembayaran', ['lunas', 'belum_lunas'])->default('belum lunas');
             
             // Status
             $table->enum('status', [
