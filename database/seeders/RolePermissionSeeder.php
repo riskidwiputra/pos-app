@@ -2,337 +2,165 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
 use App\Models\Role;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class RolePermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $adminRole = Role::create([
-            'name' => 'Administrator',
-            'slug' => 'admin',
+        // ========================================
+        // BUAT ROLES
+        // ========================================
+        
+        $superAdmin = Role::create([
+            'name' => 'Super Admin',
+            'slug' => 'super-admin',
+            'description' => 'Akses penuh ke seluruh sistem',
             'level' => 0,
-            'description' => 'Full access to all features',
             'is_active' => true,
         ]);
 
-        $kasirRole = Role::create([
-            'name' => 'Kasir',
-            'slug' => 'kasir',
+        $admin = Role::create([
+            'name' => 'Admin',
+            'slug' => 'admin',
+            'description' => 'Administrator toko',
             'level' => 1,
-            'description' => 'Access to cashier features',
             'is_active' => true,
         ]);
 
-        $userRole = Role::create([
-            'name' => 'User',
-            'slug' => 'user',
+      
+
+        $customer = Role::create([
+            'name' => 'Customer',
+            'slug' => 'customer',
+            'description' => 'Pelanggan',
             'level' => 2,
-            'description' => 'Limited access',
             'is_active' => true,
         ]);
 
-        // Create Permissions - Menu Items
-        $permissions = [
-            // Dashboard
-            [
-                'name' => 'Dashboard',
-                'slug' => 'dashboard',
-                'module' => 'Dashboard',
-                'type' => 'menu',
-                'icon' => 'fas fa-tachometer-alt',
-                'url' => '/dashboard',
-                'order' => 1,
-                'description' => 'Access to dashboard',
-                'roles' => ['admin', 'kasir', 'user'],
-            ],
+        $menus = [
 
-            // Product Management
-            [
-                'name' => 'Manajemen Produk',
-                'slug' => 'product-management',
-                'module' => 'Product',
-                'type' => 'menu',
-                'icon' => 'fas fa-box',
-                'url' => null,
-                'order' => 2,
-                'description' => 'Product management module',
-                'roles' => ['admin', 'kasir'],
-                'children' => [
-                    [
-                        'name' => 'Daftar Produk',
-                        'slug' => 'product.index',
-                        'module' => 'Product',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-list',
-                        'url' => '/product',
-                        'order' => 1,
-                        'description' => 'View product list',
-                        'roles' => ['admin', 'kasir'],
-                    ],
-                    [
-                        'name' => 'Tambah Produk',
-                        'slug' => 'product.create',
-                        'module' => 'Product',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-plus',
-                        'url' => '/product/create',
-                        'order' => 2,
-                        'description' => 'Create new product',
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'name' => 'Kategori',
-                        'slug' => 'category.index',
-                        'module' => 'Product',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-tags',
-                        'url' => '/category',
-                        'order' => 3,
-                        'description' => 'Manage categories',
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
+            ['name'=>'Dashboard', 'module'=>'dashboard', 'slug'=>'dashboard','url'=>'/dashboard','icon'=>'dashboard'],
 
-            // User Management
-            [
-                'name' => 'Manajemen User',
-                'slug' => 'user-management',
-                'module' => 'User',
-                'type' => 'menu',
-                'icon' => 'fas fa-users',
-                'url' => null,
-                'order' => 3,
-                'description' => 'User management module',
-                'roles' => ['admin'],
-                'children' => [
-                    [
-                        'name' => 'Daftar User',
-                        'slug' => 'user.index',
-                        'module' => 'User',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-user-friends',
-                        'url' => '/user',
-                        'order' => 1,
-                        'description' => 'View user list',
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'name' => 'Role',
-                        'slug' => 'role.index',
-                        'module' => 'User',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-user-tag',
-                        'url' => '/role',
-                        'order' => 2,
-                        'description' => 'Manage roles',
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'name' => 'Permission',
-                        'slug' => 'permission.index',
-                        'module' => 'User',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-shield-alt',
-                        'url' => '/permission',
-                        'order' => 3,
-                        'description' => 'Manage permissions',
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
+            ['name'=>'Kasir','module'=>'kasir', 'slug'=>'kasir','url'=>'/cashier','icon'=>'cashier'],
 
-            // Settings
-            [
-                'name' => 'Pengaturan',
-                'slug' => 'settings',
-                'module' => 'Setting',
-                'type' => 'menu',
-                'icon' => 'fas fa-cog',
-                'url' => null,
-                'order' => 99,
-                'description' => 'Application settings',
-                'roles' => ['admin'],
-                'children' => [
-                    [
-                        'name' => 'Menu Role',
-                        'slug' => 'menu-role.index',
-                        'module' => 'Setting',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-list-ul',
-                        'url' => '/menu-role',
-                        'order' => 1,
-                        'description' => 'Manage menu roles',
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'name' => 'Backup Database',
-                        'slug' => 'backup.index',
-                        'module' => 'Setting',
-                        'type' => 'menu',
-                        'icon' => 'fas fa-database',
-                        'url' => '/backup',
-                        'order' => 2,
-                        'description' => 'Database backup',
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
+            ['name'=>'Supplier','module'=>'supplier', 'slug'=>'supplier','url'=>'/supplier','icon'=>'supplier'],
+
+            ['name'=>'Produk','module'=>'product', 'slug'=>'product','url'=>'/product','icon'=>'product'],
+
+            ['name'=>'Pembelian','module'=>'purchase', 'slug'=>'purchase','url'=>'/purchase','icon'=>'purchase'],
+
+            ['name'=>'Penjualan','module'=>'sale', 'slug'=>'sale','url'=>'/sale','icon'=>'sale'],
+
+            ['name'=>'Permission','module'=>'permission', 'slug'=>'permission','url'=>'/roles/manage-permissions','icon'=>'permission'],
+
+            ['name'=>'Order Jasa','module'=>'order-jasa', 'slug'=>'order-jasa','url'=>'/order-jasa','icon'=>'order-jasa'],
+
+            ['name'=>'Data User','module'=>'user', 'slug'=>'user-management','url'=>'#','icon'=>'user'],
+
+            ['name'=>'Master Data','module'=>'master-data', 'slug'=>'master-data','url'=>'#','icon'=>'database'],
+
+            ['name'=>'Laporan','module'=>'laporan', 'slug'=>'laporan','url'=>'#','icon'=>'report']
+
         ];
 
-        // Create Permissions - Features
+        foreach ($menus as $menu) {
+
+            Permission::create([
+                'name'=>$menu['name'],
+                'slug'=>$menu['slug'],
+                'module'=>$menu['module'],
+                'type'=>'menu',
+                'url'=>$menu['url'],
+                'icon'=>$menu['icon']
+            ]);
+        }
         $features = [
-            // Product Features
-            [
-                'name' => 'Create Product',
-                'slug' => 'product.create.action',
-                'module' => 'Product',
-                'type' => 'feature',
-                'description' => 'Create new product',
-                'roles' => ['admin'],
-            ],
-            [
-                'name' => 'Update Product',
-                'slug' => 'product.update',
-                'module' => 'Product',
-                'type' => 'feature',
-                'description' => 'Update existing product',
-                'roles' => ['admin'],
-            ],
-            [
-                'name' => 'Delete Product',
-                'slug' => 'product.delete',
-                'module' => 'Product',
-                'type' => 'feature',
-                'description' => 'Delete product',
-                'roles' => ['admin'],
-            ],
-            [
-                'name' => 'Read Product',
-                'slug' => 'product.read',
-                'module' => 'Product',
-                'type' => 'feature',
-                'description' => 'View product details',
-                'roles' => ['admin', 'kasir'],
-            ],
 
-            // User Features
-            [
-                'name' => 'Create User',
-                'slug' => 'user.create.action',
-                'module' => 'User',
-                'type' => 'feature',
-                'description' => 'Create new user',
-                'roles' => ['admin'],
-            ],
-            [
-                'name' => 'Update User',
-                'slug' => 'user.update',
-                'module' => 'User',
-                'type' => 'feature',
-                'description' => 'Update existing user',
-                'roles' => ['admin'],
-            ],
-            [
-                'name' => 'Delete User',
-                'slug' => 'user.delete',
-                'module' => 'User',
-                'type' => 'feature',
-                'description' => 'Delete user',
-                'roles' => ['admin'],
-            ],
+            // Dashboard
+            ['name'=>'Lihat Dashboard','slug'=>'dashboard.view','module'=>'dashboard','parent'=>'dashboard'],
+            // Kasir
+            ['name'=>'Lihat Kasir','slug'=>'kasir.view','module'=>'kasir','parent'=>'kasir'],
+            // Supplier
+            ['name'=>'Lihat Supplier','slug'=>'supplier.view','module'=>'supplier','parent'=>'supplier'],
+            ['name'=>'Tambah Supplier','slug'=>'supplier.create','module'=>'supplier','parent'=>'supplier'],
+            ['name'=>'Edit Supplier','slug'=>'supplier.edit','module'=>'supplier','parent'=>'supplier'],
+            ['name'=>'Hapus Supplier','slug'=>'supplier.delete','module'=>'supplier','parent'=>'supplier'],
 
-            // Role Features
-            [
-                'name' => 'Manage Roles',
-                'slug' => 'role.manage',
-                'module' => 'User',
-                'type' => 'feature',
-                'description' => 'Full role management',
-                'roles' => ['admin'],
-            ],
+            // Product
+            ['name'=>'Lihat Produk','slug'=>'product.view','module'=>'product','parent'=>'product'],
+            ['name'=>'Tambah Produk','slug'=>'product.create','module'=>'product','parent'=>'product'],
+            ['name'=>'Edit Produk','slug'=>'product.edit','module'=>'product','parent'=>'product'],
+            ['name'=>'Hapus Produk','slug'=>'product.delete','module'=>'product','parent'=>'product'],
 
-            // Permission Features
-            [
-                'name' => 'Manage Permissions',
-                'slug' => 'permission.manage',
-                'module' => 'User',
-                'type' => 'feature',
-                'description' => 'Full permission management',
-                'roles' => ['admin'],
-            ],
+            // Purchase
+            ['name'=>'Lihat Pembelian','slug'=>'purchase.view','module'=>'purchase','parent'=>'purchase'],
+            ['name'=>'Tambah Pembelian','slug'=>'purchase.create','module'=>'purchase','parent'=>'purchase'],
+            ['name'=>'Edit Pembelian','slug'=>'purchase.edit','module'=>'purchase','parent'=>'purchase'],
+            // Sale
+            ['name'=>'Lihat Penjualan','slug'=>'sale.view','module'=>'sale','parent'=>'sale'],
+            ['name'=>'Tambah Penjualan','slug'=>'sale.create','module'=>'sale','parent'=>'sale'],
+            ['name'=>'Edit Penjualan','slug'=>'sale.edit','module'=>'sale','parent'=>'sale'],
+            ['name'=>'Hapus Penjualan','slug'=>'sale.delete','module'=>'sale','parent'=>'sale'],
+
+            // Order Jasa
+            ['name'=>'Lihat Order Jasa','slug'=>'order-jasa.view','module'=>'order-jasa','parent'=>'order-jasa'],
+            ['name'=>'Tambah Order Jasa','slug'=>'order-jasa.create','module'=>'order-jasa','parent'=>'order-jasa'],
+            ['name'=>'Edit Order Jasa','slug'=>'order-jasa.edit','module'=>'order-jasa','parent'=>'order-jasa'],
+
+            // User
+            ['name'=>'Kelola Admin','slug'=>'admin.manage','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Kelola Karyawan','slug'=>'karyawan.manage','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Kelola Customer','slug'=>'customer.manage','module'=>'user','parent'=>'user-management'],
+
+            // Master Data
+            ['name'=>'Kelola Category','slug'=>'category.manage','module'=>'master-data','parent'=>'master-data'],
+            ['name'=>'Kelola SubCategory','slug'=>'subcategory.manage','module'=>'master-data','parent'=>'master-data'],
+            ['name'=>'Kelola Unit','slug'=>'unit.manage','module'=>'master-data','parent'=>'master-data'],
+
+            // Laporan
+            ['name'=>'Laporan Penjualan Transaksi','slug'=>'laporan.transaksi','module'=>'laporan','parent'=>'laporan'],
+            ['name'=>'Laporan Penjualan Item','slug'=>'laporan.per-item','module'=>'laporan','parent'=>'laporan'],
+            ['name'=>'Laporan Stok','slug'=>'laporan.stok','module'=>'laporan','parent'=>'laporan'],
+
         ];
 
-        // Helper function to create permissions recursively
-        $createPermission = function($permData, $parentId = null) use (&$createPermission) {
-            $roles = $permData['roles'] ?? [];
-            $children = $permData['children'] ?? [];
-            
-            unset($permData['roles'], $permData['children']);
-            
-            $permission = Permission::create(array_merge($permData, [
-                'parent_id' => $parentId,
-            ]));
 
-            // Attach roles
-            $roleIds = Role::whereIn('slug', $roles)->pluck('id')->toArray();
-            if (!empty($roleIds)) {
-                $permission->roles()->attach($roleIds);
-            }
+        foreach ($features as $feature) {
 
-            // Create children recursively
-            foreach ($children as $child) {
-                $createPermission($child, $permission->id);
-            }
+            $parent = Permission::where('slug',$feature['parent'])->first();
 
-            return $permission;
-        };
+            Permission::create([
+                'name' => $feature['name'],
+                'slug' => $feature['slug'],
+                'module' => $feature['module'],
+                'type' => 'feature',
+                'parent_id' => $parent->id ?? null,
+                'icon' => null,
+                'url' => null,
+                'order' => 0,
+                'is_active' => true
+            ]);
 
-        // Create menu permissions
-        foreach ($permissions as $permData) {
-            $createPermission($permData);
         }
- 
-        // Create feature permissions
-        foreach ($features as $featureData) {
-            $roles = $featureData['roles'] ?? [];
-            unset($featureData['roles']);
-            
-            $feature = Permission::create($featureData);
-            
-            $roleIds = Role::whereIn('slug', $roles)->pluck('id')->toArray();
-            if (!empty($roleIds)) {
-                $feature->roles()->attach($roleIds);
-            }
-        }
+        // ========================================
+        // ASSIGN PERMISSIONS TO ROLES
+        // ========================================
+        
+        // Super Admin - Akses Semua (tidak perlu assign, cek di model)
+        
+        // Admin - Akses hampir semua kecuali kelola hak akses
+        $adminPermissions = Permission::whereNotIn('slug',[
+            'admin.manage'
+        ])->pluck('id');
 
-        // Create default admin user
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
-            'role_id' => $adminRole->id,
-            'is_active' => true,
-        ]);
+        $admin->permissions()->attach($adminPermissions);
 
-        // Create kasir user
-        User::create([
-            'name' => 'Kasir User',
-            'email' => 'kasir@example.com',
-            'password' => bcrypt('password'),
-            'role_id' => $kasirRole->id,
-            'is_active' => true,
-        ]);
+        
+        
 
-        $this->command->info('Roles, Permissions, and Users seeded successfully!');
+        // Customer - Tidak ada permission (handle manual di code)
     }
 }

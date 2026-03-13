@@ -35,7 +35,6 @@ class RoleManagement extends Component
         return [
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:roles,slug,' . $this->roleId,
-            'default_module' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ];
@@ -82,8 +81,8 @@ class RoleManagement extends Component
             [
                 'name' => $this->name,
                 'slug' => $this->slug,
-                'default_module' => $this->default_module,
                 'description' => $this->description,
+                'level' => 1, 
                 'is_active' => $this->is_active,
             ]
         );
@@ -136,11 +135,11 @@ class RoleManagement extends Component
     public function render()
     {
         $roles = Role::query()
-            ->withCount(['permissions', 'users'])
+            ->withCount(['users'])
+            ->where('level', '!=', 0)
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('slug', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%');
+                    ->orWhere('slug', 'like', '%' . $this->search . '%');
             })
             ->paginate($this->perPage);
 

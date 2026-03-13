@@ -5,14 +5,15 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\CreateAdmin;
 use App\Livewire\Admin\IndexAdmin;
 use App\Livewire\Admin\UpdateAdmin;
+use App\Livewire\Auth\CustomerRegister;
+use App\Livewire\Auth\ManageRolePermissions;
 use App\Livewire\Category\CreateCategory;
 use App\Livewire\Category\IndexCategory;
 use App\Livewire\Category\UpdateCategory;
 use App\Livewire\Customer\CreateCustomer;
 use App\Livewire\Customer\IndexCustomer;
 use App\Livewire\Customer\UpdateCustomer;
-
-// use App\Livewire\Dashboard;
+use App\Livewire\Dashboard;
 use App\Livewire\Employee\CreateEmployee;
 use App\Livewire\Employee\IndexEmployee;
 use App\Livewire\Employee\UpdateEmployee;
@@ -49,6 +50,7 @@ use App\Livewire\Unit\UpdateUnit;
 use App\Livewire\Sale\IndexSale;
 use App\Livewire\Print\PrintNota;
 use App\Livewire\Sale\updateSale;
+use App\Livewire\Setting\RoleManagement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,95 +68,137 @@ Route::get('/', function () {
     return view('livewire.home.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
-Route::middleware('auth')->group(function () {
+Route::get('/login', function () {
+    return view('auth.loginUser');
+})->name('login');
 
+Route::get('/register', CustomerRegister::class)->name('register');
+
+Route::prefix('sb-admin')->middleware('auth')->group(function () {
+
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    
     Route::get('/cashier', Kasir::class)->name('cashier');
 
     Route::prefix('supplier')->name('supplier.')->group(function () {
-        Route::get('/', IndexSupplier::class)->name('index');
-        Route::get('/create', CreateSupplier::class)->name('create');
-        Route::get('/{id}/edit', UpdateSupplier::class)->name('edit');
+        Route::get('/', IndexSupplier::class)->name('index')->middleware('permission:supplier.view');
+        Route::get('/create', CreateSupplier::class)->name('create')->middleware('permission:supplier.create');
+        Route::get('/{id}/edit', UpdateSupplier::class)->name('edit')->middleware('permission:supplier.edit');
     });
-    Route::prefix('category')->name('category.')->group(function () {
+
+    Route::prefix('category')->middleware('permission:category.manage')->name('category.')->group(function () {
         Route::get('/', IndexCategory::class)->name('index');
         Route::get('/create', CreateCategory::class)->name('create');
         Route::get('/{id}/edit', UpdateCategory::class)->name('edit');
     });
-    Route::prefix('subcategory')->name('subcategory.')->group(function () {
+
+    Route::prefix('subcategory')->middleware('permission:subcategory.manage')->name('subcategory.')->group(function () {
         Route::get('/', IndexSubCategory::class)->name('index');
         Route::get('/create', CreateSubCategory::class)->name('create');
         Route::get('/{id}/edit', UpdateSubCategory::class)->name('edit');
     });
-    Route::prefix('unit')->name('unit.')->group(function () {
+
+    Route::prefix('unit')->middleware('permission:unit.manage')->name('unit.')->group(function () {
         Route::get('/', IndexUnit::class)->name('index');
         Route::get('/create', CreateUnit::class)->name('create');
         Route::get('/{id}/edit', UpdateUnit::class)->name('edit');
     });
-    Route::prefix('karyawan')->name('karyawan.')->group(function () {
+
+    Route::prefix('karyawan')->middleware('permission:karyawan.manage')->name('karyawan.')->group(function () {
         Route::get('/', IndexEmployee::class)->name('index');
         Route::get('/create', CreateEmployee::class)->name('create');
         Route::get('/{id}/edit', UpdateEmployee::class)->name('edit');
     });
+
     Route::prefix('product')->name('product.')->group(function () {
-        Route::get('/', IndexProduct::class)->name('index');
-        Route::get('/create', CreateProduct::class)->name('create');
-        Route::get('/{id}/edit', UpdateProduct::class)->name('edit');
-        Route::get('/mass-upload',MassUpload::class)->name('mass-upload');
+        Route::get('/', IndexProduct::class)
+        ->middleware('permission:product.view')
+        ->name('index');
+
+        Route::get('/create', CreateProduct::class)
+            ->middleware('permission:product.create')
+            ->name('create');
+
+        Route::get('/{id}/edit', UpdateProduct::class)
+            ->middleware('permission:product.edit')
+            ->name('edit');
+
+        Route::get('/mass-upload', MassUpload::class)
+            ->middleware('permission:product.create')
+            ->name('mass-upload');
     });
-    Route::prefix('purchase')->name('purchase.')->group(function () {
+
+    Route::prefix('purchase')->middleware('permission:purchase.view')->name('purchase.')->group(function () {
         Route::get('/', IndexPurchase::class)->name('index');
-        Route::get('/create', CreatePurchase::class)->name('create');
-        Route::get('/{id}/edit', UpdatePurchase::class)->name('edit');
-        Route::get('/{id}/detail', DetailPurchase::class)->name('detail');
+
+        Route::get('/create', CreatePurchase::class)
+            ->middleware('permission:purchase.create')
+            ->name('create');
+
+        Route::get('/{id}/edit', UpdatePurchase::class)
+            ->middleware('permission:purchase.edit')
+            ->name('edit');
+
+        Route::get('/{id}/detail', DetailPurchase::class)
+            ->name('detail');
     });
-     Route::prefix('sale')->name('sale.')->group(function () {
-            Route::get('/', IndexSale::class)->name('index');
-            Route::get('/create', CreateSale::class)->name('create');
-            Route::get('/{id}/detail', DetailSale::class)->name('detail');
-            Route::get('/{id}/update', updateSale::class)->name('update');
-        });
-     Route::prefix('admin-management')->group(function () {
+    Route::prefix('sale')->middleware('permission:sale')->name('sale.')->group(function () {
+          Route::get('/', IndexSale::class)
+          ->middleware('permission:sale.view')
+          ->name('index');
+
+        Route::get('/create', CreateSale::class)
+            ->middleware('permission:sale.create')
+            ->name('create');
+
+        Route::get('/{id}/update', UpdateSale::class)
+            ->middleware('permission:sale.edit')
+            ->name('update');
+
+        Route::get('/{id}/detail', DetailSale::class)->name('detail');
+    });
+    Route::prefix('admin-management')->middleware('permission:admin-management.manage')->group(function () {
         Route::get('/', IndexAdmin::class)->name('admin.index');
         Route::get('/create', CreateAdmin::class)->name('admin.create');
         Route::get('/{id}/edit', UpdateAdmin::class)->name('admin.edit');
     });
-    Route::prefix('customer')->group(function () {
+    Route::prefix('customer')->middleware('permission:customer.manage')->group(function () {
         Route::get('/', IndexCustomer::class)->name('customer.index');
         Route::get('/create', CreateCustomer::class)->name('customer.create');
         Route::get('/{id}/edit', UpdateCustomer::class)->name('customer.edit');
     });
-
     Route::prefix('laporan')->name('laporan.')->group(function () {
         // Penjualan
         Route::get('/penjualan/transaksi', LaporanPenjualanTransaksi::class)
+        ->middleware('permission:laporan.transaksi')
             ->name('penjualan.transaksi');
         
         Route::get('/penjualan/per-item', LaporanPenjualanPerItem::class)
+        ->middleware('permission:laporan.per-item')
             ->name('penjualan.per-item');
         
-        
-        // Stok (coming soon)
        Route::get('/stok', LaporanStok::class)
+        ->middleware('permission:laporan.stok')
             ->name('stok');
 
        
     });
-      Route::prefix('order-jasa')->name('order-jasa.')->group(function () {
-            Route::get('/', IndexOrderJasa::class)
-                    ->name('index');
-            Route::get('/{id}/update', UpdateOrderJasa::class)
-                    ->name('update');
-            Route::get('/create', CreateOrderJasa::class)
-                    ->name('create');
-            Route::get('/{id}/detail', DetailOrderJasa::class)
-                    ->name('detail');
-             Route::get('/setting-kategori', ServiceCategoryJasa::class)->name('setting-kategori');
+    Route::prefix('order-jasa')->name('order-jasa.')->group(function () {
+             Route::get('/', IndexOrderJasa::class)->name('index');
+
+        Route::get('/create', CreateOrderJasa::class)
+            ->middleware('permission:order-jasa.create')
+            ->name('create');
+
+        Route::get('/{id}/update', UpdateOrderJasa::class)
+            ->middleware('permission:order-jasa.edit')
+            ->name('update');
+
+        Route::get('/{id}/detail', DetailOrderJasa::class)->name('detail');
+
+            Route::get('/setting-kategori', ServiceCategoryJasa::class)->name('setting-kategori');
                     
-      });
+    });
     Route::prefix('print')->name('print.')->group(function () {
         Route::get('/nota/{sale}', PrintNota::class)->name('nota');
         
@@ -164,13 +208,17 @@ Route::middleware('auth')->group(function () {
             $sale = \App\Models\Sale::with(['items.product'])->findOrFail($id);
             return view('livewire.print.nota-content', compact('sale'));
         });
+    Route::prefix('auth')->name('auth.')->middleware('permission:permission')->group(function () {
+        Route::get('/permissions', ManageRolePermissions::class)->name('permissions');
+        Route::get('/role-management', RoleManagement::class)
+        ->name('role-management');
+    });
 
     Route::get('/roles/manage-permissions', ManagePermissions::class)
         ->name('roles.manage-permissions');
     Route::get('/setting/manage-menu', MenuManagement::class)
         ->name('setting.manage-menu');
-    Route::get('/setting/role-management', \App\Livewire\Setting\RoleManagement::class)
-        ->name('setting.role-management');
+
     Route::get('/setting/permission-management', \App\Livewire\Setting\PermissionManagement::class)
         ->name('setting.permission-management');
     Route::get('/setting/user-role-management', \App\Livewire\Setting\UserRoleManagement::class)

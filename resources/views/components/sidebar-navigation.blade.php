@@ -46,6 +46,7 @@
             <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1 sidebar-scroll">
                 
                 {{-- Dashboard --}}
+                @if(auth()->user()->hasPermission('dashboard'))
                 <a 
                     href="{{ route('dashboard') }}"
                     @click="closeSidebar()"
@@ -55,8 +56,10 @@
                     </svg>
                     <span>Dashboard</span>
                 </a>
+                @endif
 
                 {{-- Kasir --}}
+                @if(auth()->user()->hasPermission('kasir'))
                 <a 
                     href="{{ route('cashier') }}"
                     @click="closeSidebar()"
@@ -66,8 +69,9 @@
                     </svg>
                     <span>Kasir</span>
                 </a>
-
+                @endif
                 {{-- Supplier --}}
+                @if(auth()->user()->hasPermission('supplier'))
                 <a 
                     href="{{ route('supplier.index') }}"
                     @click="closeSidebar()"
@@ -77,8 +81,9 @@
                     </svg>
                     <span>Supplier</span>
                 </a>
-
+                @endif
                 {{-- Manajemen Produk --}}
+                @if(auth()->user()->hasPermission('produk'))
                 <a 
                     href="{{ route('product.index') }}"
                     @click="closeSidebar()"
@@ -88,8 +93,10 @@
                     </svg>
                     <span>Manajemen Produk</span>
                 </a>
+                @endif
 
                 {{-- Pembelian --}}
+                @if(auth()->user()->hasPermission('pembelian'))
                 <a 
                     href="{{ route('purchase.index') }}"
                     @click="closeSidebar()"
@@ -99,7 +106,8 @@
                     </svg>
                     <span>Pembelian</span>
                 </a>
-
+                @endif
+                @if(auth()->user()->hasPermission('penjualan'))
                 {{-- Penjualan --}}
                 <a 
                     href="{{ route('sale.index') }}"
@@ -110,8 +118,10 @@
                     </svg>
                     <span>Penjualan</span>
                 </a>
+                @endif
 
                 {{-- Order Jasa --}}
+                @if(auth()->user()->hasPermission('order-jasa'))
                 <a 
                     href="{{ route('order-jasa.index') }}"
                     @click="closeSidebar()"
@@ -122,8 +132,10 @@
                     </svg>
                     <span>Order Jasa</span>
                 </a>
+                @endif
 
                 {{-- Data User (Dropdown) --}}
+                @if(auth()->user()->hasPermission('user-management'))
                 <div x-data="{ expanded: {{ request()->routeIs('karyawan.*', 'admin.*', 'customer.*') ? 'true' : 'false' }} }">
                     <button 
                         @click="expanded = !expanded"
@@ -177,12 +189,13 @@
                         </a>
                     </div>
                 </div>
-
+                @endif
                 {{-- Master Data (Dropdown) --}}
-                <div x-data="{ expanded: {{ request()->routeIs('category.*', 'subcategory.*', 'unit.*') ? 'true' : 'false' }} }">
+                @if(auth()->user()->hasPermission('master-data'))
+                <div x-data="{ expanded: {{ request()->routeIs('category.*', 'subcategory.*', 'unit.*', 'auth.*') ? 'true' : 'false' }} }">
                     <button 
                         @click="expanded = !expanded"
-                        class="nav-item {{ request()->routeIs('category.*', 'subcategory.*', 'unit.*') ? 'active' : '' }}"
+                        class="nav-item {{ request()->routeIs('category.*', 'subcategory.*', 'unit.*', 'auth.*') ? 'active' : '' }}"
                         style="width: 100%; justify-content: space-between;">
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,10 +243,27 @@
                             <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                             Unit
                         </a>
+                         {{-- Permission --}}
+                        <a 
+                            href="{{ route('auth.permissions') }}"
+                            @click="closeSidebar()"
+                            class="nav-item {{ request()->routeIs('auth.permissions') ? 'active' : '' }}">
+                              <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                            <span>Permission</span>
+                        </a>
+                        {{-- Role --}}
+                        <a 
+                            href="{{ route('auth.role-management') }}"
+                            @click="closeSidebar()"
+                            class="nav-item {{ request()->routeIs('auth.role-management') ? 'active' : '' }}">
+                              <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                            <span>Role</span>
+                        </a>
                     </div>
                 </div>
-
+                @endif
                 {{-- Laporan (Dropdown) --}}
+                @if(auth()->user()->hasPermission('laporan'))
                 <div x-data="{ expanded: {{ request()->routeIs('laporan.*') ? 'true' : 'false' }} }">
                     <button 
                         @click="expanded = !expanded"
@@ -287,6 +317,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
 
                
             </nav>

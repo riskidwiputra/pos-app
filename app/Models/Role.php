@@ -54,35 +54,5 @@ class Role extends Model
         return $this->permissions()->count();
     }
 
-    /**
-     * Assign permission ke role
-     */
-    // public function givePermission($permission)
-    // {
-    //     if (is_string($permission)) {
-    //         $permission = Permission::where('name', $permission)->firstOrFail();
-    //     }
-
-    //     return $this->permissions()->syncWithoutDetaching($permission);
-    // }
-
-    // /**
-    //  * Revoke permission dari role
-    //  */
-    // public function revokePermission($permission)
-    // {
-    //     if (is_string($permission)) {
-    //         $permission = Permission::where('name', $permission)->firstOrFail();
-    //     }
-
-    //     return $this->permissions()->detach($permission);
-    // }
-
-    // /**
-    //  * Sync permissions untuk role
-    //  */
-    // public function syncPermissions($permissions)
-    // {
-    //     return $this->permissions()->sync($permissions);
-    // }
+   
 }

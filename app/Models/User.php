@@ -64,7 +64,25 @@ class User extends Authenticatable
 
     public function hasPermission($permissionSlug)
     {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
         return $this->role && $this->role->hasPermission($permissionSlug);
+    }
+
+     public function hasAnyPermission(array $permissionSlugs)
+    {
+        if (!$this->role) {
+            return false;
+        }
+
+        foreach ($permissionSlugs as $slug) {
+            if ($this->hasPermission($slug)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function scopeAdmins($query)
@@ -90,109 +108,24 @@ class User extends Authenticatable
     {
         return $this->role && $this->role->level === 2;
     }
-    // /**
-    //  * Cek apakah user adalah Super Admin
-    //  */
-    // public function isSuperAdmin()
-    // {
-    //     return $this->hasRole('super_admin');
-    // }
+    public function isSuperAdmin(): bool
+    {
+        return $this->role && $this->role->level === 0;
+    }
 
-    // /**
-    //  * Cek apakah user adalah Admin
-    //  */
-    // public function isAdmin()
-    // {
-    //     return $this->hasRole('admin');
-    // }
+    public function serviceOrders()
+    {
+        return $this->hasMany(ServiceOrder::class, 'user_id');
+    }
 
-    // /**
-    //  * Cek apakah user adalah User biasa
-    //  */
-    // public function isUser()
-    // {
-    //     return $this->hasRole('user');
-    // }
-    // public function getMenuPermissions()
-    // {
-    //     if (!$this->role) {
-    //         return collect([]);
-    //     }
-
-    //     return $this->role->permissions()
-    //         ->where('type', 'menu')
-    //         ->orderBy('order')
-    //         ->get();
-    // }
-
-    // public function hasMenuAccess($menuSlug): bool
-    // {
-    //     return $this->hasPermission($menuSlug);
-    // }
-
-    // /**
-    //  * Cek apakah user memiliki salah satu dari beberapa permission
-    //  */
-    // public function hasAnyPermission(array $permissions)
-    // {
-    //     if ($this->isSuperAdmin()) {
-    //         return true;
-    //     }
-
-    //     foreach ($permissions as $permission) {
-    //         if ($this->hasPermission($permission)) {
-    //             return true;
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
-    // /**
-    //  * Cek apakah user memiliki semua permission yang disebutkan
-    //  */
-    // public function hasAllPermissions(array $permissions)
-    // {
-    //     if ($this->isSuperAdmin()) {
-    //         return true;
-    //     }
-
-    //     foreach ($permissions as $permission) {
-    //         if (!$this->hasPermission($permission)) {
-    //             return false;
-    //         }
-    //     }
-
-    //     return true;
-    // }
-
-    // /**
-    //  * Get all permissions dari role user
-    //  */
-    // public function getAllPermissions()
-    // {
-    //     if ($this->isSuperAdmin()) {
-    //         return Permission::all();
-    //     }
-
-    //     return $this->role ? $this->role->permissions : collect([]);
-    // }
-
-    // /**
-    //  * Scope untuk filter berdasarkan role
-    //  */
-    // public function scopeByRole($query, $roleName)
-    // {
-    //     return $query->whereHas('role', function ($q) use ($roleName) {
-    //         $q->where('name', $roleName);
-    //     });
-    // }
-
-    // /**
-    //  * Scope untuk filter hanya user aktif
-    //  */
-    // public function scopeActive($query)
-    // {
-    //     return $query->where('is_active', true);
-    // }
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'created_by');
+    }
+    
+    public function mySales()
+    {
+        return $this->hasMany(Sale::class, 'customer_id');
+    }
+   
 }
