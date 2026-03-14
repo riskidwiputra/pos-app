@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KasirController;
 use App\Livewire\Cashier\Kasir;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\CreateAdmin;
@@ -76,9 +77,17 @@ Route::get('/register', CustomerRegister::class)->name('register');
 
 Route::prefix('sb-admin')->middleware('auth')->group(function () {
 
+
+    Route::get('/cashier', [KasirController::class, 'index'])
+        ->name('cashier');
+    
+    Route::get('/cashier/product/{id}', [KasirController::class, 'getProduct']);
+    
+    Route::post('/cashier/process', [KasirController::class, 'prosesPembayaran']);
+
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     
-    Route::get('/cashier', Kasir::class)->name('cashier');
+    // Route::get('/cashier', Kasir::class)->name('cashier');
 
     Route::prefix('supplier')->name('supplier.')->group(function () {
         Route::get('/', IndexSupplier::class)->name('index')->middleware('permission:supplier.view');
