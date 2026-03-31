@@ -944,7 +944,7 @@
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#testimonials">Testimoni</a></li>
                 <li><a href="#contact">Kontak</a></li>
-                <li><a href="#order" class="btn-primary">Order Sekarang</a></li>
+                <li><a href="{{ route('login') }}" class="btn-primary">Masuk</a></li>
             </ul>
         </div>
     </nav>
@@ -956,24 +956,11 @@
                 <h1>Solusi Cetak <span class="highlight">Profesional</span> untuk Semua Kebutuhan Anda</h1>
                 <p>Percetakan Matahari Kisaran hadir sebagai mitra terpercaya Anda dalam mewujudkan semua kebutuhan percetakan dengan kualitas terbaik, harga kompetitif, dan layanan cepat.</p>
                 <div class="hero-buttons">
-                    <a href="#order" class="btn-primary">🛒 Order Online</a>
-                    <a href="#services" class="btn-secondary">📋 Lihat Layanan</a>
+                    <a href="#order" class="btn-primary"> Order Sekarang</a>
+                    <a href="#services" class="btn-secondary"> Lihat Layanan</a>
                 </div>
                 
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="number">10+</span>
-                        <span class="label">Tahun Pengalaman</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">5000+</span>
-                        <span class="label">Pelanggan Puas</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">50+</span>
-                        <span class="label">Jenis Layanan</span>
-                    </div>
-                </div>
+               
             </div>
             
             <div class="hero-image">
@@ -999,7 +986,7 @@
                     <ul class="service-features">
                         <li>Spanduk Flexi & Albatros</li>
                         <li>Banner Stand & X-Banner</li>
-                        <li>Roll Banner & Backdrop</li>
+                        <li>Roll Banner & Backdrop</li> 
                         <li>Ukuran Custom</li>
                     </ul>
                     <a href="#order" class="service-link">Order Sekarang →</a>
@@ -1033,7 +1020,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">📋</div>
-                    <h3>Stempel & Cap</h3>
+                    <h3>Stempel </h3>
                     <p>Pembuatan stempel profesional untuk kebutuhan bisnis dan instansi.</p>
                     <ul class="service-features">
                         <li>Stempel Kayu & Flash</li>
@@ -1053,32 +1040,6 @@
                         <li>Print Dokumen</li>
                         <li>Penjilidan Soft & Hard Cover</li>
                         <li>Laminating</li>
-                    </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">👕</div>
-                    <h3>Sablon Kaos</h3>
-                    <p>Cetak kaos custom untuk event, merchandise, atau bisnis fashion Anda.</p>
-                    <ul class="service-features">
-                        <li>Sablon Manual & Digital</li>
-                        <li>Sablon DTF & DTG</li>
-                        <li>Sablon Tote Bag</li>
-                        <li>Minimum Order 12 Pcs</li>
-                    </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>Desain Grafis</h3>
-                    <p>Jasa desain profesional untuk berbagai kebutuhan branding dan marketing.</p>
-                    <ul class="service-features">
-                        <li>Desain Logo & Brand Identity</li>
-                        <li>Desain Brosur & Poster</li>
-                        <li>Desain Social Media</li>
-                        <li>Desain Packaging</li>
                     </ul>
                     <a href="#order" class="service-link">Order Sekarang →</a>
                 </div>
@@ -1273,8 +1234,8 @@
             <h2>Siap Mewujudkan Kebutuhan Cetak Anda?</h2>
             <p>Daftar sekarang dan dapatkan konsultasi gratis untuk project cetak Anda. Tim kami siap membantu mewujudkan ide Anda menjadi kenyataan!</p>
             <div class="cta-buttons">
-                <a href="#register" class="btn-white">📝 Daftar Sekarang</a>
-                <a href="https://wa.me/6281234567890" class="btn-secondary" style="background: rgba(255,255,255,0.2); border-color: white; color: white;">💬 Chat WhatsApp</a>
+                <a href="{{ route('register') }}" class="btn-white"> Daftar Sekarang</a>
+                <a href="https://wa.me/6281234567890" class="btn-secondary" style="background: rgba(255,255,255,0.2); border-color: white; color: white;"> Chat WhatsApp</a>
             </div>
         </div>
     </section>
@@ -1296,8 +1257,8 @@
                         <li><a href="#services">Kalender</a></li>
                         <li><a href="#services">Undangan</a></li>
                         <li><a href="#services">Stempel</a></li>
-                        <li><a href="#services">Sablon Kaos</a></li>
-                        <li><a href="#services">Desain Grafis</a></li>
+                        <li><a href="#services">Cetak Dokumen</a></li>
+                        
                     </ul>
                 </div>
 
@@ -1339,8 +1300,7 @@
         </div>
     </footer>
 
-    <!-- Floating Action Button -->
-    <a href="https://wa.me/6281234567890" class="fab" title="Chat WhatsApp">💬</a>
+
 
     <script>
         // Navbar scroll effect

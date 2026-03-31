@@ -13,7 +13,7 @@
             <div class="flex items-center gap-4 mb-2">
                 
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Tambah Unit Baru</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Tambah Unit </h1>
                     
                 </div>
             </div>
@@ -24,9 +24,12 @@
             
             <!-- Form Header -->
             <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-8 py-6 border-b border-gray-200">
-                <div class="flex items-center gap-3">
-                   
+                <div class=" items-center ">
                     
+     
+                        <h3 class=" font-semibold text-gray-900">Form Unit</h3>
+                       
+    
                 </div>
             </div>
 
@@ -40,9 +43,7 @@
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                           
                         </div>
                         <input 
                             type="text" 
@@ -53,9 +54,7 @@
                     </div>
                     @error('nama_unit') 
                         <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                           
                             {{ $message }}
                         </div>
                     @enderror
@@ -68,10 +67,7 @@
                     </label>
                     <div class="relative">
                         <div class="absolute top-4 left-0 pl-4 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
+                           
                         </div>
                         <input 
                             type="text" 
@@ -82,9 +78,7 @@
                     </div>
                     @error('singkatan') 
                         <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                           
                             {{ $message }}
                         </div>
                     @enderror
@@ -103,14 +97,17 @@
                         </svg>
                         Batal
                     </a>
-                    <button 
-                        type="submit"
-                        class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
+                   <button 
+                        type="submit" wire:loading.attr="disabled"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-3"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Simpan unit
+                        <span wire:loading.remove>
+                            + Simpan Unit
+                        </span>
+                        <span wire:loading>
+                            
+                           <i class='bx bx-loader-alt animate-spin'></i> Memproses...
+                        </span>
                     </button>
                 </div>
             </form>

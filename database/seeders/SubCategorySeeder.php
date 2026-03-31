@@ -98,41 +98,35 @@ class SubCategorySeeder extends Seeder
             ['category_id' => 7, 'kode_subkategori' => '09', 'nama_subkategori' => 'Cetak Stiker'],
             ['category_id' => 7, 'kode_subkategori' => '10', 'nama_subkategori' => 'Cetak Label'],
 
-            // Percetakan Digital (Category ID: 8)
-            ['category_id' => 8, 'kode_subkategori' => '01', 'nama_subkategori' => 'Cetak Banner'],
-            ['category_id' => 8, 'kode_subkategori' => '02', 'nama_subkategori' => 'Cetak Spanduk'],
-            ['category_id' => 8, 'kode_subkategori' => '03', 'nama_subkategori' => 'Cetak MMT'],
-            ['category_id' => 8, 'kode_subkategori' => '04', 'nama_subkategori' => 'Cetak Neon Box'],
-            ['category_id' => 8, 'kode_subkategori' => '05', 'nama_subkategori' => 'Cetak Kartu Nama'],
-            ['category_id' => 8, 'kode_subkategori' => '06', 'nama_subkategori' => 'Cetak Undangan'],
-            ['category_id' => 8, 'kode_subkategori' => '07', 'nama_subkategori' => 'Cetak ID Card'],
-            ['category_id' => 8, 'kode_subkategori' => '08', 'nama_subkategori' => 'Cetak Kalender'],
-            ['category_id' => 8, 'kode_subkategori' => '09', 'nama_subkategori' => 'Cetak Katalog'],
-            ['category_id' => 8, 'kode_subkategori' => '10', 'nama_subkategori' => 'Cetak Company Profile'],
+            // Finishing Percetakan (Category ID: 8)
+            ['category_id' => 8, 'kode_subkategori' => '01', 'nama_subkategori' => 'Laminating Dingin'],
+            ['category_id' => 8, 'kode_subkategori' => '02', 'nama_subkategori' => 'Laminating Panas'],
+            ['category_id' => 8, 'kode_subkategori' => '03', 'nama_subkategori' => 'Jilid Spiral'],
+            ['category_id' => 8, 'kode_subkategori' => '04', 'nama_subkategori' => 'Jilid Kawat'],
+            ['category_id' => 8, 'kode_subkategori' => '05', 'nama_subkategori' => 'Jilid Hardcover'],
+            ['category_id' => 8, 'kode_subkategori' => '06', 'nama_subkategori' => 'Jilid Softcover'],
+            ['category_id' => 8, 'kode_subkategori' => '07', 'nama_subkategori' => 'Pemotongan Kertas'],
+            ['category_id' => 8, 'kode_subkategori' => '08', 'nama_subkategori' => 'Pond / Potong Sudut'],
+            ['category_id' => 8, 'kode_subkategori' => '09', 'nama_subkategori' => 'Emboss / Timbul'],
+            ['category_id' => 8, 'kode_subkategori' => '10', 'nama_subkategori' => 'Hotprint'],
 
-            // Finishing Percetakan (Category ID: 9)
-            ['category_id' => 9, 'kode_subkategori' => '01', 'nama_subkategori' => 'Laminating Dingin'],
-            ['category_id' => 9, 'kode_subkategori' => '02', 'nama_subkategori' => 'Laminating Panas'],
-            ['category_id' => 9, 'kode_subkategori' => '03', 'nama_subkategori' => 'Jilid Spiral'],
-            ['category_id' => 9, 'kode_subkategori' => '04', 'nama_subkategori' => 'Jilid Kawat'],
-            ['category_id' => 9, 'kode_subkategori' => '05', 'nama_subkategori' => 'Jilid Hardcover'],
-            ['category_id' => 9, 'kode_subkategori' => '06', 'nama_subkategori' => 'Jilid Softcover'],
-            ['category_id' => 9, 'kode_subkategori' => '07', 'nama_subkategori' => 'Pemotongan Kertas'],
-            ['category_id' => 9, 'kode_subkategori' => '08', 'nama_subkategori' => 'Pond / Potong Sudut'],
-            ['category_id' => 9, 'kode_subkategori' => '09', 'nama_subkategori' => 'Emboss / Timbul'],
-            ['category_id' => 9, 'kode_subkategori' => '10', 'nama_subkategori' => 'Hotprint'],
+           ['category_id' => 9, 'kode_subkategori' => '02', 'nama_subkategori' => 'Label Barcode & Harga', 'deskripsi' => 'Label untuk barcode dan harga produk'],
+            ['category_id' => 9, 'kode_subkategori' => '03', 'nama_subkategori' => 'Stiker Vinyl & Outdoor', 'deskripsi' => 'Stiker vinyl tahan cuaca untuk kebutuhan outdoor'],
+            ['category_id' => 9, 'kode_subkategori' => '04', 'nama_subkategori' => 'Label Undangan & Kemasan', 'deskripsi' => 'Label untuk undangan dan kemasan produk'],
 
-            // Promosi & Souvenir (Category ID: 10)
-            ['category_id' => 10, 'kode_subkategori' => '01', 'nama_subkategori' => 'Mug Custom'],
-            ['category_id' => 10, 'kode_subkategori' => '02', 'nama_subkategori' => 'Gantungan Kunci'],
-            ['category_id' => 10, 'kode_subkategori' => '03', 'nama_subkategori' => 'Pin & Bros'],
-            ['category_id' => 10, 'kode_subkategori' => '04', 'nama_subkategori' => 'Lanyard'],
-            ['category_id' => 10, 'kode_subkategori' => '05', 'nama_subkategori' => 'Tote Bag'],
-            ['category_id' => 10, 'kode_subkategori' => '06', 'nama_subkategori' => 'Kaos Custom'],
-            ['category_id' => 10, 'kode_subkategori' => '07', 'nama_subkategori' => 'Tumbler'],
-            ['category_id' => 10, 'kode_subkategori' => '08', 'nama_subkategori' => 'Payung Promosi'],
-            ['category_id' => 10, 'kode_subkategori' => '09', 'nama_subkategori' => 'USB Flashdisk'],
-            ['category_id' => 10, 'kode_subkategori' => '10', 'nama_subkategori' => 'Powerbank Custom'],
+
+            // 10 - Amplop & Map
+            ['category_id' => 10, 'kode_subkategori' => '01', 'nama_subkategori' => 'Amplop Surat', 'deskripsi' => 'Amplop putih dan coklat berbagai ukuran'],
+            ['category_id' => 10, 'kode_subkategori' => '02', 'nama_subkategori' => 'Map Plastik & Mika', 'deskripsi' => 'Map plastik dan mika transparan'],
+            ['category_id' => 10, 'kode_subkategori' => '03', 'nama_subkategori' => 'Map Kertas & Snelhecter', 'deskripsi' => 'Map kertas dan snelhecter untuk dokumen'],
+            ['category_id' => 10, 'kode_subkategori' => '04', 'nama_subkategori' => 'Stopmap & Folder', 'deskripsi' => 'Stopmap folio dan folder dokumen'],
+            ['category_id' => 10, 'kode_subkategori' => '05', 'nama_subkategori' => 'Map Arsip & Box File', 'deskripsi' => 'Map arsip dan box file untuk penyimpanan dokumen'],
+            ['category_id' => 10, 'kode_subkategori' => '06', 'nama_subkategori' => 'Amplop Undangan & Coklat', 'deskripsi' => 'Amplop undangan dan coklat berbagai ukuran'],
+            ['category_id' => 10, 'kode_subkategori' => '07', 'nama_subkategori' => 'Map Proyek & Presentasi', 'deskripsi' => 'Map proyek dan presentasi untuk kebutuhan kantor'],
+            ['category_id' => 10, 'kode_subkategori' => '08', 'nama_subkategori' => 'Map Resleting & Map Kancing', 'deskripsi' => 'Map dengan resleting dan kancing untuk dokumen penting'],
+
+
+            
         ];
 
         foreach ($subCategories as $subCategory) {

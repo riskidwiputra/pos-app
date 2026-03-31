@@ -29,19 +29,19 @@ return new class extends Migration
             $table->string('unit'); // pcs, lembar, meter, set, dll
             
             // Dates
-            $table->date('order_date');
-            $table->date('estimated_completion_date');
+            $table->date('order_date')->nullable();
+            $table->date('estimated_completion_date')->nullable();
             $table->date('actual_completion_date')->nullable();
             
             // Pricing
-            $table->integer('total_price');
+            $table->integer('total_price')->nullable();
             $table->integer('down_payment')->nullable()->default(0);
             $table->integer('payment')->default(0);
             
             // Files
             $table->string('design_file')->nullable();
             $table->text('notes')->nullable();
-            $table->enum('status_pembayaran', ['lunas', 'belum_lunas'])->default('belum lunas');
+            $table->enum('status_pembayaran', ['lunas', 'belum_lunas'])->default('belum_lunas');
             
             // Status
             $table->enum('status', [

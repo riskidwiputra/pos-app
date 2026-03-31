@@ -13,7 +13,7 @@
             <div class="flex items-center gap-4 mb-2">
                 
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Tambah category Baru</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Tambah Kategori</h1>
                     
                 </div>
             </div>
@@ -36,19 +36,15 @@
                 <!-- Nama Supplier -->
                 <div class="group">
                     <label class="block text-sm font-semibold text-gray-800 mb-2">
-                        Nama category <span class="text-red-500 font-bold">*</span>
+                        Nama Kategori <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
+                        
                         <input 
                             type="text" 
                             wire:model="nama_kategori" 
-                            placeholder="Nama category"
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_category') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
+                            placeholder="Nama kategori"
+                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_kategori') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         >
                     </div>
                     @error('nama_kategori') 
@@ -67,17 +63,12 @@
                         Deskripsi <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute top-4 left-0 pl-4 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </div>
+                        
                         <input 
                             type="text" 
                             wire:model="deskripsi" 
-                            placeholder="Deskripsi category"
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_category') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
+                            placeholder="Deskripsi kategori"
+                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('deskripsi') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         >
                     </div>
                     @error('deskripsi') 
@@ -110,7 +101,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        Simpan category
+                        Simpan Kategori
                     </button>
                 </div>
             </form>

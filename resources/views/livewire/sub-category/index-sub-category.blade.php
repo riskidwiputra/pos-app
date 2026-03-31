@@ -5,7 +5,7 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Sub Kategori Management
+                    Daftar Sub Kategori 
                 </h1>
             </div>
             <a href="{{ route('subcategory.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
@@ -79,17 +79,13 @@
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
-                                    </svg>
+                                    
                                     Kode Sub Kategori
                                 </span>
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                                    </svg>
+                            
                                     Nama Sub Kategori
                                 </span>
                             </th>
@@ -134,11 +130,16 @@
                                             </svg>
                                             Edit
                                         </a>
-                                        <button wire:click.prevent="confirmDelete({{ $subcategory->id }})" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                            </svg>
-                                            Hapus
+                                        <button wire:loading.attr="disabled" wire:click.prevent="confirmDelete({{ $subcategory->id }})" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                                                   
+                        <span wire:loading.remove>
+                          <i class='bx bx-trash'></i>  Hapus
+                        </span>
+                        <span wire:loading>
+                            
+                            <i class='bx bx-loader-alt animate-spin'></i> Memproses...
+                        </span>
+                                           
                                         </button>
                                     </div>
                                 </td>
@@ -147,13 +148,7 @@
                             <tr>
                                 <td colspan="6" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
-                                        <div class="relative">
-                                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="space-y-2">
                                             <p class="text-lg font-semibold text-gray-700">Tidak ada data Sub kategori</p>
                                             <p class="text-sm text-gray-500">Mulai dengan menambahkan Sub kategori baru</p>

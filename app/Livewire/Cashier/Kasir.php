@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-#[Layout('layouts.kasir')]
+#[Layout('layouts.kasir-layout')]
 #[Title('Kasir')]
 class Kasir extends Component
 {
@@ -24,6 +24,7 @@ class Kasir extends Component
     public $keranjang = [];
     public $tunai = 0;
     public $showModalStruk = false;
+    public $showModalKonfirmasi = false; 
     public $nomorInvoice = '';
     public $tanggalTransaksi = '';
 
@@ -160,6 +161,26 @@ class Kasir extends Component
         $this->tunai += $nominal;
     }
 
+     public function showKonfirmasiPembayaran()
+    {
+        if (empty($this->keranjang)) {
+            $this->dispatch('toast', type: 'error', message: 'Keranjang masih kosong');
+            return;
+        }
+
+        if ($this->tunai < $this->totalBelanja()) {
+            $this->dispatch('toast', type: 'error', message: 'Uang tidak cukup');
+            return;
+        }
+
+        $this->showModalKonfirmasi = true;
+    }
+
+    public function batalkanPembayaran()
+    {
+        $this->showModalKonfirmasi = false;
+    }
+
     public function prosesPembayaran()
     {
         if (empty($this->keranjang)) {
@@ -193,14 +214,15 @@ class Kasir extends Component
             foreach ($this->keranjang as $item) {
              
                 $produk = Product::find($item['product_id']);
+                $hargaBeli = $produk->harga_beli ?? 0;
+               
                 $produk->decrement('stok_tersedia', $item['jumlah']);
-
                 SaleItem::create([
                     'sale_id' => $sale->id,
                     'product_id' => $item['product_id'],
                     'product_name' => $item['nama'],
                     'price' => $item['harga'],
-                    'price_purchase' => $produk->harga_beli ?? 0,
+                    'price_purchase' => $hargaBeli,
                     'quantity' => $item['jumlah'],
                     'unit' => $item['satuan'],
                     'subtotal' => $item['harga'] * $item['jumlah'],

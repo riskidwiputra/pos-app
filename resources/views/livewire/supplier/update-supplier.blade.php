@@ -13,7 +13,7 @@
             <div class="flex items-center gap-4 mb-2">
                
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Edit Supplier</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Ubah Supplier</h1>
                    
                 </div>
             </div>
@@ -110,7 +110,7 @@
                                 </svg>
                             </div>
                             <input 
-                                type="text" 
+                                type="number" 
                                 wire:model="no_telepon" 
                                 class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('no_telepon') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                             >
@@ -153,16 +153,6 @@
                     </div>
                 </div>
 
-                <!-- Changes Alert -->
-                <!-- <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl p-4 flex gap-3">
-                    <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4v2m0 5v2m0-16h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <div class="text-sm text-amber-700">
-                        <p class="font-semibold mb-1">Perhatian</p>
-                        <p class="text-amber-600">Perubahan yang disimpan akan mempengaruhi semua record pembelian dari supplier ini.</p>
-                    </div>
-                </div> -->
 
                 <!-- Button Section -->
                 <div class="flex gap-3 pt-6 border-t border-gray-200">
@@ -176,14 +166,19 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
+                        type="submit" wire:loading.attr="disabled"
                         class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Simpan Perubahan
+                         <span wire:loading.remove>
+                            + Simpan Perubahan
+                        </span>
+                        <span wire:loading>
+                            
+                            ⏳ Memproses...
+                        </span>
                     </button>
+                   
+                        
                 </div>
             </form>
         </div>

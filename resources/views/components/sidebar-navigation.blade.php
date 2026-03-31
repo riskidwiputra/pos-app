@@ -24,11 +24,7 @@
             {{-- Header/Logo --}}
             <div class="flex items-center justify-between px-6 py-5 border-b border-gray-200">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                        </svg>
-                    </div>
+                     <img src="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg" width="30px" height="30px" alt="Logo jpg" border="0">
                     <h1 class="text-xl font-bold text-gray-700">toko matahari</h1>
                 </a>
                 
@@ -51,9 +47,7 @@
                     href="{{ route('dashboard') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                    </svg>
+                   <i class='bx bx-home-alt text-lg'></i>
                     <span>Dashboard</span>
                 </a>
                 @endif
@@ -64,9 +58,7 @@
                     href="{{ route('cashier') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('cashier') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
+                    <i class='bx bx-calculator text-lg'></i>
                     <span>Kasir</span>
                 </a>
                 @endif
@@ -76,9 +68,7 @@
                     href="{{ route('supplier.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
+                    <i class='bx bx-buildings text-lg'></i>
                     <span>Supplier</span>
                 </a>
                 @endif
@@ -88,9 +78,7 @@
                     href="{{ route('product.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                    </svg>
+                   <i class='bx bx-package text-lg'></i>
                     <span>Manajemen Produk</span>
                 </a>
                 @endif
@@ -101,9 +89,7 @@
                     href="{{ route('purchase.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('purchase.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
+                    <i class='bx bx-shopping-bag text-lg'></i>
                     <span>Pembelian</span>
                 </a>
                 @endif
@@ -113,23 +99,36 @@
                     href="{{ route('sale.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('sale.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
+                    <i class='bx bx-cart text-lg'></i>
                     <span>Penjualan</span>
                 </a>
                 @endif
+                @if(auth()->user()->isCustomer())
+                <a 
+                    href="{{ route('order-jasa.tambah-pesanan') }}"
+                    @click="closeSidebar()"
+                    class="nav-item {{ request()->routeIs('order-jasa.tambah-pesanan') ? 'active' : '' }}">
+                   <i class='bx bx-cog text-lg'></i>
+                    <span>Tambah Pesanan</span>
+                </a>    
 
+                <a 
+                    href="{{ route('order-jasa.index') }}"
+                    @click="closeSidebar()"
+                    class="nav-item {{ request()->routeIs('order-jasa.index') ? 'active' : '' }}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Pesanan Saya</span>
+                </a>
+                 @endif
                 {{-- Order Jasa --}}
                 @if(auth()->user()->hasPermission('order-jasa'))
                 <a 
                     href="{{ route('order-jasa.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('order-jasa.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
+                   <i class='bx bx-cog text-lg'></i>
                     <span>Order Jasa</span>
                 </a>
                 @endif
@@ -142,9 +141,7 @@
                         class="nav-item {{ request()->routeIs('karyawan.*', 'admin.*', 'customer.*') ? 'active' : '' }}"
                         style="width: 100%; justify-content: space-between;">
                         <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                           <i class='bx bx-group text-lg'></i>
                             <span>Data User</span>
                         </div>
                         <svg 
@@ -198,9 +195,7 @@
                         class="nav-item {{ request()->routeIs('category.*', 'subcategory.*', 'unit.*', 'auth.*') ? 'active' : '' }}"
                         style="width: 100%; justify-content: space-between;">
                         <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
-                            </svg>
+                           <i class='bx bx-data text-lg'></i>
                             <span>Master Data</span>
                         </div>
                         <svg 
@@ -243,14 +238,6 @@
                             <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                             Unit
                         </a>
-                         {{-- Permission --}}
-                        <a 
-                            href="{{ route('auth.permissions') }}"
-                            @click="closeSidebar()"
-                            class="nav-item {{ request()->routeIs('auth.permissions') ? 'active' : '' }}">
-                              <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                            <span>Permission</span>
-                        </a>
                         {{-- Role --}}
                         <a 
                             href="{{ route('auth.role-management') }}"
@@ -259,6 +246,15 @@
                               <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                             <span>Role</span>
                         </a>
+                         {{-- Permission --}}
+                        <a 
+                            href="{{ route('auth.permissions') }}"
+                            @click="closeSidebar()"
+                            class="nav-item {{ request()->routeIs('auth.permissions') ? 'active' : '' }}">
+                              <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                            <span>Permission</span>
+                        </a>
+                        
                     </div>
                 </div>
                 @endif
@@ -270,9 +266,7 @@
                         class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}"
                         style="width: 100%; justify-content: space-between;">
                         <div class="flex items-center gap-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
+                          <i class='bx bx-bar-chart-alt-2 text-lg'></i>
                             <span>Laporan</span>
                         </div>
                         <svg 
@@ -330,9 +324,7 @@
                     onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin keluar?')) document.getElementById('logout-form').submit();"
                     class="nav-item text-red-600 hover:bg-red-50"
                     style="width: 100%;">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
+                   <i class='bx bx-log-out text-lg'></i>
                     <span>Logout</span>
                 </button>
 

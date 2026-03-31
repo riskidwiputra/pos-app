@@ -663,7 +663,7 @@
 
                 <!-- Submit Button -->
                 <button type="submit" class="form-submit" wire:loading.attr="disabled">
-                    <span wire:loading.remove>📝 Daftar Sekarang</span>
+                    <span wire:loading.remove> Daftar Sekarang</span>
                     <span wire:loading>⏳ Memproses...</span>
                 </button>
             </form>

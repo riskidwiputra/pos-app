@@ -5,16 +5,20 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Role Manager
+                    Daftar Role 
                 </h1>
-                <p class="text-sm text-gray-500 mt-1">Kelola role pengguna aplikasi</p>
+                
             </div>
-            <button wire:click="openModal" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Tambah Role
+            <button wire:loading.attr="disabled" wire:click="openModal" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
+                
+                 <span wire:loading.remove>
+                   <i class='bx bx-plus'></i>  Tambah Role
+                </span>
+                <span wire:loading>
+                    <i class='bx bx-loader-alt animate-spin'></i> Memproses...
+                </span>
             </button>
+            
         </div>
 
         <!-- Messages -->
@@ -66,11 +70,11 @@
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Nama Role</span>
                             </th>
                             <th class="px-6 py-4 text-left">
-                                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Judul Role</span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Slug</span>
                             </th>
                             
                             <th class="px-6 py-4 text-center">
-                                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Keterangan</span>
+                                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Deskripsi</span>
                             </th>
                             <th class="px-6 py-4 text-center">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Aksi</span>
@@ -109,7 +113,7 @@
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                             </svg>
-                                            Delete
+                                            Hapus
                                         </button>
                                     </div>
                                 </td>
@@ -136,7 +140,7 @@
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
                 <div class="border-b px-6 py-4 flex items-center justify-between">
-                    <h3 class="text-xl font-bold">{{ $roleId ? 'Edit Role' : 'Tambah Role Baru' }}</h3>
+                    <h3 class="text-xl font-bold">Form Role</h3>
                     <button wire:click="closeModal" class="text-gray-400 hover:text-gray-600">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -167,10 +171,10 @@
                         @error('description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="flex items-center gap-2">
+                    {{-- <div class="flex items-center gap-2">
                         <input type="checkbox" wire:model="is_active" id="is_active" class="w-4 h-4 text-indigo-600">
                         <label for="is_active" class="text-sm text-gray-700">Status Aktif</label>
-                    </div>
+                    </div> --}}
 
                     <div class="flex gap-3 pt-4 border-t">
                         <button type="button" wire:click="closeModal" class="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition">Batal</button>

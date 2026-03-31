@@ -5,9 +5,9 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Kategori Management
+                   Daftar Kategori 
                 </h1>
-                <p class="text-sm text-gray-500 mt-1">Kelola kategori barang untuk klasifikasi produk</p>
+             
             </div>
             <a href="{{ route('category.create') }}"  class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,17 +80,13 @@
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
-                                    </svg>
+                                    
                                     Kode Kategori
                                 </span>
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                                    </svg>
+                                  
                                     Nama Kategori
                                 </span>
                             </th>
@@ -148,13 +144,7 @@
                             <tr>
                                 <td colspan="6" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
-                                        <div class="relative">
-                                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="space-y-2">
                                             <p class="text-lg font-semibold text-gray-700">Tidak ada data kategori</p>
                                             <p class="text-sm text-gray-500">Mulai dengan menambahkan kategori baru</p>

@@ -492,7 +492,7 @@
                 <!-- Email or Phone -->
                 <div class="form-group">
                     <label class="form-label">
-                        Email atau No. HP <span class="required">*</span>
+                        Email atau Username <span class="required">*</span>
                     </label>
                     <input 
                         type="text" 

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('kode_subkategori', 20);
             $table->string('nama_subkategori')->unique();
             $table->text('deskripsi')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

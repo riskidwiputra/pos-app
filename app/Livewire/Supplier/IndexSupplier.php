@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Supplier')]
+#[Title('Daftar Supplier')]
 
 class IndexSupplier extends Component
 {

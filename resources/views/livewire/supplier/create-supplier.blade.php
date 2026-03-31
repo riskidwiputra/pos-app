@@ -76,7 +76,7 @@
                         <textarea 
                             wire:model="alamat" 
                             rows="4"
-                            placeholder="Jl. Raya No. 123, Jakarta Pusat"
+                            placeholder="Jl. Raya No. 123, Medan sunggal"
                             class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 resize-none @error('alamat') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         ></textarea>
                     </div>
@@ -104,9 +104,9 @@
                                 </svg>
                             </div>
                             <input 
-                                type="text" 
+                                type="number" 
                                 wire:model="no_telepon" 
-                                placeholder="021-1234567"
+                                placeholder="081234567"
                                 class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('no_telepon') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                             >
                         </div>
@@ -150,7 +150,7 @@
                 </div>
 
                 <!-- Info Box -->
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-4 flex gap-3">
+                {{-- <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-4 flex gap-3">
                     <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
@@ -158,7 +158,7 @@
                         <p class="font-semibold mb-1">Tips</p>
                         <p class="text-blue-600">Pastikan data supplier sudah benar sebelum menyimpan. Email bersifat opsional.</p>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Button Section -->
                 <div class="flex gap-3 pt-6 border-t border-gray-200">
@@ -172,14 +172,18 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
-                        class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
+                        type="submit" wire:loading.attr="disabled"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-3"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Simpan Supplier
+                        <span wire:loading.remove>
+                            + Simpan Supplier
+                        </span>
+                        <span wire:loading>
+                            
+                            ⏳ Memproses...
+                        </span>
                     </button>
+                     
                 </div>
             </form>
         </div>

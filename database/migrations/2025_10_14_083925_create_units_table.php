@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('kode_unit', 20);
             $table->string('nama_unit');
             $table->string('singkatan', 10);
-            $table->softDeletes();
             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

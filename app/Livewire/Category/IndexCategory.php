@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Kategori')]
+#[Title('Daftar Kategori')]
 class IndexCategory extends Component
 {
     use WithPagination;

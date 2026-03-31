@@ -29,14 +29,13 @@ class RoleManagement extends Component
     protected $queryString = ['search'];
 
     #[Layout('layouts.app')]
-    #[Title('Detail Pembelian')]
+    #[Title('Daftar Role')]
     protected function rules()
     {
         return [
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:roles,slug,' . $this->roleId,
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
         ];
     }
 
@@ -67,7 +66,7 @@ class RoleManagement extends Component
         $this->slug = $role->slug;
         $this->default_module = $role->default_module;
         $this->description = $role->description;
-        $this->is_active = $role->is_active;
+        $this->is_active = 1;
         
         $this->showModal = true;
     }
@@ -138,8 +137,7 @@ class RoleManagement extends Component
             ->withCount(['users'])
             ->where('level', '!=', 0)
             ->when($this->search, function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('slug', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%' . $this->search . '%');
             })
             ->paginate($this->perPage);
 

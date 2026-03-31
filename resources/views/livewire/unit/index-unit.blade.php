@@ -5,7 +5,7 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Unit Management
+                    Daftar Unit 
                 </h1>
                
             </div>
@@ -78,7 +78,7 @@
         <!-- Search & Per Page -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
             <div class="md:col-span-9 relative">
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari unit, alamat, atau nomor telepon..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari nama unit dan singkat unit" class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-3">
                 <select wire:model.live="perPage" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
@@ -104,37 +104,27 @@
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
+                                    
                                     Kode unit
                                 </span>
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                    </svg>
+                                   
                                     Nama Unit
                                 </span>
                             </th>
                             
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
+                                   
                                     Singkatan
                                 </span>
                             </th>
                            
                             <th class="px-6 py-4 text-center">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
-                                    </svg>
+                                    
                                     Aksi
                                 </span>
                             </th>
@@ -193,8 +183,8 @@
                                 
 
                                 <!-- Aksi -->
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class=" items-center justify-center ">
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <div class=" items-center justify-center text-center ">
                                         <a href="{{ route('unit.edit', $unit->id) }}" 
                                         class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,10 +194,13 @@
                                         </a>
                                         <button wire:click.prevent="confirmDelete({{ $unit->id }})" 
                                                 class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                            </svg>
-                                            Hapus
+                                            <span wire:loading.remove>
+                          <i class='bx bx-trash'></i>  Hapus
+                        </span>
+                        <span wire:loading>
+                            
+                            <i class='bx bx-loader-alt animate-spin'></i> Memproses...
+                        </span>
                                         </button>
                                     </div>
                                 </td>

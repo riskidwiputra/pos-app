@@ -20,7 +20,7 @@ class CreateCustomer extends Component
     #[Validate('required|email|unique:users,email')]
     public $email = '';
 
-    #[Validate('required|string|min:6|confirmed')]
+    #[Validate('required|string|min:6')]
     public $username = '';
     
     #[Validate('required|string|min:6|confirmed')]
@@ -57,7 +57,7 @@ class CreateCustomer extends Component
         ]);
 
         session()->flash('message', 'Admin berhasil ditambahkan!');
-        return redirect()->route('admin.index');
+        return redirect()->route('customer.index');
     }
 
     

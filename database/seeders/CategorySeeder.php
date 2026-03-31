@@ -21,9 +21,17 @@ class CategorySeeder extends Seeder
             ['kode_kategori' => '05', 'nama_kategori' => 'Perlengkapan Meja', 'deskripsi' => 'Kategori untuk perlengkapan meja kerja'],
             ['kode_kategori' => '06', 'nama_kategori' => 'Printer & Tinta', 'deskripsi' => 'Kategori untuk printer dan tinta'],
             ['kode_kategori' => '07', 'nama_kategori' => 'Percetakan Umum', 'deskripsi' => 'Kategori untuk layanan percetakan umum'],
-            ['kode_kategori' => '08', 'nama_kategori' => 'Percetakan Digital', 'deskripsi' => 'Kategori untuk layanan percetakan digital'],
-            ['kode_kategori' => '09', 'nama_kategori' => 'Finishing Percetakan', 'deskripsi' => 'Kategori untuk finishing dan laminating'],
-            ['kode_kategori' => '10', 'nama_kategori' => 'Promosi & Souvenir', 'deskripsi' => 'Kategori untuk produk promosi dan souvenir'],
+            ['kode_kategori' => '08', 'nama_kategori' => 'Finishing Percetakan', 'deskripsi' => 'Kategori untuk finishing dan laminating'],
+            [
+                'kode_kategori' => '09',
+                'nama_kategori' => 'Stiker & Label',
+                'deskripsi' => 'Berbagai jenis stiker, label, dan bahan adhesive',
+            ],
+            [
+                'kode_kategori' => '10',
+                'nama_kategori' => 'Amplop & Map',
+                'deskripsi' => 'Amplop, map, dan folder untuk penyimpanan dokumen',
+            ],
         ];
 
         foreach ($categories as $category) {

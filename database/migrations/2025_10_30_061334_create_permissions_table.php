@@ -16,9 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('module'); // Nama module/kategori
-            $table->string('type')->default('feature'); // 'menu' atau 'feature'
-            $table->string('icon')->nullable();
-            $table->string('url')->nullable(); // URL/route untuk menu
+            $table->string('type')->default('feature'); // 'menu' atau 'feature'// URL/route untuk menu
             $table->foreignId('parent_id')->nullable()->constrained('permissions')->onDelete('cascade'); // Untuk submenu
             $table->integer('order')->default(0);
             $table->text('description')->nullable();

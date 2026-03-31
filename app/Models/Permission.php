@@ -15,8 +15,6 @@ class Permission extends Model
         'slug',
         'module',
         'type',
-        'icon',
-        'url',
         'parent_id',
         'order',
         'description',

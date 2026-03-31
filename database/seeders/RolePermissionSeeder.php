@@ -42,27 +42,30 @@ class RolePermissionSeeder extends Seeder
 
         $menus = [
 
-            ['name'=>'Dashboard', 'module'=>'dashboard', 'slug'=>'dashboard','url'=>'/dashboard','icon'=>'dashboard'],
+            ['name'=>'Dashboard', 'module'=>'dashboard', 'slug'=>'dashboard'],
 
-            ['name'=>'Kasir','module'=>'kasir', 'slug'=>'kasir','url'=>'/cashier','icon'=>'cashier'],
+            ['name'=>'Kasir','module'=>'kasir', 'slug'=>'kasir'],
 
-            ['name'=>'Supplier','module'=>'supplier', 'slug'=>'supplier','url'=>'/supplier','icon'=>'supplier'],
+            ['name'=>'Supplier','module'=>'supplier', 'slug'=>'supplier'],
+            ['name'=>'Produk','module'=>'product', 'slug'=>'product'],
 
-            ['name'=>'Produk','module'=>'product', 'slug'=>'product','url'=>'/product','icon'=>'product'],
+            ['name'=>'Pembelian','module'=>'purchase', 'slug'=>'purchase'],
 
-            ['name'=>'Pembelian','module'=>'purchase', 'slug'=>'purchase','url'=>'/purchase','icon'=>'purchase'],
+            ['name'=>'Penjualan','module'=>'sale', 'slug'=>'sale'],
 
-            ['name'=>'Penjualan','module'=>'sale', 'slug'=>'sale','url'=>'/sale','icon'=>'sale'],
+            ['name'=>'Permission','module'=>'permission', 'slug'=>'permission'],
 
-            ['name'=>'Permission','module'=>'permission', 'slug'=>'permission','url'=>'/roles/manage-permissions','icon'=>'permission'],
+            ['name'=>'Order Jasa','module'=>'order-jasa', 'slug'=>'order-jasa'],
 
-            ['name'=>'Order Jasa','module'=>'order-jasa', 'slug'=>'order-jasa','url'=>'/order-jasa','icon'=>'order-jasa'],
+            ['name'=>'Data User','module'=>'user', 'slug'=>'user-management'],
 
-            ['name'=>'Data User','module'=>'user', 'slug'=>'user-management','url'=>'#','icon'=>'user'],
+            ['name'=>'Category','module'=>'category', 'slug'=>'category'],
 
-            ['name'=>'Master Data','module'=>'master-data', 'slug'=>'master-data','url'=>'#','icon'=>'database'],
+            ['name'=>'SubCategory','module'=>'subcategory', 'slug'=>'subcategory'],
 
-            ['name'=>'Laporan','module'=>'laporan', 'slug'=>'laporan','url'=>'#','icon'=>'report']
+            ['name'=>'Unit','module'=>'unit', 'slug'=>'unit'],
+
+            ['name'=>'Laporan','module'=>'laporan', 'slug'=>'laporan']
 
         ];
 
@@ -73,8 +76,6 @@ class RolePermissionSeeder extends Seeder
                 'slug'=>$menu['slug'],
                 'module'=>$menu['module'],
                 'type'=>'menu',
-                'url'=>$menu['url'],
-                'icon'=>$menu['icon']
             ]);
         }
         $features = [
@@ -109,21 +110,51 @@ class RolePermissionSeeder extends Seeder
             ['name'=>'Lihat Order Jasa','slug'=>'order-jasa.view','module'=>'order-jasa','parent'=>'order-jasa'],
             ['name'=>'Tambah Order Jasa','slug'=>'order-jasa.create','module'=>'order-jasa','parent'=>'order-jasa'],
             ['name'=>'Edit Order Jasa','slug'=>'order-jasa.edit','module'=>'order-jasa','parent'=>'order-jasa'],
+            ['name'=>'Hapus Order Jasa','slug'=>'order-jasa.delete','module'=>'order-jasa','parent'=>'order-jasa'],
 
-            // User
-            ['name'=>'Kelola Admin','slug'=>'admin.manage','module'=>'user','parent'=>'user-management'],
-            ['name'=>'Kelola Karyawan','slug'=>'karyawan.manage','module'=>'user','parent'=>'user-management'],
-            ['name'=>'Kelola Customer','slug'=>'customer.manage','module'=>'user','parent'=>'user-management'],
+            // user admin
+            ['name'=>'Lihat Admin','slug'=>'admin.view','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Tambah Admin','slug'=>'admin.create','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Edit Admin','slug'=>'admin.edit','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Hapus Admin','slug'=>'admin.delete','module'=>'user','parent'=>'user-management'],
 
-            // Master Data
-            ['name'=>'Kelola Category','slug'=>'category.manage','module'=>'master-data','parent'=>'master-data'],
-            ['name'=>'Kelola SubCategory','slug'=>'subcategory.manage','module'=>'master-data','parent'=>'master-data'],
-            ['name'=>'Kelola Unit','slug'=>'unit.manage','module'=>'master-data','parent'=>'master-data'],
+            // user karyawan
+            ['name'=>'Lihat Karyawan','slug'=>'karyawan.view','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Tambah Karyawan','slug'=>'karyawan.create','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Edit Karyawan','slug'=>'karyawan.edit','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Hapus Karyawan','slug'=>'karyawan.delete','module'=>'user','parent'=>'user-management'],
+
+            // user customer
+            ['name'=>'Lihat Customer','slug'=>'customer.view','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Tambah Customer','slug'=>'customer.create','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Edit Customer','slug'=>'customer.edit','module'=>'user','parent'=>'user-management'],
+            ['name'=>'Hapus Customer','slug'=>'customer.delete','module'=>'user','parent'=>'user-management'],
+
+            // category 
+            ['name'=>'Lihat Category','slug'=>'category.view','module'=>'category','parent'=>'category'],
+            ['name'=>'Tambah Category','slug'=>'category.create','module'=>'category','parent'=>'category'],
+            ['name'=>'Edit Category','slug'=>'category.edit','module'=>'category','parent'=>'category'],
+            ['name'=>'Hapus Category','slug'=>'category.delete','module'=>'category','parent'=>'category'],
+
+            // subcategory
+            ['name'=>'Lihat SubCategory','slug'=>'subcategory.view','module'=>'subcategory','parent'=>'subcategory'],
+            ['name'=>'Tambah SubCategory','slug'=>'subcategory.create','module'=>'subcategory','parent'=>'subcategory'],
+            ['name'=>'Edit SubCategory','slug'=>'subcategory.edit','module'=>'subcategory','parent'=>'subcategory'],
+            ['name'=>'Hapus SubCategory','slug'=>'subcategory.delete','module'=>'subcategory','parent'=>'subcategory'],
+
+                // unit
+            ['name'=>'Lihat Unit','slug'=>'unit.view','module'=>'unit','parent'=>'unit'],
+            ['name'=>'Tambah Unit','slug'=>'unit.create','module'=>'unit','parent'=>'unit'],
+            ['name'=>'Edit Unit','slug'=>'unit.edit','module'=>'unit','parent'=>'unit'],
+            ['name'=>'Hapus Unit','slug'=>'unit.delete','module'=>'unit','parent'=>'unit'],
 
             // Laporan
             ['name'=>'Laporan Penjualan Transaksi','slug'=>'laporan.transaksi','module'=>'laporan','parent'=>'laporan'],
             ['name'=>'Laporan Penjualan Item','slug'=>'laporan.per-item','module'=>'laporan','parent'=>'laporan'],
             ['name'=>'Laporan Stok','slug'=>'laporan.stok','module'=>'laporan','parent'=>'laporan'],
+
+            // role & permission management
+            ['name'=>'Kelola Role & Permission','slug'=>'admin.manage','module'=>'permission','parent'=>'permission'],
 
         ];
 
@@ -138,8 +169,6 @@ class RolePermissionSeeder extends Seeder
                 'module' => $feature['module'],
                 'type' => 'feature',
                 'parent_id' => $parent->id ?? null,
-                'icon' => null,
-                'url' => null,
                 'order' => 0,
                 'is_active' => true
             ]);

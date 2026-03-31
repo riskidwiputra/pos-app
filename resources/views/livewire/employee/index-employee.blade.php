@@ -5,7 +5,7 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Manajemen Karyawan
+                    Daftar Karyawan
                 </h1>
             </div>
             <a href="{{ route('karyawan.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
@@ -48,7 +48,7 @@
         <!-- Search, Filter & Per Page -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
             <div class="md:col-span-7 relative">
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari nama, telepon, atau posisi..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari nama" class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-2">
                 <select wire:model.live="filterStatus" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
@@ -81,9 +81,7 @@
                             </th>
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
+                                   
                                     Nama Lengkap
                                 </span>
                             </th>
@@ -195,26 +193,12 @@
                             <tr>
                                 <td colspan="8" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
-                                        <div class="relative">
-                                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                                </svg>
-                                            </div>
-                                            <div class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-blue-100 animate-ping"></div>
-                                            <div class="absolute -bottom-1 -left-1 w-4 h-4 rounded-full bg-indigo-100"></div>
-                                        </div>
+                                      
                                         <div class="space-y-2">
                                             <p class="text-lg font-semibold text-gray-700">Tidak ada data karyawan</p>
-                                            <p class="text-sm text-gray-500">Mulai dengan menambahkan karyawan baru untuk sistem Anda</p>
+                                            <p class="text-sm text-gray-500">Mulai dengan menambahkan karyawan baru </p>
                                         </div>
-                                        <a href="{{ route('karyawan.create') }}" 
-                                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                            </svg>
-                                            Tambah Karyawan Pertama
-                                        </a>
+                                       
                                     </div>
                                 </td>
                             </tr>

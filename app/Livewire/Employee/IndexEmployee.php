@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Karyawan')]
+#[Title('Daftar Karyawan')]
 class IndexEmployee extends Component
 {
      use WithPagination;
@@ -27,9 +27,7 @@ class IndexEmployee extends Component
     public function employees()
     {
         return Employee::where(function($query) {
-            $query->where('nama_lengkap', 'like', '%' . $this->search . '%')
-                  ->orWhere('no_telepon', 'like', '%' . $this->search . '%')
-                  ->orWhere('posisi', 'like', '%' . $this->search . '%');
+            $query->where('nama_lengkap', 'like', '%' . $this->search . '%');
         })
         ->when($this->filterStatus, function($query) {
             $query->where('status_pekerjaan', $this->filterStatus);
