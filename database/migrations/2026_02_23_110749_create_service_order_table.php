@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('order_title');
             $table->text('order_description');
             $table->integer('quantity');
-            $table->string('unit'); // pcs, lembar, meter, set, dll
             
             // Dates
             $table->date('order_date')->nullable();

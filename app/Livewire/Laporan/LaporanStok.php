@@ -24,7 +24,7 @@ class LaporanStok extends Component
     public $statusStok = 'semua'; // semua, kritis, rendah, aman, habis
     public $sortBy = 'stok_tersedia';
     public $sortDirection = 'asc';
-    public $perPage = 15;
+    public $perPage = 5;
 
     // Threshold Settings
     public $batasKritis = 5;    // Stok <= 5 (Merah - Kritis)

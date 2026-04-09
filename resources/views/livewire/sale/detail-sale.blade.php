@@ -29,11 +29,15 @@
                 </div>
                 <div class="flex flex-wrap gap-3">
                     
-                    <button  wire:click="printInvoice" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        Cetak Invoice
+                    <button  wire:loading.attr="disabled" wire:click="printInvoice" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl shadow-md hover:shadow-lg hover:border-gray-400 transition-all duration-300 transform hover:scale-105">
+                      <span wire:loading.remove>
+                            Cetak Invoice
+                        </span>
+                        <span wire:loading>
+                            
+                             <i class='bx bx-loader-alt animate-spin'></i> Memproses...
+                        </span>
+                        
                     </button>
                 </div>
             </div>
@@ -83,11 +87,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Nomor Invoice</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                        </svg>
-                                    </div>
+                                   
                                     <div>
                                         <p class="font-bold text-gray-900">{{ $sale->invoice_number }}</p>
                                         <p class="text-sm text-gray-500">{{ $sale->transaction_date->format('d M Y') }}</p>
@@ -99,11 +99,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Pelanggan</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
-                                    </div>
+                                   
                                     <div>
                                         <p class="font-bold text-gray-900">{{ $sale->customer->fullname ?? 'Umum' }}</p>
                                         <p class="text-sm text-gray-500">{{ $sale->customer ? 'Member' : 'Walk-in Customer' }}</p>
@@ -115,11 +111,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Metode Pembayaran</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-bold text-gray-900">{{ ucfirst($sale->payment_method) }}</p>
                                         <p class="text-sm text-gray-500">{{ $sale->transaction_date->diffForHumans() }}</p>
@@ -131,15 +123,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Status Transaksi</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg {{ $sale->status === 'lunas' ? 'bg-gradient-to-br from-green-100 to-emerald-100' : 'bg-gradient-to-br from-red-100 to-pink-100' }} flex items-center justify-center">
-                                        <svg class="w-5 h-5 {{ $sale->status === 'lunas' ? 'text-emerald-600' : 'text-red-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($sale->status === 'lunas')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-bold {{ $sale->status === 'lunas' ? 'text-emerald-700' : 'text-red-700' }}">
                                             {{ $sale->status }}
@@ -208,11 +192,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center gap-3">
-                                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                                    </svg>
-                                                </div>
+                                                
                                                 <div>
                                                     <p class="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
                                                         {{ $item->product_name }}
@@ -225,7 +205,7 @@
                                             <p class="font-semibold text-gray-900">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 font-bold text-sm">
+                                            <span class="inline-flex items-center px-3 py-1.5  text-blue-700 font-bold text-sm">
                                                 {{ $item->quantity }} {{ $item->unit }}
                                             </span>
                                         </td>
@@ -296,18 +276,7 @@
                         <!-- Status Card -->
                         <div class="bg-gradient-to-r {{ $sale->status === 'lunas' ? 'from-green-50 to-emerald-50' : 'from-red-50 to-pink-50' }} rounded-xl p-4">
                             <div class="flex items-center gap-3">
-                                <div class="relative">
-                                    <div class="absolute inset-0 {{ $sale->status === 'lunas' ? 'bg-green-400' : 'bg-red-400' }} rounded-full blur-md opacity-30 animate-pulse"></div>
-                                    <div class="relative w-12 h-12 rounded-full {{ $sale->status === 'lunas' ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 'bg-gradient-to-br from-red-500 to-pink-600' }} flex items-center justify-center shadow-lg">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($sale->status === 'lunas')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
-                                </div>
+                                
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">Status Pembayaran</p>
                                     <p class="text-lg font-bold {{ $sale->status === 'lunas' ? 'text-green-700' : 'text-red-700' }}">
@@ -318,26 +287,13 @@
                         </div>
 
                         <!-- Payment Method Info -->
-                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4">
-                            <div class="flex gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <div class="text-sm text-blue-700">
-                                    <p class="font-semibold mb-1">Metode Pembayaran</p>
-                                    <p class="capitalize">{{ $sale->payment_method }}</p>
-                                    <p class="text-xs mt-1">{{ $sale->transaction_date->format('d F Y, H:i') }}</p>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Action Buttons -->
                         <div class="space-y-3 pt-4 border-t border-gray-200">
                             <button wire:click="printNota" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                                 <span class="flex items-center justify-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                                    </svg>
+                                    
                                     Cetak Nota
                                 </span>
                             </button>

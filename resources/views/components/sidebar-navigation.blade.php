@@ -72,14 +72,14 @@
                     <span>Supplier</span>
                 </a>
                 @endif
-                {{-- Manajemen Produk --}}
+                {{--  Produk --}}
                 @if(auth()->user()->hasPermission('produk'))
                 <a 
                     href="{{ route('product.index') }}"
                     @click="closeSidebar()"
                     class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
                    <i class='bx bx-package text-lg'></i>
-                    <span>Manajemen Produk</span>
+                    <span> Produk</span>
                 </a>
                 @endif
 
@@ -293,14 +293,14 @@
                             @click="closeSidebar()"
                             class="nav-sub-item {{ request()->routeIs('laporan.penjualan.transaksi') ? 'active' : '' }}">
                             <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                            Laporan Penjualan
+                            Laporan Per Transksi
                         </a>
                         <a 
                             href="{{ route('laporan.penjualan.per-item') }}"
                             @click="closeSidebar()"
                             class="nav-sub-item {{ request()->routeIs('laporan.penjualan.per-item') ? 'active' : '' }}">
                             <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                            Laporan Penjualan Per Item
+                            Laporan Per Item
                         </a>
                         <a 
                             href="{{ route('laporan.stok') }}"

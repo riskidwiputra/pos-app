@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Admin')]
+#[Title('Daftar Admin')]
 class IndexAdmin extends Component
 {
     use WithPagination;

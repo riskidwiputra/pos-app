@@ -194,14 +194,14 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-1 lg:gap-2">
+                    {{-- <div class="grid grid-cols-3 gap-1 lg:gap-2">
                         <button onclick="tambahTunai(2000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+2k</button>
                         <button onclick="tambahTunai(5000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+5k</button>
                         <button onclick="tambahTunai(10000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+10k</button>
                         <button onclick="tambahTunai(20000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+20k</button>
                         <button onclick="tambahTunai(50000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+50k</button>
                         <button onclick="tambahTunai(100000)" class="bg-gray-100 hover:bg-cyan-50 border-2 border-gray-200 hover:border-cyan-500 rounded-lg py-1 lg:py-2 text-xs lg:text-sm font-bold transition-colors">+100k</button>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div id="area-kembalian"></div>
@@ -575,7 +575,7 @@ async function prosesPembayaran() {
 
     const btnBayar = document.getElementById('btn-bayar');
     btnBayar.disabled = true;
-    btnBayar.innerHTML = '<span class="animate-pulse">⏳ Memproses...</span>';
+    btnBayar.innerHTML = '<span class="animate-pulse"> Memproses...</span>';
 
     try {
         const response = await fetch('/sb-admin/cashier/process', {

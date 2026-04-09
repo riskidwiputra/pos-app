@@ -54,7 +54,6 @@
             background: #f8f9fa;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 12px;
             border-left: 3px solid #4F46E5;
         }
         
@@ -242,11 +241,15 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="company-name">TOKO MATAHARI KISARAN</div>
-            <div class="company-info">
-                Jl. Merdeka No. 123, Kisaran | Telp: (0812) 3456-7890
-            </div>
+            @php
+                    $path = public_path('img/logo/Logos.jpeg');
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                @endphp
+                <img src="{{ $image }}" width="800">
             <div class="report-title">LAPORAN PENJUALAN PER TRANSAKSI</div>
+            
         </div>
 
         <!-- Filter Info -->
@@ -270,30 +273,7 @@
         </div>
 
         <!-- Statistics -->
-        <table class="statistics">
-            <tr>
-                <td class="stat-box">
-                    <div class="stat-label">Total Transaksi</div>
-                    <div class="stat-value">{{ number_format($ringkasan['total_transaksi']) }}</div>
-                </td>
-                <td style="width: 8px;"></td>
-                <td class="stat-box">
-                    <div class="stat-label">Total Pendapatan</div>
-                    <div class="stat-value">Rp {{ number_format($ringkasan['total_pendapatan'], 0, ',', '.') }}</div>
-                </td>
-                <td style="width: 8px;"></td>
-                <td class="stat-box">
-                    <div class="stat-label">Total Keuntungan</div>
-                    <div class="stat-value">Rp {{ number_format($ringkasan['total_keuntungan'], 0, ',', '.') }}</div>
-                </td>
-                <td style="width: 8px;"></td>
-                <td class="stat-box">
-                    <div class="stat-label">Item Terjual</div>
-                    <div class="stat-value">{{ number_format($ringkasan['total_item_terjual']) }}</div>
-                </td>
-            </tr>
-        </table>
-
+       
         <!-- Data Table -->
         <table class="data-table">
             <thead>
@@ -359,12 +339,10 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <div style="margin-bottom: 3px;">Laporan ini digenerate secara otomatis oleh sistem</div>
-            <div><strong>TOKO MATAHARI KISARAN</strong></div>
-            <div>Dokumen ini sah tanpa tanda tangan</div>
-        </div>
+            <!-- Footer -->
+            <div class="footer">
+                Laporan ini dicetak pada {{ now()->format('d F Y H:i:s') }}.
+            </div>
     </div>
 </body>
 </html>

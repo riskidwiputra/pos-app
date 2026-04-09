@@ -12,7 +12,7 @@
 
             <div class="flex items-center gap-4 mb-2">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Edit Produk</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">Form Produk</h1>
                   
                 </div>
             </div>
@@ -45,22 +45,16 @@
                         Nama Produk <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                            </svg>
-                        </div>
+                        
                         <input 
                             type="text" 
                             wire:model="nama_produk" 
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_produk') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
+                            class="w-full pl-5 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('nama_produk') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         >
                     </div>
                     @error('nama_produk') 
                         <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                          
                             {{ $message }}
                         </div>
                     @enderror
@@ -84,9 +78,7 @@
                         </select>
                         @error('category_id') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                              
                                 {{ $message }}
                             </div>
                         @enderror
@@ -109,9 +101,7 @@
                         </select>
                         @error('sub_category_id') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                              
                                 {{ $message }}
                             </div>
                         @enderror
@@ -133,9 +123,7 @@
                         </select>
                         @error('unit_id') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                               
                                 {{ $message }}
                             </div>
                         @enderror
@@ -157,9 +145,7 @@
                     </div>
                     @error('deskripsi') 
                         <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                          
                             {{ $message }}
                         </div>
                     @enderror
@@ -173,24 +159,18 @@
                             Harga Jual (Rp) <span class="text-red-500 font-bold">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
+                           
                             <input 
                                 type="number" 
                                 wire:model="harga_jual" 
                                 step="0.01"
                                 min="0"
-                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('harga_jual') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
+                                class="w-full pl-5 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('harga_jual') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                             >
                         </div>
                         @error('harga_jual') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                              
                                 {{ $message }}
                             </div>
                         @enderror
@@ -204,23 +184,17 @@
                             Stok Minimum <span class="text-red-500 font-bold">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                                </svg>
-                            </div>
+                            
                             <input 
                                 type="number" 
                                 wire:model="stok_minimum" 
                                 min="0"
-                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('stok_minimum') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
+                                class="w-full pl-5 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 @error('stok_minimum') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                             >
                         </div>
                         @error('stok_minimum') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                              
                                 {{ $message }}
                             </div>
                         @enderror
@@ -239,9 +213,7 @@
                             <div class="mb-3 relative inline-block">
                                 <img src="{{ asset('storage/' . $existing_image) }}" alt="Current" class="w-32 h-32 rounded-lg object-cover shadow-md">
                                 <button type="button" wire:click="deleteImage" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
+                                 
                                 </button>
                             </div>
                         @endif
@@ -264,9 +236,7 @@
                         
                         @error('gambar_barang') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                               
                                 {{ $message }}
                             </div>
                         @enderror
@@ -287,9 +257,7 @@
                         </select>
                         @error('status_product') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                               
                                 {{ $message }}
                             </div>
                         @enderror

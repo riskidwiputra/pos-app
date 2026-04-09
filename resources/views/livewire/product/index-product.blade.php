@@ -5,18 +5,18 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Manajemen Produk
+                    Daftar Produk
                 </h1>
-                <p class="text-sm text-gray-500 mt-1">Kelola data produk dengan mudah dan efisien</p>
+               
             </div>
             
             <div class="flex gap-3">
-    <a href="{{ route('product.mass-upload') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
+    {{-- <a href="{{ route('product.mass-upload') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
         </svg>
         Upload Massal
-    </a>
+    </a> --}}
     <a href="{{ route('product.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -75,8 +75,8 @@
 
         <!-- Search, Filter & Per Page -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
-            <div class="md:col-span-4 relative">
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari nama, kode, atau barcode..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+            <div class="md:col-span-5 relative">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari nama, kode" class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-2">
                 <select wire:model.live="filterCategory" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
@@ -93,7 +93,7 @@
                     <option value="Tidak Tersedia">Tidak Tersedia</option>
                 </select>
             </div>
-            <div class="md:col-span-2">
+            <div class="md:col-span-3">
                 <select wire:model.live="perPage" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
                     <option value="10">10 per halaman</option>
                     <option value="25">25 per halaman</option>
@@ -101,11 +101,7 @@
                     <option value="100">100 per halaman</option>
                 </select>
             </div>
-            <div class="md:col-span-2">
-                <button wire:click="resetFilters" class="w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-all duration-200 shadow-sm">
-                    Reset Filter
-                </button>
-            </div>
+           
         </div>
 
         <!-- Premium Table -->
@@ -126,9 +122,7 @@
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Kategori</span>
                             </th>
-                            <th class="px-6 py-4 text-left">
-                                <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Barcode</span>
-                            </th>
+                           
                             <th class="px-6 py-4 text-left">
                                 <span class="text-xs font-bold uppercase tracking-widest text-gray-600">Stok</span>
                             </th>
@@ -184,11 +178,7 @@
                                     </div>
                                 </td>
 
-                                <td class="px-6 py-4">
-                                    <div class="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
-                                        {{ $product->barcode_product }}
-                                    </div>
-                                </td>
+                                
 
                                 <td class="px-6 py-4">
                                     <div>
@@ -213,12 +203,12 @@
                                 <td class="px-6 py-4 text-center">
                                     @if($product->status_product === 'Tersedia')
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
-                                            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+                                           
                                             Tersedia
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
-                                            <span class="w-2 h-2 bg-gray-500 rounded-full mr-2"></span>
+                                           
                                             Tidak Tersedia
                                         </span>
                                     @endif
@@ -247,13 +237,7 @@
                             <tr>
                                 <td colspan="9" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
-                                        <div class="relative">
-                                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="space-y-2">
                                             <p class="text-lg font-semibold text-gray-700">Tidak ada data produk</p>
                                             <p class="text-sm text-gray-500">Mulai dengan menambahkan produk baru</p>

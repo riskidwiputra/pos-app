@@ -97,7 +97,7 @@
         }
         
         .items-table thead {
-            background: #4F46E5;
+            background: #2620a8;
             color: white;
         }
         
@@ -289,12 +289,16 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="company-name">TOKO MATAHARI KISARAN</div>
-            <div class="company-info">
-                Jl. Merdeka No. 123, Kisaran<br>
-                Telp: (0812) 3456-7890 | Email: toko@mataharikisaran.com
-            </div>
-            <div class="invoice-title">INVOICE</div>
+            <div class="company-name">
+                @php
+                    $path = public_path('img/logo/Logos.jpeg');
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                @endphp
+                <img src="{{ $image }}" width="700">
+            
+                
         </div>
 
         <!-- Info Section -->
@@ -308,7 +312,7 @@
                     <div class="info-value">{{ $sale->transaction_date->format('d F Y') }}</div>
                     
                     <div class="info-label">Kasir</div>
-                    <div class="info-value">{{ $sale->creator->fullname ?? '-' }}</div>
+                    <div class="info-value">{{ $sale->creator->name ?? '-' }}</div>
                 </div>
             </div>
             
@@ -322,9 +326,10 @@
                     
                     <div class="info-label">Status</div>
                     <div class="info-value">
-                        <span class="status-badge {{ $sale->status === 'Lunas' ? 'status-lunas' : 'status-belum' }}">
+                        <span class="status-badge {{ $sale->status === 'lunas' ? 'status-lunas' : 'status-belum' }}">
                             {{ $sale->status }}
                         </span>
+                        
                     </div>
                 </div>
             </div>
@@ -338,7 +343,7 @@
                     <th style="width: 40%;">NAMA PRODUK</th>
                     <th style="width: 15%;" class="text-right">HARGA</th>
                     <th style="width: 10%;" class="text-center">QTY</th>
-                    <th style="width: 15%;" class="text-right">DISKON</th>
+                    
                     <th style="width: 15%;" class="text-right">SUBTOTAL</th>
                 </tr>
             </thead>
@@ -352,7 +357,6 @@
                     </td>
                     <td class="text-right">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                     <td class="text-center">{{ $item->quantity }} {{ $item->unit }}</td>
-                    <td class="text-right">Rp 0</td>
                     <td class="text-right">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
                 </tr>
                 @endforeach
@@ -363,7 +367,7 @@
         <div class="summary-section">
             <div class="summary-row">
                 <div class="summary-label">Subtotal:</div>
-                <div class="summary-value">Rp {{ number_format($sale->subtotal, 0, ',', '.') }}</div>
+                <div class="summary-value">Rp {{ number_format($sale->total, 0, ',', '.') }}</div>
             </div>
             <div class="summary-row">
                 <div class="summary-label">Diskon:</div>
@@ -395,19 +399,7 @@
         </div>
         @endif
 
-        <!-- Signature -->
-        <div class="signature-section">
-            <div class="signature-box">
-                <div class="signature-line">
-                    Penerima
-                </div>
-            </div>
-            <div class="signature-box">
-                <div class="signature-line">
-                    Hormat Kami
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Footer -->
         <div class="footer">

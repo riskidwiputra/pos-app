@@ -21,7 +21,7 @@ class Product extends Model
         'harga_beli',
         'stok_tersedia',
         'stok_minimum',
-        'barcode_product',
+        // 'barcode_product',
         'gambar_barang',
         'status_product',
     ];

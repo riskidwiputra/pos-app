@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Penjualan')]
+#[Title('Daftar Penjualan')]
 class IndexSale extends Component
 {
     use WithPagination;

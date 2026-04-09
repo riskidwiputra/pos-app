@@ -13,22 +13,21 @@ use Livewire\Attributes\Title;
 #[Title('Edit Pelanggan')]
 class UpdateCustomer extends Component
 {
-    public User $admin;
+    public User $customer;
     public $name = '';
     public $email = '';
-    public $role_id = '';
     public $username = '';
     public $password = '';
+    public $role_id = '';
     public $password_confirmation = '';
 
     protected function rules()
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $this->admin->id,
-            'role_id' => 'required|exists:roles,id',
+            'email' => 'required|email|unique:users,email,' . $this->customer->id,
             'password' => 'nullable|string|min:6|confirmed',
-            'username' => 'required|unique:users,username,' . $this->admin->id,
+            'username' => 'required|unique:users,username,' . $this->customer->id,
         ];
     }
 
@@ -37,7 +36,6 @@ class UpdateCustomer extends Component
         'email.required' => 'Email wajib diisi',
         'email.email' => 'Format email tidak valid',
         'email.unique' => 'Email sudah terdaftar',
-        'role_id.required' => 'Role wajib dipilih',
         'password.min' => 'Password minimal 6 karakter',
         'password.confirmed' => 'Konfirmasi password tidak cocok',
         'username.required' => 'Username wajib diisi',
@@ -46,11 +44,11 @@ class UpdateCustomer extends Component
 
     public function mount($id)
     {
-        $this->admin = User::findOrFail($id);
-        $this->name = $this->admin->name;
-        $this->email = $this->admin->email;
-        $this->username = $this->admin->username;
-        $this->role_id = $this->admin->role_id;
+        $this->customer = User::findOrFail($id);
+        $this->name = $this->customer->name;
+        $this->email = $this->customer->email;
+        $this->username = $this->customer->username;
+        $this->role_id = $this->customer->role_id;
     }
 
     public function update()
@@ -68,10 +66,10 @@ class UpdateCustomer extends Component
             $data['password'] = Hash::make($this->password);
         }
 
-        $this->admin->update($data);
+        $this->customer->update($data);
 
-        session()->flash('message', 'Data admin berhasil diupdate!');
-        return redirect()->route('admin.index');
+        session()->flash('message', 'Data pelanggan berhasil diupdate!');
+        return redirect()->route('customer.index');
     }
 
     public function render()

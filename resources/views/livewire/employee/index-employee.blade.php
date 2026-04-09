@@ -153,17 +153,17 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if($employee->status_pekerjaan === 'Aktif')
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
-                                            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+                                           
                                             Aktif
                                         </span>
                                     @elseif($employee->status_pekerjaan === 'Cuti')
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-700">
-                                            <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+                                           
                                             Cuti
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
-                                            <span class="w-2 h-2 bg-gray-500 rounded-full mr-2"></span>
+                                        
                                             Tidak Aktif
                                         </span>
                                     @endif

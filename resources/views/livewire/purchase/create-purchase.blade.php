@@ -12,8 +12,8 @@
 
             <div class="flex items-center gap-4 mb-2">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Tambah Pembelian Baru</h1>
-                    <p class="text-sm text-gray-500 mt-1">Catat pembelian barang dari supplier</p>
+                    <h1 class="text-3xl font-bold text-gray-900">Form Pembelian </h1>
+                    
                 </div>
             </div>
         </div>
@@ -184,7 +184,7 @@
 
                 <!-- Right Side - Summary -->
                 <div class="lg:col-span-1">
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 sticky top-8">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
                         <div class="bg-gradient-to-r from-indigo-500 to-blue-600 px-6 py-4">
                             <h2 class="text-lg font-semibold text-white">Ringkasan Pembelian</h2>
                         </div>
@@ -231,15 +231,7 @@
                             <!-- Status Pembayaran -->
                             <div class="bg-gradient-to-r {{ $status_pembayaran === 'Lunas' ? 'from-green-50 to-emerald-50' : 'from-amber-50 to-orange-50' }} rounded-xl p-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full {{ $status_pembayaran === 'Lunas' ? 'bg-green-500' : 'bg-amber-500' }} flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($status_pembayaran === 'Lunas')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="text-sm text-gray-600">Status Pembayaran</p>
                                         <p class="font-bold {{ $status_pembayaran === 'Lunas' ? 'text-green-700' : 'text-amber-700' }}">
@@ -252,12 +244,11 @@
                             <!-- Info Box -->
                             <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
                                 <div class="flex gap-3">
-                                    <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    
                                     <div class="text-sm text-blue-700">
                                         <p class="font-semibold mb-1">Informasi</p>
                                         <p>Stok akan otomatis bertambah setelah pembelian disimpan.</p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -266,9 +257,7 @@
                             <div class="space-y-3 pt-4">
                                 <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                                     <span class="flex items-center justify-center gap-2">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                       
                                         Simpan Pembelian
                                     </span>
                                 </button>

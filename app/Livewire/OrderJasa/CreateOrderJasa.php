@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
+
+
 #[Layout('layouts.app')]
 #[Title('Tambah Order Jasa')]
 class CreateOrderJasa extends Component
@@ -32,7 +34,6 @@ class CreateOrderJasa extends Component
     public $order_title = '';
     public $order_description = '';
     public $quantity = 1;
-    public $unit = 'pcs';
 
     // Dates
     public $order_date;
@@ -42,6 +43,7 @@ class CreateOrderJasa extends Component
     public $total_price = 0;
     public $payment = 0;
     public $down_payment = 0;
+    public $category_price = 0;
 
     // Files & Notes
     public $design_file;
@@ -50,7 +52,7 @@ class CreateOrderJasa extends Component
 
     // Status
     public $status = 'pending';
-
+    
 
     public function mount()
     {
@@ -65,7 +67,18 @@ class CreateOrderJasa extends Component
         return ServiceCategory::orderBy('nama_jasa')->get();
     }
 
-    
+    public function updatedCategoryId($value)
+{
+    if ($value) {
+        $category = ServiceCategory::find($value);
+        if ($category) {
+            $this->category_price = $category->total_harga ?? 0;
+        }
+    } else {
+        $this->category_price = 0;
+        
+    }
+}
 
     public function save()
     {
@@ -77,10 +90,8 @@ class CreateOrderJasa extends Component
             'order_title' => 'required|string|max:255',
             'order_description' => 'required|string',
             'quantity' => 'required|integer|min:1',
-            'unit' => 'required|string|max:50',
             'order_date' => 'required|date',
             'estimated_completion_date' => 'required|date|after_or_equal:order_date',
-            'total_price' => 'required|integer|min:0',
             'payment' => 'required|integer|min:0',
             'down_payment' => 'nullable|integer|min:0',
             'design_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,zip,rar,ai,psd,cdr|max:10240',
@@ -96,12 +107,9 @@ class CreateOrderJasa extends Component
             'order_description.required' => 'Deskripsi order wajib diisi',
             'quantity.required' => 'Jumlah wajib diisi',
             'quantity.min' => 'Jumlah minimal 1',
-            'unit.required' => 'Satuan wajib dipilih',
             'order_date.required' => 'Tanggal order wajib diisi',
             'estimated_completion_date.required' => 'Estimasi selesai wajib diisi',
             'estimated_completion_date.after_or_equal' => 'Estimasi selesai tidak boleh kurang dari tanggal order',
-            'total_price.required' => 'Total harga wajib diisi',
-            'total_price.min' => 'Total harga tidak boleh negatif',
             'payment.required' => 'Pembayaran wajib diisi',
             'payment.min' => 'Pembayaran tidak boleh negatif',
             'down_payment.min' => 'Down payment tidak boleh negatif',
@@ -125,6 +133,7 @@ class CreateOrderJasa extends Component
                     $userId = $customer->id;
                 }
             }
+            $this->total_price = $this->category_price * $this->quantity;
             if($this->total_price > 0 && $this->payment >= $this->total_price) {
                 $statusPembayaran = 'lunas';
             }else {
@@ -140,7 +149,6 @@ class CreateOrderJasa extends Component
                 'order_title' => $this->order_title,
                 'order_description' => $this->order_description,
                 'quantity' => $this->quantity,
-                'unit' => $this->unit,
                 'order_date' => $this->order_date,
                 'estimated_completion_date' => $this->estimated_completion_date,
                 'total_price' => $this->total_price,

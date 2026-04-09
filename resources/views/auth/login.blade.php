@@ -16,11 +16,7 @@
         <div class="mt-4">
             <div class="d-flex justify-content-between">
              <x-input-label for="password" :value="__('Password')" />
-                <!-- @if (Route::has('password.request')) 
-                    <a class=" text-sm   rounded-md  focus:ring-2 focus:ring-offset-2 " href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                 @endif -->
+                
                   </div>
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -35,15 +31,11 @@
         <div class=" mt-4">
            
 
-            <x-primary-button class=" btn btn-primary d-grid w-100">
+            <x-primary-button class="btn d-grid w-100" style="background-color: #185FA5; border-color: #185FA5; color: white;">
                 {{ __('Log in') }}
             </x-primary-button>
 
-            <!-- <p class="text-center mt-2">
-                <a href="{{ route('register') }}" class=" d-grid w-100">
-                  <span>Create an account</span>
-                </a>
-              </p> -->
+            
         </div>
     </form>
 </x-guest-layout>

@@ -20,7 +20,6 @@ class ServiceOrder extends Model
         'order_title',
         'order_description',
         'quantity',
-        'unit',
         'order_date',
         'estimated_completion_date',
         'total_price',

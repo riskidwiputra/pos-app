@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('harga_jual');
             $table->integer('stok_tersedia')->default(0);
             $table->integer('stok_minimum')->default(0);
-            $table->string('barcode_product')->unique();
             $table->string('gambar_barang')->nullable();
             $table->enum('status_product', ['Tersedia', 'Tidak-Tersedia'])->default('Tersedia');
             $table->softDeletes();

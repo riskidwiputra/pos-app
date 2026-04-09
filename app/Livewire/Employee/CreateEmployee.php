@@ -10,7 +10,7 @@ use Livewire\Attributes\Validate;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Karyawan')]
+#[Title('Tambah Karyawan')]
 class CreateEmployee extends Component
 {
     #[Validate('required|string|max:255')]

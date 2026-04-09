@@ -5,7 +5,7 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Manajemen Pelanggan
+                    Daftar Pelanggan
                 </h1>
             </div>
             <a href="{{ route('customer.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
@@ -115,12 +115,12 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if($customer->role->is_active)
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
-                                            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+                                          
                                             Aktif
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
-                                            <span class="w-2 h-2 bg-gray-500 rounded-full mr-2"></span>
+                                         
                                             Tidak Aktif
                                         </span>
                                     @endif

@@ -16,9 +16,7 @@ class ServiceCategory extends Model
     protected $fillable = [
         'nama_jasa',
         'deskripsi',
-        'harga_dasar',
-        'harga_maksimal',
-      
+        'total_harga',
         'keterangan_bahan',
         'gambar_contoh',
         'is_active',
@@ -27,8 +25,7 @@ class ServiceCategory extends Model
     ];
 
     protected $casts = [
-        'harga_dasar'          => 'integer',
-        'harga_maksimal'       => 'integer',
+        'total_harga'          => 'integer',
         'is_active'            => 'boolean',
     ];
 
@@ -65,11 +62,8 @@ class ServiceCategory extends Model
 
     public function getHargaFormatAttribute(): string
     {
-        $harga = 'Rp ' . number_format($this->harga_dasar, 0, ',', '.');
+        $harga = 'Rp ' . number_format($this->total_harga, 0, ',', '.');
 
-        if ($this->harga_maksimal) {
-            $harga .= ' – Rp ' . number_format($this->harga_maksimal, 0, ',', '.');
-        }
 
         return $harga;
     }

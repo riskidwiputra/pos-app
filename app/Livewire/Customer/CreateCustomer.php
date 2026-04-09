@@ -29,8 +29,7 @@ class CreateCustomer extends Component
     #[Validate('required')]
     public $password_confirmation = '';
     
-    #[Validate('required|exists:roles,id')]
-    public $role_id = '';
+
 
     protected $messages = [
         'name.required' => 'Nama wajib diisi',
@@ -40,8 +39,6 @@ class CreateCustomer extends Component
         'password.required' => 'Password wajib diisi',
         'password.min' => 'Password minimal 6 karakter',
         'password.confirmed' => 'Konfirmasi password tidak cocok',
-        'role_id.required' => 'Role wajib dipilih',
-        'role_id.exists' => 'Role tidak valid',
     ];
 
     public function store()
@@ -53,10 +50,10 @@ class CreateCustomer extends Component
             'email' => $this->email,
             'username' => $this->username,
             'password' => Hash::make($this->password),
-            'role_id' => $this->role_id,
+            'role_id' => 2, // Default role_id for customers
         ]);
 
-        session()->flash('message', 'Admin berhasil ditambahkan!');
+        session()->flash('message', 'Pelanggan berhasil ditambahkan!');
         return redirect()->route('customer.index');
     }
 

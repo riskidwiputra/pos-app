@@ -11,9 +11,9 @@
             </a>
 
             <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Tambah Order Jasa Baru
+                Form Pesanan Jasa 
             </h1>
-            <p class="text-sm text-gray-500 mt-1">Buat pesanan jasa percetakan baru untuk customer</p>
+            
         </div>
 
         <form wire:submit.prevent="save">
@@ -81,11 +81,27 @@
                     {{-- Detail Order --}}
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
                         <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                            <h2 class="text-lg font-semibold text-gray-900">Detail Order Jasa</h2>
+                            <h2 class="text-lg font-semibold text-gray-900">Detail Pesanan Jasa</h2>
                         </div>
                         
                         <div class="p-6 space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-800 mb-2">
+                                    Judul/Nama Pesanan <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    wire:model="order_title"
+                                    placeholder="Contoh: Cetak Spanduk Event..."
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 @error('order_title') border-red-500 @enderror"
+                                />
+                                @error('order_title')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-800 mb-2">
                                         Kategori Jasa <span class="text-red-500">*</span>
@@ -102,25 +118,23 @@
                                     @error('category_id')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
+                                    @if($category_id && $category_price > 0)
+    <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-indigo-200 rounded-xl">
+       
+        <div class="flex-1">
+            <p class="text-xs text-indigo-500 font-medium uppercase tracking-wide">Harga Jasa</p>
+            <p class="text-lg font-bold text-indigo-700">
+                Rp {{ number_format($category_price, 0, ',', '.') }}
+            </p>
+            
+        </div>
+        
+    </div>
+@endif
                                 </div>
 
                                 
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                    Judul/Nama Pesanan <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    wire:model="order_title"
-                                    placeholder="Contoh: Cetak Spanduk Event..."
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 @error('order_title') border-red-500 @enderror"
-                                />
-                                @error('order_title')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
-                            </div>
+                         
 
                             <div>
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
@@ -153,26 +167,7 @@
                                     @enderror
                                 </div>
 
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                        Satuan <span class="text-red-500">*</span>
-                                    </label>
-                                    <select 
-                                        wire:model="unit"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer @error('unit') border-red-500 @enderror"
-                                    >
-                                        <option value="pcs">Pcs</option>
-                                        <option value="lembar">Lembar</option>
-                                        <option value="meter">Meter</option>
-                                        <option value="set">Set</option>
-                                        <option value="box">Box</option>
-                                        <option value="rim">Rim</option>
-                                        <option value="roll">Roll</option>
-                                    </select>
-                                    @error('unit')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -207,25 +202,7 @@
                             
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                        Total Harga <span class="text-red-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">Rp</span>
-                                        <input 
-                                            type="number" 
-                                            wire:model="total_price"
-                                            min="0"
-                                            step="1000"
-                                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 @error('total_price') border-red-500 @enderror"
-                                        />
-                                    </div>
-                                    @error('total_price')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
+                              
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-800 mb-2">
                                         Jumlah Pembayaran <span class="text-red-500">*</span>
@@ -244,8 +221,6 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-800 mb-2">
                                        Uang muka (Dp) <span class="text-gray-400 text-xs">(Opsional)</span>
@@ -265,10 +240,8 @@
                                     @enderror
                                 </div>
 
-                                <div>
-                                    
-                                </div>
                             </div>
+                           
 
                             <div>
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
@@ -308,7 +281,7 @@
 
                             <div>
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                    Status Order <span class="text-red-500">*</span>
+                                    Status Pesanan <span class="text-red-500">*</span>
                                 </label>
                                 <select 
                                     wire:model="status"
@@ -331,7 +304,7 @@
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
-                                        Simpan Order Jasa
+                                        Simpan Pesanan Jasa
                                     </span>
                                 </button>
                                 

@@ -5,9 +5,9 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Manajemen Penjualan
+                    Daftar Penjualan
                 </h1>
-                <p class="text-sm text-gray-500 mt-1">Kelola transaksi penjualan produk</p>
+               
             </div>
             <a href="{{ route('sale.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
         <!-- Filters -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
             <div class="md:col-span-4 relative">
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari invoice/customer..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari invoice..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-2">
                 <select wire:model.live="filterStatus" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
@@ -67,9 +67,9 @@
            
             <div class="md:col-span-2">
                 <select wire:model.live="perPage" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm cursor-pointer">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
+                    <option value="10">10 Per Halaman</option>
+                    <option value="25">25 Per Halaman</option>
+                    <option value="50">50 Per Halaman</option>
                 </select>
             </div>
         </div>
@@ -142,12 +142,12 @@
                                 <td class="px-6 py-4 text-center">
                                     @if($sale->status === 'lunas')
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">
-                                            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+                                            
                                             Lunas
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">
-                                            <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                                           
                                             Dibatalkan
                                         </span>
                                     @endif

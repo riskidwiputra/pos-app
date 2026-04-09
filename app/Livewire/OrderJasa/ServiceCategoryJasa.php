@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 #[Layout('layouts.app')]
-#[Title('Setting Kategori Jasa')]
+#[Title('Daftar Kategori Pesanan Jasa')]
 class ServiceCategoryJasa extends Component
 {
     use WithPagination, WithFileUploads;
@@ -36,8 +36,7 @@ class ServiceCategoryJasa extends Component
     // ─── Form Fields ────────────────────────────────────────────────────────────
     public string  $nama_jasa              = '';
     public string  $deskripsi              = '';
-    public int     $harga_dasar            = 0;
-    public ?int    $harga_maksimal         = null;
+    public int     $total_harga            = 0;
     public string  $keterangan_bahan       = '';
     public bool    $is_active              = true;
     public $gambar_contoh;
@@ -53,9 +52,7 @@ class ServiceCategoryJasa extends Component
         return ServiceCategory::query()
             ->when($this->pencarian, fn($q) =>
                 $q->where(function ($q2) {
-                    $q2->where('nama_jasa',     'like', "%{$this->pencarian}%")
-
-                       ->orWhere('deskripsi',   'like', "%{$this->pencarian}%");
+                    $q2->where('nama_jasa',     'like', "%{$this->pencarian}%");
                 })
             )
             ->when($this->filterStatus !== '', fn($q) =>
@@ -88,8 +85,7 @@ class ServiceCategoryJasa extends Component
         // Isi fields
         $this->nama_jasa              = $kategori->nama_jasa;
         $this->deskripsi              = $kategori->deskripsi ?? '';
-        $this->harga_dasar            = $kategori->harga_dasar;
-        $this->harga_maksimal         = $kategori->harga_maksimal;
+        $this->total_harga            = $kategori->total_harga;
         $this->keterangan_bahan       = $kategori->keterangan_bahan ?? '';
         $this->is_active              = $kategori->is_active;
         $this->gambar_existing        = $kategori->gambar_contoh;
@@ -173,8 +169,7 @@ class ServiceCategoryJasa extends Component
         $rules = [
             'nama_jasa'            => 'required|string|max:150',
             'deskripsi'            => 'nullable|string|max:500',
-            'harga_dasar'          => 'required|integer|min:0',
-            'harga_maksimal'       => 'nullable|integer|min:0|gte:harga_dasar',
+            'total_harga'          => 'required|integer|min:0',
             'keterangan_bahan'     => 'nullable|string',
             'is_active'            => 'boolean',
             'gambar_contoh'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -182,9 +177,8 @@ class ServiceCategoryJasa extends Component
 
         $messages = [
             'nama_jasa.required'      => 'Nama jasa wajib diisi.',
-            'harga_dasar.required'    => 'Harga dasar wajib diisi.',
-            'harga_dasar.min'         => 'Harga dasar tidak boleh negatif.',
-            'harga_maksimal.gte'      => 'Harga maksimal harus lebih besar dari harga dasar.',
+            'total_harga.required'    => 'Total harga wajib diisi.',
+            'total_harga.min'         => 'Total harga tidak boleh negatif.',
             'gambar_contoh.image'     => 'File harus berupa gambar.',
             'gambar_contoh.max'       => 'Ukuran gambar maksimal 2MB.',
         ];
@@ -206,8 +200,7 @@ class ServiceCategoryJasa extends Component
             $payload = [
                 'nama_jasa'            => $this->nama_jasa,
                 'deskripsi'            => $this->deskripsi ?: null,
-                'harga_dasar'          => $this->harga_dasar,
-                'harga_maksimal'       => $this->harga_maksimal ?: null,
+                'total_harga'          => $this->total_harga,
                 'keterangan_bahan'     => $this->keterangan_bahan ?: null,
                 'is_active'            => $this->is_active,
                 'gambar_contoh'        => $gambarPath,
@@ -252,8 +245,7 @@ class ServiceCategoryJasa extends Component
         $this->selectedId            = null;
         $this->nama_jasa             = '';
         $this->deskripsi             = '';
-        $this->harga_dasar           = 0;
-        $this->harga_maksimal        = null;
+        $this->total_harga           = 0;
         $this->keterangan_bahan      = '';
         $this->is_active             = true;
         $this->gambar_contoh         = null;

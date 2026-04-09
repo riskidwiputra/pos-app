@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\KasirController;
 use App\Livewire\Cashier\Kasir;
 use App\Http\Controllers\ProfileController;
@@ -21,10 +22,14 @@ use App\Livewire\Employee\UpdateEmployee;
 use App\Livewire\Laporan\LaporanPenjualanPerItem;
 use App\Livewire\Laporan\LaporanPenjualanTransaksi;
 use App\Livewire\Laporan\LaporanStok;
+use App\Livewire\OrderJasa\CreateOrderCustomer;
 use App\Livewire\OrderJasa\CreateOrderJasa;
+use App\Livewire\OrderJasa\DetailOrderCustomer;
 use App\Livewire\OrderJasa\DetailOrderJasa;
+use App\Livewire\OrderJasa\IndexOrderCustomer;
 use App\Livewire\OrderJasa\IndexOrderJasa;
 use App\Livewire\OrderJasa\ServiceCategoryJasa;
+use App\Livewire\OrderJasa\UpdateOrderCustomer;
 use App\Livewire\OrderJasa\UpdateOrderJasa;
 use App\Livewire\Product\CreateProduct;
 use App\Livewire\Product\IndexProduct;
@@ -75,11 +80,41 @@ Route::get('/login', function () {
 
 Route::get('/register', CustomerRegister::class)->name('register');
 
+
+Route::middleware('customer')->group(function () {
+        
+    Route::get('/dashboard', [CustomerDashboardController::class, 'index'])->name('dashboard');
+        
+    Route::prefix('order-jasa')->name('order-jasa.')->group(function () {
+        
+        Route::get('/riwayat-pesanan', IndexOrderCustomer::class)
+            ->name('riwayat-pesanan');
+
+        Route::get('/tambah-pesanan', CreateOrderCustomer::class)
+            ->name('tambah-pesanan');
+        
+        Route::get('/{id}/detail-pesanan', DetailOrderCustomer::class)
+            ->name('detail-pesanan');
+
+        Route::get('/{id}/ubah-pesanan', UpdateOrderCustomer::class)
+        ->name('ubah-pesanan');
+
+                    
+    });
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+      
+});
 Route::prefix('sb-admin')->middleware('auth')->group(function () {
 
 
     Route::get('/cashier', [KasirController::class, 'index'])
         ->name('cashier');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile-admin.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile-admin.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::get('/cashier/product/{id}', [KasirController::class, 'getProduct']);
     
@@ -199,9 +234,17 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
             ->middleware('permission:order-jasa.create')
             ->name('create');
 
+        Route::get('/create-order', CreateOrderCustomer::class)
+            ->name('create-order');
+        Route::get('/getOrder', IndexOrderCustomer::class)
+            ->name('getOrder');
+        Route::get('/{id}/getDetail', DetailOrderCustomer::class)
+            ->name('getDetail');
+
         Route::get('/{id}/update', UpdateOrderJasa::class)
             ->middleware('permission:order-jasa.edit')
             ->name('update');
+        Route::get('/{id}/getUpdate', UpdateOrderCustomer::class)->name('getUpdate');
 
         Route::get('/{id}/detail', DetailOrderJasa::class)->name('detail');
 
@@ -212,7 +255,6 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
         Route::get('/nota/{sale}', PrintNota::class)->name('nota');
         
     });
-    Route::get('test-print/{sale}', PrintNota::class)->name('test-print');
     Route::get('/nota/{sale}', function($id) {
             $sale = \App\Models\Sale::with(['items.product'])->findOrFail($id);
             return view('livewire.print.nota-content', compact('sale'));
@@ -222,22 +264,16 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
         Route::get('/role-management', RoleManagement::class)
         ->name('role-management');
     });
-
-    Route::get('/roles/manage-permissions', ManagePermissions::class)
-        ->name('roles.manage-permissions');
-    Route::get('/setting/manage-menu', MenuManagement::class)
-        ->name('setting.manage-menu');
-
-    Route::get('/setting/permission-management', \App\Livewire\Setting\PermissionManagement::class)
-        ->name('setting.permission-management');
-    Route::get('/setting/user-role-management', \App\Livewire\Setting\UserRoleManagement::class)
-        ->name('setting.user-role-management');
-    Route::get('/setting/role-permission-management', \App\Livewire\Setting\RolePermissionManagement::class)
-        ->name('setting.role-permission-management');
-        
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/invoice/{sale}', function($id) {
+            $sale = \App\Models\Sale::with(['items.product', 'users'])->findOrFail($id);
+            return view('livewire.print.invoice', compact('sale'));
+        });
+    Route::get('/laporan-penjualan-transaksi/{sale}', function($id) {
+            $sale = \App\Models\Sale::with(['items.product', 'users'])->findOrFail($id);
+            return view('livewire.print.laporan-penjualan-transaksi', compact('sale'));
+         })->name('laporan-penjualan-transaksi.detail');
+    
+   
 });
 
 require __DIR__.'/auth.php';

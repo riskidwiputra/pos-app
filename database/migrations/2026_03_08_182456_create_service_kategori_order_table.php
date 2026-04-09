@@ -17,9 +17,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
 
             // Harga
-            $table->unsignedBigInteger('harga_dasar')->default(0);
-            $table->unsignedBigInteger('harga_maksimal')->nullable();
-          
+            $table->unsignedBigInteger('total_harga')->default(0);          
 
             // Bahan & Material
             $table->text('keterangan_bahan')->nullable();

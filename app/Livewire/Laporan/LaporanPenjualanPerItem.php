@@ -125,16 +125,7 @@ class LaporanPenjualanPerItem extends Component
         }
     }
 
-    public function resetFilter()
-    {
-        $this->tanggalMulai = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->tanggalSelesai = Carbon::now()->format('Y-m-d');
-        $this->pencarian = '';
-        $this->kategoriFilter = '';
-        $this->sortBy = 'total_terjual';
-        $this->sortDirection = 'desc';
-        $this->resetPage();
-    }
+   
 
     public function updatingPencarian()
     {

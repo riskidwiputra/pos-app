@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.app')]
-#[Title('Kelola Order Jasa')]
+#[Title('Daftar pesanan jasa')]
 class IndexOrderJasa extends Component
 {
     use WithPagination;
@@ -190,12 +190,7 @@ class IndexOrderJasa extends Component
         }
     }
 
-    public function resetFilter()
-    {
-        $this->pencarian = '';
-        $this->statusFilter = '';
-        $this->resetPage();
-    }
+    
 
     public function updatingPencarian()
     {

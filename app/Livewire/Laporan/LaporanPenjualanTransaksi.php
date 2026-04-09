@@ -86,22 +86,6 @@ class LaporanPenjualanTransaksi extends Component
         ];
     }
 
-    #[Computed]
-    public function grafikHarian()
-    {
-        $data = Sale::whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
-            ->where('status', 'Lunas')
-            ->selectRaw('DATE(transaction_date) as tanggal, SUM(total) as total_harian, COUNT(*) as jumlah')
-            ->groupBy('tanggal')
-            ->orderBy('tanggal')
-            ->get();
-
-        return [
-            'labels' => $data->pluck('tanggal')->map(fn($d) => Carbon::parse($d)->format('d M'))->toArray(),
-            'values' => $data->pluck('total_harian')->toArray(),
-            'counts' => $data->pluck('jumlah')->toArray(),
-        ];
-    }
 
     public function hitungKeuntungan($sale)
     {

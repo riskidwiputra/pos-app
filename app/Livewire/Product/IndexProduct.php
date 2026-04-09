@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Produk')]
+#[Title('Daftar Produk')]
 class IndexProduct extends Component
 {
     use WithPagination;
@@ -32,8 +32,7 @@ class IndexProduct extends Component
         return Product::with(['category', 'subCategory', 'unit'])
             ->where(function($query) {
                 $query->where('nama_produk', 'like', '%' . $this->search . '%')
-                      ->orWhere('kode_produk', 'like', '%' . $this->search . '%')
-                      ->orWhere('barcode_product', 'like', '%' . $this->search . '%');
+                      ->orWhere('kode_produk', 'like', '%' . $this->search . '%');
             })
             ->when($this->filterCategory, function($query) {
                 $query->where('category_id', $this->filterCategory);
@@ -82,14 +81,7 @@ class IndexProduct extends Component
         $this->productId = null;
     }
 
-    public function resetFilters()
-    {
-        $this->search = '';
-        $this->filterCategory = '';
-        $this->filterStatus = '';
-        $this->showLowStock = false;
-        $this->resetPage();
-    }
+
 
     public function render()
     {

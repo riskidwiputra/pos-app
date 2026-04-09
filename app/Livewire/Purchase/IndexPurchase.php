@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Carbon\Carbon;
 
 #[Layout('layouts.app')]
-#[Title('Manajemen Pembelian')]
+#[Title('Daftar Pembelian')]
 class IndexPurchase extends Component
 {
     use WithPagination;
@@ -41,10 +41,7 @@ class IndexPurchase extends Component
         return Purchase::with(['supplier', 'items.product'])
             ->where(function($query) {
                 $query->where('purchase_code', 'like', '%' . $this->search . '%')
-                      ->orWhere('nomor_invoice', 'like', '%' . $this->search . '%')
-                      ->orWhereHas('supplier', function($q) {
-                          $q->where('nama_supplier', 'like', '%' . $this->search . '%');
-                      });
+                      ->orWhere('nomor_invoice', 'like', '%' . $this->search . '%');
             })
             ->when($this->filterSupplier, function($query) {
                 $query->where('supplier_id', $this->filterSupplier);

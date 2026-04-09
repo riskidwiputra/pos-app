@@ -28,20 +28,15 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                    @if($purchase->status_pembayaran !== 'Lunas' && $purchase->status === 'Aktif')
+                    {{-- @if($purchase->status_pembayaran !== 'Lunas' && $purchase->status === 'Aktif')
                         <button wire:click="openPaymentModal" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
                             Tambah Pembayaran
                         </button>
-                    @endif
-                    <a href="{{ route('purchase.edit', $purchase->id) }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                        </svg>
-                        Edit
-                    </a>
+                    @endif --}}
+                    
                   
                 </div>
             </div>
@@ -91,11 +86,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Supplier</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-bold text-gray-900">{{ $purchase->supplier->nama_supplier }}</p>
                                         <p class="text-sm text-gray-500">{{ $purchase->supplier->alamat_supplier ?? '-' }}</p>
@@ -107,11 +98,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Nomor Invoice</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                        </svg>
-                                    </div>
+                                   
                                     <div>
                                         <p class="font-bold text-gray-900">{{ $purchase->nomor_invoice }}</p>
                                         <p class="text-sm text-gray-500">Tgl Invoice: {{ Carbon\Carbon::parse($purchase->tgl_invoice)->format('d M Y') }}</p>
@@ -123,11 +110,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Tanggal Terima</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-bold text-gray-900">{{ Carbon\Carbon::parse($purchase->tanggal_terima_barang)->format('d F Y') }}</p>
                                         <p class="text-sm text-gray-500">{{ Carbon\Carbon::parse($purchase->tanggal_terima_barang)->diffForHumans() }}</p>
@@ -139,15 +122,7 @@
                             <div class="group">
                                 <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wider">Status Dokumen</p>
                                 <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg {{ $purchase->status === 'Aktif' ? 'bg-gradient-to-br from-green-100 to-emerald-100' : 'bg-gradient-to-br from-red-100 to-pink-100' }} flex items-center justify-center">
-                                        <svg class="w-5 h-5 {{ $purchase->status === 'Aktif' ? 'text-emerald-600' : 'text-red-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($purchase->status === 'Aktif')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="font-bold {{ $purchase->status === 'Aktif' ? 'text-emerald-700' : 'text-red-700' }}">
                                             {{ $purchase->status }}
@@ -198,12 +173,8 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4">
-                                            <div class="flex items-center gap-3">
-                                                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                                    </svg>
-                                                </div>
+                                            <div class="flex items-center gap-2">
+                                                
                                                 <div>
                                                     <p class="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
                                                         {{ $item->product->nama_produk }}
@@ -281,10 +252,7 @@
                                         <span>Progress Pembayaran</span>
                                         <span class="font-semibold">{{ number_format($percentage, 1) }}%</span>
                                     </div>
-                                    <!-- <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                        <div class="h-full rounded-full bg-gradient-to-r {{ $percentage >= 100 ? 'from-green-500 to-emerald-600' : 'from-blue-500 to-indigo-600' }} transition-all duration-500 ease-out" 
-                                             style="width: {{ min($percentage, 100) }}%"></div>
-                                    </div> -->
+                                    
                                 </div>
                                 
                                 <div class="pt-3 flex justify-between items-center">
@@ -299,18 +267,7 @@
                         <!-- Status Card -->
                         <div class="bg-gradient-to-r {{ $purchase->status_pembayaran === 'Lunas' ? 'from-green-50 to-emerald-50' : 'from-amber-50 to-orange-50' }} rounded-xl p-4">
                             <div class="flex items-center gap-3">
-                                <div class="relative">
-                                    <div class="absolute inset-0 {{ $purchase->status_pembayaran === 'Lunas' ? 'bg-green-400' : 'bg-amber-400' }} rounded-full blur-md opacity-30 animate-pulse"></div>
-                                    <div class="relative w-12 h-12 rounded-full {{ $purchase->status_pembayaran === 'Lunas' ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 'bg-gradient-to-br from-amber-500 to-orange-600' }} flex items-center justify-center shadow-lg">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($purchase->status_pembayaran === 'Lunas')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
-                                </div>
+                                
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">Status Pembayaran</p>
                                     <p class="text-lg font-bold {{ $purchase->status_pembayaran === 'Lunas' ? 'text-green-700' : 'text-amber-700' }}">
@@ -323,9 +280,7 @@
                         <!-- Info Box -->
                         <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4">
                             <div class="flex gap-3">
-                                <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                
                                 <div class="text-sm text-blue-700">
                                     <p class="font-semibold mb-1">Informasi</p>
                                     @if($purchase->status_pembayaran === 'Lunas')
@@ -337,31 +292,13 @@
                             </div>
                         </div>
 
-                        <!-- Action Buttons -->
-                        <div class="space-y-3 pt-4 border-t border-gray-200">
-                            @if($purchase->status_pembayaran !== 'Lunas' && $purchase->status === 'Aktif')
-                                <button wire:click="openPaymentModal" class="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                                    <span class="flex items-center justify-center gap-2">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
-                                        Tambah Pembayaran
-                                    </span>
-                                </button>
-                            @endif
-                            
-                            <a href="{{ route('purchase.edit', $purchase->id) }}" class="block w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-center">
-                                Edit Pembelian
-                            </a>
-                            
-                            
-                        </div>
+                       
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Payment Modal -->
+        {{-- <!-- Payment Modal -->
         @if($showPaymentModal)
         <div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md transform transition-all animate-in slide-in-from-bottom fade-in duration-300">
@@ -487,7 +424,7 @@
                 </form>
             </div>
         </div>
-        @endif
+        @endif --}}
 
     </div>
 </div>

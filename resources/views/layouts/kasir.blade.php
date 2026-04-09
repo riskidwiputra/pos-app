@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Kasir' }}</title>
+   <title>@yield('title', 'Kasir')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+     <script src="https://cdn.tailwindcss.com"></script>
+    
+    {{-- Alpine.js --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
     
     <style>
@@ -22,10 +26,14 @@
     @livewireScripts
     
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('toast', (event) => {
-                showToast(event.type, event.message);
-            });
+        // document.addEventListener('livewire:init', () => {
+        //     Livewire.on('toast', (event) => {
+        //         showToast(event.type, event.message);
+        //     });
+        // });
+         window.addEventListener('toast', event => {
+            alert(event.detail.message); // Sementara pakai alert
+            console.log('Toast:', event.detail);
         });
 
         function showToast(type, message) {

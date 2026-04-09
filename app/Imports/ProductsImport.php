@@ -70,12 +70,12 @@ class ProductsImport implements
         } while (Product::where('kode_produk', $kodeProduk)->exists());
 
         // Generate unique barcode
-        do {
-            $kode_category = str_pad($row['id_kategori'], 3, '0', STR_PAD_LEFT);
-            $kode_sub_category = str_pad($row['id_sub_kategori'], 3, '0', STR_PAD_LEFT);
-            $kode_unit = str_pad($row['id_unit'], 3, '0', STR_PAD_LEFT);
-            $barcode = $kode_category . $kode_sub_category . $kode_unit . $kodeProduk;
-        } while (Product::where('barcode_product', $barcode)->exists());
+        // do {
+        //     $kode_category = str_pad($row['id_kategori'], 3, '0', STR_PAD_LEFT);
+        //     $kode_sub_category = str_pad($row['id_sub_kategori'], 3, '0', STR_PAD_LEFT);
+        //     $kode_unit = str_pad($row['id_unit'], 3, '0', STR_PAD_LEFT);
+        //     // $barcode = $kode_category . $kode_sub_category . $kode_unit . $kodeProduk;
+        // } while (Product::where('barcode_product', $barcode)->exists());
 
         $this->successCount++;
 
@@ -89,7 +89,7 @@ class ProductsImport implements
             'harga_jual' => $row['harga_jual'],
             'stok_tersedia' => 0,
             'stok_minimum' => $row['stok_minimum'],
-            'barcode_product' => $barcode,
+            // 'barcode_product' => $barcode,
             'gambar_barang' => null,
             'status_product' => 'Tersedia',
         ]);

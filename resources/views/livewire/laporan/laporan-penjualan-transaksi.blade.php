@@ -5,9 +5,9 @@
         <div class="mb-8 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Laporan Penjualan
+                    Laporan Per Transaksi
                 </h1>
-                <p class="text-sm text-gray-500 mt-1">Analisis transaksi penjualan per periode</p>
+                
             </div>
             <div class="flex gap-2">
                 <button 
@@ -16,13 +16,46 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                     </svg>
-                    Export PDF
+                    Cetak Laporan PDF
                 </button>
             </div>
         </div>
 
-        {{-- Tab Navigation --}}
-        <x-laporan-navigation active="transaksi" />
+        
+         {{-- Ringkasan --}}
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm font-medium opacity-90">Total Transaksi</p>
+                   
+                </div>
+                <h3 class="text-3xl font-bold">{{ number_format($this->ringkasanTransaksi()['total_transaksi']) }}</h3>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-lg p-6 text-white">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm font-medium opacity-90">Total Pendapatan</p>
+                    
+                </div>
+                <h3 class="text-2xl font-bold">Rp {{ number_format($this->ringkasanTransaksi()['total_pendapatan'], 0, ',', '.') }}</h3>
+            </div>
+
+            <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg p-6 text-white">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm font-medium opacity-90">Total Keuntungan</p>
+                   
+                </div>
+                <h3 class="text-2xl font-bold">Rp {{ number_format($this->ringkasanTransaksi()['total_keuntungan'], 0, ',', '.') }}</h3>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm font-medium opacity-90">Item Terjual</p>
+                  
+                </div>
+                <h3 class="text-3xl font-bold">{{ number_format($this->ringkasanTransaksi()['total_item_terjual']) }}</h3>
+            </div>
+        </div>
 
         {{-- Filter Section --}}
         <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -166,109 +199,10 @@
                 {{ $this->laporanTransaksi()->links() }}
             </div>
         </div>
+        
 
-        {{-- Ringkasan --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-sm font-medium opacity-90">Total Transaksi</p>
-                    <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-3xl font-bold">{{ number_format($this->ringkasanTransaksi()['total_transaksi']) }}</h3>
-            </div>
-
-            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-lg p-6 text-white">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-sm font-medium opacity-90">Total Pendapatan</p>
-                    <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-2xl font-bold">Rp {{ number_format($this->ringkasanTransaksi()['total_pendapatan'], 0, ',', '.') }}</h3>
-            </div>
-
-            <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg p-6 text-white">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-sm font-medium opacity-90">Total Keuntungan</p>
-                    <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                    </svg>
-                </div>
-                <h3 class="text-2xl font-bold">Rp {{ number_format($this->ringkasanTransaksi()['total_keuntungan'], 0, ',', '.') }}</h3>
-            </div>
-
-            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-6 text-white">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-sm font-medium opacity-90">Item Terjual</p>
-                    <svg class="w-8 h-8 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                    </svg>
-                </div>
-                <h3 class="text-3xl font-bold">{{ number_format($this->ringkasanTransaksi()['total_item_terjual']) }}</h3>
-            </div>
-        </div>
-
-        {{-- Grafik --}}
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">Grafik Penjualan Harian</h3>
-            <div class="h-80" 
-                x-data="{ 
-                    chart: null,
-                    init() {
-                        const ctx = this.$refs.canvas.getContext('2d');
-                        this.chart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: @js($this->grafikHarian()['labels']),
-                                datasets: [{
-                                    label: 'Pendapatan (Rp)',
-                                    data: @js($this->grafikHarian()['values']),
-                                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                                    borderColor: 'rgb(59, 130, 246)',
-                                    borderWidth: 2,
-                                    borderRadius: 8,
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: { display: false },
-                                    tooltip: {
-                                        callbacks: {
-                                            label: function(context) {
-                                                return 'Rp ' + context.parsed.y.toLocaleString('id-ID');
-                                            }
-                                        }
-                                    }
-                                },
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        ticks: {
-                                            callback: function(value) {
-                                                return 'Rp ' + (value / 1000) + 'k';
-                                            }
-                                        },
-                                        grid: {
-                                            color: 'rgba(0, 0, 0, 0.05)'
-                                        }
-                                    },
-                                    x: {
-                                        grid: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }">
-                <canvas x-ref="canvas"></canvas>
-            </div>
-        </div>
+       
+        
 
     </div>
 </div>

@@ -12,8 +12,8 @@
 
             <div class="flex items-center gap-4 mb-2">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Tambah Penjualan Baru</h1>
-                    <p class="text-sm text-gray-500 mt-1">Catat transaksi penjualan produk kepada pelanggan</p>
+                    <h1 class="text-3xl font-bold text-gray-900">Form Penjualan</h1>
+                    
                 </div>
             </div>
         </div>
@@ -205,18 +205,7 @@
                                 @error('paid_amount')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
-                                <div class="mt-2 flex gap-2 flex-wrap">
-                                    <button type="button" wire:click="$set('paid_amount', {{ $total }})" 
-                                            class="px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-medium rounded-lg transition">
-                                        Uang Pas
-                                    </button>
-                                    @foreach([50000, 100000, 200000, 500000] as $amount)
-                                        <button type="button" wire:click="$set('paid_amount', {{ $amount }})" 
-                                                class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg transition">
-                                            {{ number_format($amount/1000, 0) }}k
-                                        </button>
-                                    @endforeach
-                                </div>
+                               
                             </div>
 
                             <!-- Kembalian -->
@@ -229,18 +218,11 @@
                                 </div>
                             </div>
 
+                            @if(isset($change_amount) && $change_amount < 0)
                             <!-- Status Pembayaran Indicator -->
                             <div class="bg-gradient-to-r {{ $change_amount >= 0 && $paid_amount >= $total ? 'from-green-50 to-emerald-50' : 'from-amber-50 to-orange-50' }} rounded-xl p-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full {{ $change_amount >= 0 && $paid_amount >= $total ? 'bg-green-500' : 'bg-amber-500' }} flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($change_amount >= 0 && $paid_amount >= $total)
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="text-sm text-gray-600">Status</p>
                                         <p class="font-bold {{ $change_amount >= 0 && $paid_amount >= $total ? 'text-green-700' : 'text-amber-700' }}">
@@ -249,13 +231,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @endif
                             <!-- Info Box -->
                             <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
                                 <div class="flex gap-3">
-                                    <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    
                                     <div class="text-sm text-blue-700">
                                         <p class="font-semibold mb-1">Informasi</p>
                                         <p>Stok akan otomatis berkurang setelah penjualan disimpan.</p>

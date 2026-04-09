@@ -92,7 +92,7 @@ class CreateProduct extends Component
         $kode_category = Category::find($this->category_id)->kode_kategori;
         $kode_sub_category = SubCategory::find($this->sub_category_id)->kode_sub_kategori;
         $kode_unit = Unit::find($this->unit_id)->kode_unit;
-        $barcode = $kode_category . $kode_sub_category . $kode_unit . $this->kode_produk;
+        // $barcode = $kode_category . $kode_sub_category . $kode_unit . $this->kode_produk;
 
         Product::create([
             'category_id' => $this->category_id,
@@ -104,11 +104,11 @@ class CreateProduct extends Component
             'harga_jual' => $this->harga_jual,
             'stok_minimum' => $this->stok_minimum,
             'gambar_barang' => $imagePath,
-            'barcode_product' => $barcode,
+            // 'barcode_product' => $barcode,
             'status_product' => $this->status_product,
         ]);
 
-        session()->flash('message', 'Produk berhasil ditambahkan dengan barcode otomatis!');
+        session()->flash('message', 'Produk berhasil ditambahkan');
         return redirect()->route('product.index');
     }
 

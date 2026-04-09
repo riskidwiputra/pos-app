@@ -239,23 +239,25 @@
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600 font-semibold">Sisa Tagihan:</span>
                                     <span class="text-xl font-bold {{ $sisa_tagihan > 0 ? 'text-red-600' : 'text-green-600' }}">
-                                        Rp {{ number_format($sisa_tagihan, 0, ',', '.') }}
+                                        {{ $sisa_tagihan > 0 ? 'Rp ' . number_format($sisa_tagihan, 0, ',', '.') : 'Rp 0' }}
                                     </span>
                                 </div>
+                                @if($sisa_tagihan < 0)
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600 font-semibold">Kembalian:</span>
+                                    <span class="text-xl font-bold text-red-600">
+                                        Rp {{ number_format(abs($sisa_tagihan), 0, ',', '.') }}
+                                    </span>
+                                </div>
+                                @endif
                             </div>
+
+                            
 
                             <!-- Status Pembayaran -->
                             <div class="bg-gradient-to-r {{ $status_pembayaran === 'Lunas' ? 'from-green-50 to-emerald-50' : 'from-amber-50 to-orange-50' }} rounded-xl p-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full {{ $status_pembayaran === 'Lunas' ? 'bg-green-500' : 'bg-amber-500' }} flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            @if($status_pembayaran === 'Lunas')
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @else
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            @endif
-                                        </svg>
-                                    </div>
+                                    
                                     <div>
                                         <p class="text-sm text-gray-600">Status Pembayaran</p>
                                         <p class="font-bold {{ $status_pembayaran === 'Lunas' ? 'text-green-700' : 'text-amber-700' }}">
@@ -265,18 +267,7 @@
                                 </div>
                             </div>
 
-                            <!-- Warning Box -->
-                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                                <div class="flex gap-3">
-                                    <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                                    </svg>
-                                    <div class="text-sm text-amber-700">
-                                        <p class="font-semibold mb-1">Perhatian</p>
-                                        <p>Perubahan qty akan menyesuaikan stok produk secara otomatis.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <!-- Action Buttons -->
                             <div class="space-y-3 pt-4">

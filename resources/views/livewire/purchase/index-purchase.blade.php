@@ -5,7 +5,7 @@
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Manajemen Pembelian
+                    Daftar Pembelian
                 </h1>
                 <p class="text-sm text-gray-500 mt-1">Kelola pembelian dari supplier dan stok masuk</p>
             </div>
@@ -62,7 +62,7 @@
 
         <!-- Filters -->
         <div class="mb-6 grid grid-cols-1 md:grid-cols-12 gap-4">
-            <div class="md:col-span-3 relative">
+            <div class="md:col-span-4 relative">
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Cari kode/invoice..." class="w-full pl-4 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
             <div class="md:col-span-2">
@@ -86,11 +86,7 @@
             <div class="md:col-span-2">
                 <input type="date" wire:model.live="endDate" class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 shadow-sm"/>
             </div>
-            <div class="md:col-span-1">
-                <button wire:click="resetFilters" class="w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-all duration-200 shadow-sm">
-                    Reset
-                </button>
-            </div>
+            
         </div>
 
         <!-- Table -->
@@ -165,7 +161,10 @@
                                     <div>
                                         <p class="text-sm font-medium text-green-600">Rp {{ number_format($purchase->jumlah_dibayar, 0, ',', '.') }}</p>
                                         @if($purchase->sisa_tagihan > 0)
-                                            <p class="text-xs text-red-600">Sisa: Rp {{ number_format($purchase->sisa_tagihan, 0, ',', '.') }}</p>
+                                            <p class="text-xs text-red-600">Sisa pembayaran: Rp {{ number_format($purchase->sisa_tagihan, 0, ',', '.') }}</p>
+                                        @endif
+                                        @if($purchase->jumlah_dibayar >= $purchase->total_harga && $purchase->sisa_tagihan != 0)
+                                            <p class="text-xs text-red-600">Kembalian: Rp {{ number_format($purchase->jumlah_dibayar - $purchase->total_harga, 0, ',', '.') }}</p>
                                         @endif
                                     </div>
                                 </td>
@@ -187,7 +186,8 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-2">
                                         <a href="{{ route('purchase.detail', $purchase->id) }}" 
-                                        class="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-gradient-to-r from-green-500 to-teal-600 text-white font-medium text-xs shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                                      
+                                        class="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium text-xs shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -215,11 +215,7 @@
                             <tr>
                                 <td colspan="8" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
-                                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                                            </svg>
-                                        </div>
+                                       
                                         <div class="space-y-2">
                                             <p class="text-lg font-semibold text-gray-700">Tidak ada data pembelian</p>
                                             <p class="text-sm text-gray-500">Mulai dengan menambahkan pembelian baru</p>
