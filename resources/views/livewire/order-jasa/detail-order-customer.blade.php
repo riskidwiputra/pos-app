@@ -3,12 +3,12 @@
 
 
         <div class="mb-6">
-            <a href="{{ route('order-jasa.index') }}"
+            <a href="{{ route('order-jasa.riwayat-pesanan') }}"
                class="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold mb-6 group">
                 <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Kembali ke Daftar Order
+                Kembali ke Riwayat Pesanan
             </a>
 
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
@@ -47,14 +47,14 @@
 
                 {{-- Tombol Aksi Header --}}
                 <div class="flex flex-wrap gap-2 shrink-0">
-                    <a href=""
+                    <a href="{{ route('order-jasa.ubah-pesanan', $order->id) }}"
                        class="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-600
                               text-white text-sm font-semibold rounded-xl transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
-                        Edit
+                        Ubah
                     </a>
 
                    
@@ -259,12 +259,17 @@
                                     <p class="text-sm font-bold text-amber-600">Sisa Tagihan</p>
                                     <p class="text-sm font-bold text-amber-600">Rp {{ number_format($sisa, 0, ',', '.') }}</p>
                                 </div>
+                            @elseif ($order->status_pembayaran == 'belum_lunas')
+                                <div class="flex items-center justify-center gap-2 p-2 bg-amber-50 border border-amber-200 rounded-xl">
+                                    
+                                    <span class="text-sm font-bold text-amber-700">BELUM LUNAS </span>   
+                                </div>
                             @else
                                 <div class="flex items-center justify-center gap-2 p-2 bg-green-50 border border-green-200 rounded-xl">
                                     <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                     </svg>
-                                    <span class="text-sm font-bold text-green-700">LUNAS</span>
+                                    <span class="text-sm font-bold text-green-700">LUNAS ${{$order->status_pembayaran}}</span>
                                 </div>
                             @endif
                         </div>

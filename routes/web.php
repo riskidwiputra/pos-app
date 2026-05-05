@@ -108,7 +108,7 @@ Route::middleware('customer')->group(function () {
 });
 Route::prefix('sb-admin')->middleware('auth')->group(function () {
 
-
+  
     Route::get('/cashier', [KasirController::class, 'index'])
         ->name('cashier');
 
@@ -120,7 +120,7 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
     
     Route::post('/cashier/process', [KasirController::class, 'prosesPembayaran']);
 
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard-admin');
     
     // Route::get('/cashier', Kasir::class)->name('cashier');
 

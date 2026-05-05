@@ -55,9 +55,9 @@
         // Debug: Cek apakah Livewire ter-load
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof Livewire !== 'undefined') {
-                console.log('✅ Livewire loaded successfully!');
+                console.log(' Livewire loaded successfully!');
             } else {
-                console.error('❌ Livewire NOT loaded!');
+                console.error(' Livewire NOT loaded!');
             }
         });
     </script>

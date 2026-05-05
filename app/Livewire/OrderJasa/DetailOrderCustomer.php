@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 #[Layout('layouts.app')]
-#[Title('Detail Order Jasa')]
+#[Title('Detail Pesanan Saya')]
 class DetailOrderCustomer extends Component
 {
     public ServiceOrder $order;
@@ -111,7 +111,7 @@ class DetailOrderCustomer extends Component
 
         $this->order->delete();
         session()->flash('success', 'Order jasa berhasil dihapus.');
-        return redirect()->route('order-jasa.index');
+        return redirect()->route('order-jasa.riwayat-pesanan');
     }
 
     // ─── Modal helpers ────────────────────────────────────────────────────────────

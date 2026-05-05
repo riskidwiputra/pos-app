@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 #[Layout('layouts.app')]
-#[Title('Edit Order Jasa')]
+#[Title('Ubah Pesanan Saya')]
 class UpdateOrderCustomer extends Component
 {
     use WithFileUploads;
@@ -212,7 +212,7 @@ class UpdateOrderCustomer extends Component
             $this->order->update($updateData);
 
             session()->flash('success', 'Order jasa berhasil diperbarui.');
-            return redirect()->route('order-jasa.detail', $this->order->id);
+            return redirect()->route('order-jasa.riwayat-pesanan');
 
         } catch (\Throwable $e) {
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());

@@ -18,12 +18,16 @@
     :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }"
     class="fixed top-0 left-0 z-50 h-screen transition-transform duration-300 ease-in-out lg:translate-x-0 bg-white border-r border-gray-200 shadow-xl"
     style="width: 240px;"
+
 >
         <div class="h-full flex flex-col">
-            
-            {{-- Header/Logo --}}
+          
             <div class="flex items-center justify-between px-6 py-5 border-b border-gray-200">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
+                @if(auth()->user()->isCustomer())
+    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
+@else
+    <a href="{{ route('dashboard-admin') }}" class="flex items-center gap-2">
+@endif
                      <img src="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg" width="30px" height="30px" alt="Logo jpg" border="0">
                     <h1 class="text-xl font-bold text-gray-700">toko matahari</h1>
                 </a>
@@ -43,10 +47,12 @@
                 
                 {{-- Dashboard --}}
                 @if(auth()->user()->hasPermission('dashboard'))
-                <a 
-                    href="{{ route('dashboard') }}"
-                    @click="closeSidebar()"
-                    class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    @if(auth()->user()->isCustomer())
+                        <a href="{{ route('dashboard') }}"  class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" @click="closeSidebar()">
+                    @else
+                        <a href="{{ route('dashboard-admin') }}"  class="nav-item {{ request()->routeIs('dashboard-admin') ? 'active' : '' }}" @click="closeSidebar()">
+                    @endif
+                
                    <i class='bx bx-home-alt text-lg'></i>
                     <span>Dashboard</span>
                 </a>
@@ -113,13 +119,13 @@
                 </a>    
 
                 <a 
-                    href="{{ route('order-jasa.index') }}"
+                    href="{{ route('order-jasa.riwayat-pesanan') }}"
                     @click="closeSidebar()"
-                    class="nav-item {{ request()->routeIs('order-jasa.index') ? 'active' : '' }}">
+                    class="nav-item {{ request()->routeIs('order-jasa.riwayat-pesanan') ? 'active' : '' }}">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <span>Pesanan Saya</span>
+                    <span>Riwayat Pesanan</span>
                 </a>
                  @endif
                 {{-- Order Jasa --}}

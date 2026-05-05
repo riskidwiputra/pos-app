@@ -8,11 +8,9 @@
     <!-- Header -->
     <div>
         <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Kelola Pesanan Saya
+            Riwayat Pesanan 
         </h1>
-        <p class="mt-1 text-sm text-gray-500">
-            Manajemen pesanan Saya
-        </p>
+       
     </div>
 
     <!-- Action Buttons -->
@@ -22,7 +20,7 @@
 
         <!-- Tambah Order -->
         <a 
-            href="{{ route('order-jasa.create') }}"
+            href="{{ route('order-jasa.tambah-pesanan') }}"
             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 
                    bg-gradient-to-r from-blue-500 to-indigo-600 
                    hover:from-blue-600 hover:to-indigo-700
@@ -75,7 +73,7 @@
         {{-- Statistik Cards --}}
         <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
             <div class="bg-white rounded-xl shadow-md p-4 border-l-4 border-gray-400">
-                <p class="text-xs font-medium text-gray-500 mb-1">Total Order</p>
+                <p class="text-xs font-medium text-gray-500 mb-1">Total Pesanan</p>
                 <p class="text-2xl font-bold text-gray-900">{{ $this->statistik()['total'] }}</p>
             </div>
             
@@ -108,7 +106,7 @@
         {{-- Filter & Search --}}
         <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-                <div class="md:col-span-5">
+                <div class="md:col-span-7">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Pencarian</label>
                     <div class="relative">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +115,7 @@
                         <input 
                             type="text" 
                             wire:model.live.debounce.500ms="pencarian"
-                            placeholder="Cari kode order / judul pesanan..."
+                            placeholder="Cari kode Pesanan / judul pesanan..."
                             class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
                         />
                     </div>
@@ -150,13 +148,7 @@
                     </select>
                 </div>
 
-                <div class="md:col-span-2 flex items-end">
-                    <button 
-                        wire:click="resetFilter"
-                        class="w-full px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all">
-                        Reset Filter
-                    </button>
-                </div>
+                
             </div>
         </div>
 
@@ -167,7 +159,7 @@
                     <thead>
                         <tr class="bg-gradient-to-r from-slate-50 via-blue-50 to-slate-50 border-b-2 border-gray-200">
                             <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-gray-600">No</th>
-                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-gray-600">Kode Order</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-gray-600">Kode Pesanan</th>
                             <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-gray-600">Customer</th>
                             <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-gray-600">Jasa</th>
                             <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-widest text-gray-600">Total</th>
@@ -225,7 +217,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center gap-2">
                                         <a 
-                                            href="{{ route('order-jasa.getDetail', $order->id) }}"
+                                            href="{{ route('order-jasa.detail-pesanan', $order->id) }}"
                                             class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold rounded-lg transition-all">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -234,12 +226,12 @@
                                             Detail
                                         </a>
                                         <a 
-                                            href="{{ route('order-jasa.getUpdate', $order->id) }}"
+                                            href="{{ route('order-jasa.ubah-pesanan', $order->id) }}"
                                             class="inline-flex items-center gap-1 px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                             </svg>
-                                            Edit
+                                            Ubah
                                         </a>
 
                                        
@@ -251,9 +243,7 @@
                             <tr>
                                 <td colspan="7" class="px-6 py-12 text-center">
                                     <div class="flex flex-col items-center justify-center text-gray-400">
-                                        <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                        </svg>
+                                       
                                         <p class="text-lg font-semibold">Belum ada order jasa</p>
                                     </div>
                                 </td>

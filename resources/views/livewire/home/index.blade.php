@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Percetakan Matahari Kisaran - Solusi Cetak Profesional Anda</title>
+    <title>Percetakan Matahari Kisaran </title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg">
     <style>
         * {
             margin: 0;
@@ -113,11 +114,11 @@
             position: relative;
         }
 
-        .nav-menu a:hover {
+         .nav-menu a:hover {
             color: var(--primary);
         }
 
-        .nav-menu a::after {
+        /* .nav-menu a::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -130,7 +131,7 @@
 
         .nav-menu a:hover::after {
             width: 100%;
-        }
+        } */ 
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -171,10 +172,10 @@
 
         /* Hero Section */
         .hero {
-            margin-top: 80px;
+            margin-top: 50px;
             background: linear-gradient(135deg, #004e89 0%, #1a759f 100%);
             color: var(--white);
-            padding: 100px 30px;
+            padding: 30px 30px;
             position: relative;
             overflow: hidden;
         }
@@ -208,8 +209,6 @@
             line-height: 1.2;
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--white), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
@@ -226,9 +225,9 @@
         }
 
         .hero-buttons {
-            display: flex;
+            /* display: flex;
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 40px; */
         }
 
         .hero-image {
@@ -238,15 +237,11 @@
         .hero-image-placeholder {
             width: 100%;
             height: 450px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 120px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         .stats {
@@ -280,14 +275,14 @@
 
         /* Services Section */
         .services {
-            padding: 100px 30px;
+            padding: 50px 30px;
             background: var(--bg-light);
         }
 
         .section-header {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 60px;
+            margin: 0 auto 0px;
         }
 
         .section-subtitle {
@@ -296,14 +291,13 @@
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
         }
 
         .section-title {
             font-size: 42px;
             font-weight: 800;
             color: var(--secondary);
-            margin-bottom: 20px;
             line-height: 1.3;
         }
 
@@ -322,6 +316,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
+            margin-top: 20px;
         }
 
         .service-card {
@@ -335,7 +330,7 @@
             overflow: hidden;
         }
 
-        .service-card::before {
+        /* .service-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -345,16 +340,16 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.3s;
-        }
+        } */
 
-        .service-card:hover {
+        /* .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
         }
 
         .service-card:hover::before {
             transform: scaleX(1);
-        }
+        } */
 
         .service-icon {
             width: 70px;
@@ -366,7 +361,7 @@
             justify-content: center;
             font-size: 32px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+ 
         }
 
         .service-card h3 {
@@ -380,12 +375,10 @@
             color: var(--text-light);
             font-size: 14px;
             line-height: 1.8;
-            margin-bottom: 20px;
         }
 
         .service-features {
             list-style: none;
-            margin-bottom: 20px;
         }
 
         .service-features li {
@@ -420,7 +413,7 @@
 
         /* How It Works */
         .how-it-works {
-            padding: 100px 30px;
+            padding: 30px 30px;
             background: var(--white);
         }
 
@@ -432,8 +425,8 @@
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .step-card {
@@ -452,8 +445,7 @@
             justify-content: center;
             font-size: 32px;
             font-weight: 800;
-            margin: 0 auto 25px;
-            box-shadow: 0 10px 30px rgba(0, 78, 137, 0.3);
+            margin: 0 auto 5px;
             position: relative;
         }
 
@@ -486,7 +478,7 @@
 
         /* Portfolio/Gallery */
         .portfolio {
-            padding: 100px 30px;
+            padding: 50px 30px;
             background: var(--bg-light);
         }
 
@@ -499,7 +491,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-top: 60px;
+            margin-top: 20px;
         }
 
         .portfolio-item {
@@ -932,7 +924,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <div class="logo-icon">PM</div>
+                <div class=""><img width="50px" height="50px" src="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg" alt="Logo jpg" border="0"></div>
                 <div class="logo-text">
                     <span class="brand">Percetakan Matahari</span>
                     <span class="tagline">Kisaran - Sumatera Utara</span>
@@ -942,7 +934,6 @@
                 <li><a href="#home">Beranda</a></li>
                 <li><a href="#services">Layanan</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#testimonials">Testimoni</a></li>
                 <li><a href="#contact">Kontak</a></li>
                 <li><a href="{{ route('login') }}" class="btn-primary">Masuk</a></li>
             </ul>
@@ -953,11 +944,10 @@
     <section class="hero" id="home">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Solusi Cetak <span class="highlight">Profesional</span> untuk Semua Kebutuhan Anda</h1>
-                <p>Percetakan Matahari Kisaran hadir sebagai mitra terpercaya Anda dalam mewujudkan semua kebutuhan percetakan dengan kualitas terbaik, harga kompetitif, dan layanan cepat.</p>
+                <h1>Solusi Cetak untuk Semua Kebutuhan Anda</h1>
+               
                 <div class="hero-buttons">
-                    <a href="#order" class="btn-primary"> Order Sekarang</a>
-                    <a href="#services" class="btn-secondary"> Lihat Layanan</a>
+                    <a href="{{ route('register') }}" class="btn-primary"> Daftar Sekarang</a>
                 </div>
                 
                
@@ -975,7 +965,7 @@
             <div class="section-header">
                 <div class="section-subtitle">Layanan Kami</div>
                 <h2 class="section-title">Percetakan Lengkap untuk Semua Kebutuhan</h2>
-                <p class="section-description">Kami menyediakan berbagai layanan percetakan profesional dengan teknologi modern dan tim berpengalaman untuk menghasilkan produk berkualitas tinggi.</p>
+               
             </div>
 
             <div class="services-grid">
@@ -989,7 +979,7 @@
                         <li>Roll Banner & Backdrop</li> 
                         <li>Ukuran Custom</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                   
                 </div>
 
                 <div class="service-card">
@@ -1002,7 +992,7 @@
                         <li>Kalender Duduk</li>
                         <li>Design Custom Gratis</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                    
                 </div>
 
                 <div class="service-card">
@@ -1015,7 +1005,7 @@
                         <li>Amplop & Box Eksklusif</li>
                         <li>Konsultasi Gratis</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                   
                 </div>
 
                 <div class="service-card">
@@ -1028,7 +1018,7 @@
                         <li>Stempel Digital</li>
                         <li>Proses Cepat 1 Hari</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                   
                 </div>
 
                 <div class="service-card">
@@ -1041,7 +1031,7 @@
                         <li>Penjilidan Soft & Hard Cover</li>
                         <li>Laminating</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                   
                 </div>
 
                 <div class="service-card">
@@ -1054,7 +1044,7 @@
                         <li>Gantungan Kunci</li>
                         <li>Mug & Mouse Pad</li>
                     </ul>
-                    <a href="#order" class="service-link">Order Sekarang →</a>
+                 
                 </div>
             </div>
         </div>
@@ -1120,7 +1110,7 @@
 
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <div class="portfolio-image">🖼️</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/gb9BqnQM/4a1ccb75c2bceacea28423ba09e94f2b.jpg" alt="4a1ccb75c2bceacea28423ba09e94f2b" border="0"></div>
                     <div class="portfolio-overlay">
                         <h3>Spanduk Event Grand Opening</h3>
                         <p>Toko Elektronik Jaya - Spanduk Flexi 4x2 meter</p>
@@ -1128,7 +1118,7 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <div class="portfolio-image">💍</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/3mN4G6V8/undagan-pernkikan.jpg" alt="undagan-pernkikan" border="0"></div>
                     <div class="portfolio-overlay">
                         <h3>Undangan Pernikahan Premium</h3>
                         <p>Budi & Sari - Hardcover Gold Foil 500 pcs</p>
@@ -1136,23 +1126,23 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <div class="portfolio-image">📅</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/mCy3wgGD/0-707353237-Percetakan-Cetak-Kalender-Meja-Semarang.jpg" alt="0-707353237-Percetakan-Cetak-Kalender-Meja-Semarang" border="0"></div>
                     <div class="portfolio-overlay">
-                        <h3>Kalender Perusahaan 2026</h3>
+                        <h3>Kalender Perusahaan 2025</h3>
                         <p>PT. Sejahtera Abadi - Kalender Dinding 1000 pcs</p>
                     </div>
                 </div>
 
                 <div class="portfolio-item">
-                    <div class="portfolio-image">👕</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/Q72wLVjB/ceb0305d-e0ee-4d3f-b2f0-6a0f6c74e1d0.jpg" alt="ceb0305d-e0ee-4d3f-b2f0-6a0f6c74e1d0" border="0"></div>
                     <div class="portfolio-overlay">
-                        <h3>Kaos Seragam Event</h3>
-                        <p>Festival Budaya Kisaran - 500 Kaos DTF Full Color</p>
+                        <h3>Cetak Alquran</h3>
+                        <p>PT. Darul Quran - 1000 Alquran Hardcover</p>
                     </div>
                 </div>
 
                 <div class="portfolio-item">
-                    <div class="portfolio-image">📋</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/1Y4bzYNd/11.jpg" alt="11" border="0"></div>
                     <div class="portfolio-overlay">
                         <h3>Stempel Perusahaan</h3>
                         <p>CV. Maju Jaya - Stempel Flash & Warna</p>
@@ -1160,74 +1150,18 @@
                 </div>
 
                 <div class="portfolio-item">
-                    <div class="portfolio-image">🎨</div>
+                    <div class="portfolio-image"><img width="100%" height="100%" src="https://i.ibb.co.com/NdZTnSPG/5c62f3a7-ea0f-41db-8cce-45d550f65549.jpg" alt="5c62f3a7-ea0f-41db-8cce-45d550f65549" border="0"></div>
                     <div class="portfolio-overlay">
-                        <h3>Desain Logo & Branding</h3>
-                        <p>Kafe Santai - Logo + Business Card + Menu</p>
+                        <h3>Sticker</h3>
+                        <p>PT. Makmur Jaya - Sticker Custom 1000 pcs</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-container">
-            <div class="section-header">
-                <div class="section-subtitle">Testimoni</div>
-                <h2 class="section-title">Apa Kata Pelanggan Kami</h2>
-                <p class="section-description">Kepuasan pelanggan adalah prioritas utama kami. Berikut beberapa testimoni dari pelanggan setia kami.</p>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="quote-icon">"</div>
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">Pelayanan sangat memuaskan! Spanduk untuk grand opening toko saya dicetak dengan kualitas bagus dan selesai tepat waktu. Harga juga sangat kompetitif. Pasti order lagi!</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">BS</div>
-                            <div class="author-info">
-                                <h4>Budi Santoso</h4>
-                                <p>Pemilik Toko Elektronik Jaya</p>
-                            </div>
-                        </div>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="quote-icon">"</div>
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">Undangan pernikahan kami dicetak di Percetakan Matahari. Hasilnya luar biasa! Desainnya elegant dan kualitas cetaknya premium. Banyak tamu yang memuji undangannya. Terima kasih!</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SA</div>
-                            <div class="author-info">
-                                <h4>Siti Aminah</h4>
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="quote-icon">"</div>
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">Sudah langganan di sini untuk cetak kalender perusahaan tiap tahun. Prosesnya mudah, hasil bagus, dan harga terjangkau. Tim nya juga responsif dan profesional.</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">AW</div>
-                            <div class="author-info">
-                                <h4>Ahmad Wijaya</h4>
-                                <p>HRD PT. Sejahtera Abadi</p>
-                            </div>
-                        </div>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
+{{-- 
     <!-- CTA Section -->
     <section class="cta" id="order">
         <div class="cta-content">
@@ -1238,7 +1172,7 @@
                 <a href="https://wa.me/6281234567890" class="btn-secondary" style="background: rgba(255,255,255,0.2); border-color: white; color: white;"> Chat WhatsApp</a>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Footer -->
     <footer class="footer" id="contact">
@@ -1267,8 +1201,7 @@
                     <ul>
                         <li><a href="#home">Tentang Kami</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#testimonials">Testimoni</a></li>
-                        <li><a href="#order">Cara Order</a></li>
+                        {{-- <li><a href="#order">Cara Order</a></li> --}}
                        
                     </ul>
                 </div>
@@ -1295,7 +1228,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2026 Percetakan Matahari Kisaran. All Rights Reserved. Made with ❤️ in Kisaran</p>
+                <p>&copy; 2026 Percetakan Matahari Kisaran. All Rights Reserved. Made with Rizky </p>
             </div>
         </div>
     </footer>

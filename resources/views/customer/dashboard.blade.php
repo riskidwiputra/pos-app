@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Percetakan Matahari</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<style>
+    .warnacard {
+      background: linear-gradient(195deg, #0436a1, #17458f);
+    }
+</style>
 <body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
     {{-- Navbar --}}
-    <nav class="bg-white shadow-lg border-b-4 border-indigo-500">
+    <nav class="bg-white shadow-lg ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 {{-- Logo & Brand --}}
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <span class="text-white font-bold text-xl">PM</span>
-                    </div>
+                    <img src="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg" width="30px" height="30px" alt="Logo jpg" border="0">
                     <div>
                         <h1 class="text-lg font-bold text-gray-900">Percetakan Matahari</h1>
                         <p class="text-xs text-gray-500">Kisaran - Sumatera Utara</p>
@@ -26,7 +30,7 @@
                 <div class="flex items-center gap-4">
                     <div class="hidden sm:block text-right">
                         <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
-                        <p class="text-xs text-gray-500">{{ ucfirst(Auth::user()->customer_type ?? 'Personal') }}</p>
+                       
                     </div>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -45,11 +49,10 @@
     {{-- Main Content --}}
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {{-- Welcome Card --}}
-        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl shadow-2xl overflow-hidden mb-8">
+        <div class="warnacard rounded-3xl shadow-2xl overflow-hidden mb-8">
             <div class="relative p-8 lg:p-12">
                 {{-- Decorative Elements --}}
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
-                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full -ml-24 -mb-24"></div>
+               
                 
                 {{-- Content --}}
                 <div class="relative z-10">
@@ -62,10 +65,8 @@
                     
                     <p class="text-lg lg:text-xl text-white/90 leading-relaxed mb-6">
                         Terima kasih telah mendaftar di <span class="font-bold">Percetakan Matahari Kisaran</span>. 
-                        Kami sangat senang Anda bergabung dengan keluarga besar kami!
-                    </p>
-
-                    
+                   
+                    </p> 
                 </div>
             </div>
         </div>
@@ -136,7 +137,7 @@
         <div class="mt-8 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-6 border border-gray-200">
             <div class="text-center">
                 <h3 class="text-lg font-bold text-gray-900 mb-2">Butuh Bantuan?</h3>
-                <p class="text-gray-600 mb-4">Tim kami siap membantu Anda</p>
+                
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="tel:08123456789" class="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -154,7 +155,8 @@
     <footer class="mt-12 py-6 border-t">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-sm text-gray-500">
-                © {{ date('Y') }} Percetakan Matahari Kisaran. All rights reserved.
+                &copy; 2026 Percetakan Matahari Kisaran. All Rights Reserved. Made with Rizky 
+            
             </p>
         </div>
     </footer>

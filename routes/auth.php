@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginCustomerController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -20,6 +21,8 @@ Route::middleware('guest')->group(function () {
 
     Route::get('sb-admin/login', [AuthenticatedSessionController::class, 'create'])
                 ->name('sb-admin.login');
+    
+    Route::post('loginAdmin', [LoginAdminController::class, 'store'])->name('loginAdmin');
 
     Route::post('login', [LoginCustomerController::class, 'store']);
 

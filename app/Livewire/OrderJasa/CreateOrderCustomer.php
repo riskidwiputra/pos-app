@@ -18,7 +18,7 @@ use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Calculation\Web\Service;
 
 #[Layout('layouts.app')]
-#[Title('Tambah Order Jasa')]
+#[Title('Tambah Pesanan Saya')]
 class CreateOrderCustomer extends Component
 {
     use WithFileUploads;
@@ -129,7 +129,7 @@ class CreateOrderCustomer extends Component
             ]);
 
             session()->flash('success', 'Order jasa berhasil ditambahkan');
-            return redirect()->route('order-jasa.index');
+            return redirect()->route('order-jasa.riwayat-pesanan');
 
         } catch (\Exception $e) {
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());

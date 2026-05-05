@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Customer - Percetakan Matahari</title>
+    <title>Login - Percetakan Matahari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg">
     <style>
         * {
             margin: 0;
@@ -15,8 +16,8 @@
         :root {
             --primary: #ff6b35;
             --primary-dark: #e55a2b;
-            --secondary: #004e89;
-            --secondary-dark: #003d6b;
+            --secondary: #1F2937;
+            --secondary-dark: #111827;
             --accent: #ffd23f;
             --success: #4caf50;
             --error: #f44336;
@@ -24,6 +25,7 @@
             --text-light: #666;
             --bg-light: #f8f9fa;
             --white: #ffffff;
+            --biru: #004e89;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
         }
@@ -32,7 +34,8 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: linear-gradient(135deg, #004e89 0%, #1a759f 100%);
+            /* background: linear-gradient(135deg, #004e89 0%, #1a759f 100%); */
+                background-color: #f5f5f9;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -53,7 +56,7 @@
 
         /* Left Side - Branding */
         .auth-brand {
-            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            background: linear-gradient(195deg, #0d1423, #17458f);
             padding: 60px 40px;
             color: var(--white);
             display: flex;
@@ -63,7 +66,7 @@
             overflow: hidden;
         }
 
-        .auth-brand::before {
+        /* .auth-brand::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -72,9 +75,9 @@
             height: 400px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-        }
+        } */
 
-        .auth-brand::after {
+        /* .auth-brand::after {
             content: '';
             position: absolute;
             bottom: -30%;
@@ -83,7 +86,7 @@
             height: 350px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-        }
+        } */
 
         .brand-content {
             position: relative;
@@ -196,7 +199,7 @@
         .form-header h1 {
             font-size: 28px;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--biru);
             margin-bottom: 10px;
         }
 
@@ -304,7 +307,7 @@
         .form-submit {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
             color: var(--white);
             border: none;
             border-radius: 12px;
@@ -457,15 +460,18 @@
             
             <div class="brand-content">
                 <div class="logo-container">
-                    <div class="logo-icon">PM</div>
-                    <div class="logo-text">
-                        <span class="brand">Percetakan Matahari</span>
-                        <span class="tagline">Kisaran - Sumatera Utara</span>
-                    </div>
+                     @php
+                    $path = public_path('img/logo/Logo-remove.png');
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                @endphp
+                <img src="{{ $image }}" width="370">
+                   
                 </div>
 
                 <h2>Selamat Datang Kembali!</h2>
-                <p>Login untuk melanjutkan pesanan Anda dan nikmati berbagai layanan percetakan profesional kami.</p>
+                <p>Login untuk melanjutkan pesanan Anda dan nikmati berbagai layanan percetakan.</p>
 
                 
             </div>
@@ -474,6 +480,7 @@
         <!-- Right Side - Login Form -->
         <div class="auth-form-container">
             <div class="form-header">
+                 
                 <h1>Masuk ke Akun Anda</h1>
                 <p>Masukkan email dan password untuk login</p>
             </div>
@@ -481,7 +488,7 @@
             <!-- Error Alert -->
             @if ($errors->any())
                 <div class="alert alert-error">
-                    <strong>❌ Login Gagal!</strong><br>
+                    <strong> Login Gagal!</strong><br>
                     {{ $errors->first() }}
                 </div>
             @endif
@@ -504,7 +511,7 @@
                         autofocus
                     >
                     @error('email')
-                        <span class="error-message">❌ {{ $message }}</span>
+                        <span class="error-message"> {{ $message }}</span>
                     @enderror
                 </div>
 
@@ -522,10 +529,10 @@
                             placeholder="Masukkan password"
                             required
                         >
-                        <span class="input-icon" onclick="togglePassword()">👁️</span>
+                        {{-- <span class="input-icon" onclick="togglePassword()">👁️</span> --}}
                     </div>
                     @error('password')
-                        <span class="error-message">❌ {{ $message }}</span>
+                        <span class="error-message"> {{ $message }}</span>
                     @enderror
                 </div>
 

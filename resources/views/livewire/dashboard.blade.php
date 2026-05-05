@@ -8,7 +8,7 @@
                     <h1 class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                         Dashboard
                     </h1>
-                    <p class="text-sm text-gray-500 mt-1">Selamat datang, {{ Auth::user()->fullname }}</p>
+                    <p class="text-sm text-gray-500 mt-1">Selamat datang, {{ Auth::user()->name }}</p>
                 </div>
                 <div class="flex gap-2">
                     <select 
@@ -26,9 +26,7 @@
         {{-- Summary Cards - Penjualan --}}
         <div class="mb-6">
             <h2 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                </svg>
+               
                 Ringkasan Penjualan
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -91,9 +89,7 @@
             {{-- Stok Produk --}}
             <div>
                 <h2 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                    </svg>
+                    
                     Status Stok Produk
                 </h2>
                 <div class="grid grid-cols-2 gap-3">
@@ -119,113 +115,7 @@
            
         </div>
 
-        {{-- Charts --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            {{-- Grafik Penjualan 7 Hari --}}
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5">
-                <h3 class="text-base font-bold text-gray-900 mb-4">Penjualan 7 Hari Terakhir</h3>
-                <div class="h-64" 
-                    x-data="{ 
-                        chart: null,
-                        init() {
-                            const ctx = this.$refs.canvas.getContext('2d');
-                            this.chart = new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: @js($this->grafikPenjualanMingguan()['labels']),
-                                    datasets: [{
-                                        label: 'Pendapatan (Rp)',
-                                        data: @js($this->grafikPenjualanMingguan()['values']),
-                                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                                        borderColor: 'rgb(59, 130, 246)',
-                                        borderWidth: 3,
-                                        fill: true,
-                                        tension: 0.4,
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: { display: false },
-                                        tooltip: {
-                                            callbacks: {
-                                                label: function(context) {
-                                                    return 'Rp ' + context.parsed.y.toLocaleString('id-ID');
-                                                }
-                                            }
-                                        }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                callback: function(value) {
-                                                    return 'Rp ' + (value / 1000) + 'k';
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }">
-                    <canvas x-ref="canvas"></canvas>
-                </div>
-            </div>
-
-            {{-- Grafik Penjualan Bulanan --}}
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-5">
-                <h3 class="text-base font-bold text-gray-900 mb-4">Penjualan Per Bulan (Tahun Ini)</h3>
-                <div class="h-64" 
-                    x-data="{ 
-                        chart: null,
-                        init() {
-                            const ctx = this.$refs.canvas.getContext('2d');
-                            this.chart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: @js($this->grafikPenjualanBulanan()['labels']),
-                                    datasets: [{
-                                        label: 'Pendapatan (Rp)',
-                                        data: @js($this->grafikPenjualanBulanan()['values']),
-                                        backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                                        borderColor: 'rgb(16, 185, 129)',
-                                        borderWidth: 2,
-                                        borderRadius: 8,
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: { display: false },
-                                        tooltip: {
-                                            callbacks: {
-                                                label: function(context) {
-                                                    return 'Rp ' + context.parsed.y.toLocaleString('id-ID');
-                                                }
-                                            }
-                                        }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                callback: function(value) {
-                                                    return 'Rp ' + (value / 1000000) + 'jt';
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }">
-                    <canvas x-ref="canvas"></canvas>
-                </div>
-            </div>
-        </div>
+      
 
         {{-- Tables --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -233,9 +123,7 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div class="p-5 border-b">
                     <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-                        </svg>
+                       
                         Top 5 Produk Terlaris
                     </h3>
                 </div>
@@ -282,9 +170,7 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div class="p-5 border-b">
                     <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        
                         Transaksi Terbaru
                     </h3>
                 </div>
@@ -329,9 +215,7 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div class="p-5 border-b">
                     <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                        </svg>
+                      
                         Stok Menipis
                     </h3>
                 </div>
@@ -371,9 +255,7 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div class="p-5 border-b">
                     <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
+                       
                         Order Jasa Terbaru
                     </h3>
                 </div>

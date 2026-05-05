@@ -11,6 +11,7 @@
 
         :root {
             --primary: #ff6b35;
+            --biru : #004e89;
             --primary-dark: #e55a2b;
             --secondary: #004e89;
             --secondary-dark: #003d6b;
@@ -29,7 +30,7 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: linear-gradient(135deg, #004e89 0%, #1a759f 100%);
+           background-color: #f5f5f9;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -41,7 +42,7 @@
             width: 100%;
             max-width: 900px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             background: var(--white);
             border-radius: 30px;
             overflow: hidden;
@@ -176,13 +177,13 @@
 
         .auth-form-container {
             padding: 60px 50px;
-            overflow-y: auto;
+            
             max-height: 90vh;
         }
 
         .form-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .form-header h1 {
@@ -358,7 +359,8 @@
         .form-submit {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            /* background: linear-gradient(135deg, var(--biru), var(--primary-dark)); */
+            background-color : var(--biru);
             color: var(--white);
             border: none;
             border-radius: 12px;
@@ -484,32 +486,13 @@
 
     <div class="auth-container">
         <!-- Left Side - Branding -->
-        <div class="auth-brand">
-            <a href="/" class="back-home">
-                ← Kembali ke Beranda
-            </a>
-            
-            <div class="brand-content">
-                <div class="logo-container">
-                    <div class="logo-icon">PM</div>
-                    <div class="logo-text">
-                        <span class="brand">Percetakan Matahari</span>
-                        <span class="tagline">Kisaran - Sumatera Utara</span>
-                    </div>
-                </div>
-
-                <h2>Bergabunglah dengan Kami!</h2>
-                <p>Daftar sekarang dan nikmati berbagai keuntungan menjadi member Percetakan Matahari.</p>
-
-              
-            </div>
-        </div>
+        
 
         <!-- Right Side - Register Form -->
         <div class="auth-form-container">
             <div class="form-header">
                 <h1>Buat Akun Baru</h1>
-                <p>Isi formulir di bawah untuk mendaftar</p>
+
             </div>
 
             <form wire:submit="register">
@@ -582,10 +565,10 @@
                             wire:model.live="password"
                             placeholder="Minimal 8 karakter"
                         >
-                        <span class="input-icon" @click="show = !show" x-text="show ? '🙈' : '👁️'"></span>
+                        {{-- <span class="input-icon" @click="show = !show" x-text="show ? '🙈' : '👁️'"></span> --}}
                     </div>
                     @error('password')
-                        <span class="error-message">❌ {{ $message }}</span>
+                        <span class="error-message"> {{ $message }}</span>
                     @enderror
 
                     <!-- Password Strength Indicator -->
@@ -632,7 +615,7 @@
                             wire:model.live="confirmPassword"
                             placeholder="Ulangi password"
                         >
-                        <span class="input-icon" @click="show = !show" x-text="show ? '🙈' : '👁️'"></span>
+                        {{-- <span class="input-icon" @click="show = !show" x-text="show ? '🙈' : '👁️'"></span> --}}
                     </div>
                     @error('confirmPassword')
                         <span class="error-message">❌ {{ $message }}</span>
@@ -664,7 +647,7 @@
                 <!-- Submit Button -->
                 <button type="submit" class="form-submit" wire:loading.attr="disabled">
                     <span wire:loading.remove> Daftar Sekarang</span>
-                    <span wire:loading>⏳ Memproses...</span>
+                    <span wire:loading> Memproses...</span>
                 </button>
             </form>
 

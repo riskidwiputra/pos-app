@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.app')]
-#[Title('Kelola Order Jasa')]
+#[Title('Riwayat Pesanan Jasa')]
 class IndexOrderCustomer     extends Component
 {
     use WithPagination;
@@ -33,6 +33,7 @@ class IndexOrderCustomer     extends Component
     public function orders()
     {
         $userId = Auth::id();
+       
         return ServiceOrder::with(['user'])
             ->when($this->pencarian, function($query) {
                 $query->where(function($q) {

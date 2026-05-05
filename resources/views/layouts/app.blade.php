@@ -13,7 +13,8 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <!-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -27,26 +28,18 @@
 </head>
 <body class="font-sans antialiased bg-gray-50">
     <div class="min-h-screen">
-        {{-- Sidebar Navigation --}}
         <x-sidebar-navigation />
         
-        {{-- Main Content Area --}} 
-        {{-- Main Content Area --}} 
-<div class="lg:ml-[240px] min-h-screen">
-
-
-    <div class="sticky top-0 z-20 bg-white border-b border-gray-200 px-6 h-14 flex items-center justify-between">
+        <div class="lg:ml-[240px] min-h-screen">
+            <div class="sticky top-0 z-20 bg-white border-b border-gray-200 px-6 h-14 flex items-center justify-between">
         
-        {{-- Kiri: Tanggal --}}
-        <p class="text-sm text-gray-400">
-            {{ now()->translatedFormat('l, d F Y') }}
-        </p>
-
-        {{-- Kanan: Notifikasi + Profile --}}
-        <div class="flex items-center gap-3">
+            {{-- Kiri: Tanggal --}}
+            <p class="text-sm text-gray-400">
+                {{ now()->translatedFormat('l, d F Y') }}
+            </p>
+            {{-- Kanan: Notifikasi + Profile --}}
+            <div class="flex items-center gap-3">
             
-           
-
             <div class="w-px h-6 bg-gray-200"></div>
 
             {{-- Profile Dropdown --}}
@@ -95,7 +88,6 @@
         </div>
     </div>
 </div>
-    </div>
     
     @livewireScripts
     @stack('scripts')

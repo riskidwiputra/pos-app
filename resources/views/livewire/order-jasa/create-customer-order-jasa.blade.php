@@ -13,22 +13,24 @@
             <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Tambah Pesanan Baru
             </h1>
-            <p class="text-sm text-gray-500 mt-1">Buat pesanan jasa percetakan baru </p>
+            
         </div>
 
         <form wire:submit.prevent="save">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 
                 {{-- Left Side - Form --}}
-                <div class="lg:col-span-6 space-y-12">
+                <div class="lg:col-span-6 space-y-">
 
-                    {{-- Data Informasi --}}
+
+                    {{-- Detail Order --}}
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
                         <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                            <h2 class="text-lg font-semibold text-gray-900">Data Informasi</h2>
+                            <h2 class="text-lg font-semibold text-gray-900">Detail Order Jasa</h2>
                         </div>
                         
                         <div class="p-6 space-y-4">
+                            
                             <div>
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
                                     Nama Pemesan <span class="text-red-500">*</span>
@@ -75,38 +77,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    {{-- Detail Order --}}
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                        <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                            <h2 class="text-lg font-semibold text-gray-900">Detail Order Jasa</h2>
-                        </div>
-                        
-                        <div class="p-6 space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                        Kategori Jasa <span class="text-red-500">*</span>
-                                    </label>
-                                    <select 
-                                        wire:model.live="category_id"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer @error('category_id') border-red-500 @enderror"
-                                    >
-                                        <option value="">Pilih Kategori</option>
-                                        @foreach($this->kategori as $category)
-                                            <option value="{{ $category->id }}">{{ $category->nama_jasa }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                
-                            </div>
-
                             <div>
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
                                     Judul/Nama Pesanan <span class="text-red-500">*</span>
@@ -153,23 +123,20 @@
                                     @enderror
                                 </div>
 
-                                <div>
+                                 <div>
                                     <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                        Satuan <span class="text-red-500">*</span>
+                                        Kategori Jasa <span class="text-red-500">*</span>
                                     </label>
                                     <select 
-                                        wire:model="unit"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer @error('unit') border-red-500 @enderror"
+                                        wire:model.live="category_id"
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer @error('category_id') border-red-500 @enderror"
                                     >
-                                        <option value="pcs">Pcs</option>
-                                        <option value="lembar">Lembar</option>
-                                        <option value="meter">Meter</option>
-                                        <option value="set">Set</option>
-                                        <option value="box">Box</option>
-                                        <option value="rim">Rim</option>
-                                        <option value="roll">Roll</option>
+                                        <option value="">Pilih Kategori</option>
+                                        @foreach($this->kategori as $category)
+                                            <option value="{{ $category->id }}">{{ $category->nama_jasa }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('unit')
+                                    @error('category_id')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -189,7 +156,7 @@
                                     accept=".pdf,.jpg,.jpeg,.png,.zip,.rar,.ai,.psd,.cdr"
                                     class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 @error('design_file') border-red-500 @enderror"
                                 />
-                                <p class="mt-1 text-xs text-gray-500">Format: PDF, JPG, PNG, ZIP, RAR, AI, PSD, CDR (Max: 10MB)</p>
+                                <p class="mt-1 text-xs text-gray-500">Format: JPG, PNG, ZIP, RAR, PSD, CDR (Max: 10MB)</p>
                                 @error('design_file')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror

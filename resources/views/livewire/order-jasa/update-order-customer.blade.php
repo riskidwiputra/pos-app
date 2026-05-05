@@ -3,7 +3,7 @@
 
         {{-- ── Header ─────────────────────────────────────────────────────────── --}}
         <div class="mb-8">
-            <a href="{{ route('order-jasa.index') }}"
+            <a href="{{ route('order-jasa.riwayat-pesanan') }}"
                class="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold mb-6 group">
                 <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -11,13 +11,13 @@
                 Kembali ke halaman Pesanan
             </a>
 
-            <div class="flex items-start justify-between gap-4">
+            <div class="flex items-start justify-between gap-2">
                 <div>
                     <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        Edit Pesanan
+                        Ubah Pesanan
                     </h1>
-                    <div class="flex items-center gap-3 mt-1">
-                        <p class="text-sm text-gray-500">Perbarui data pesanan jasa percetakan</p>
+                    <div class="flex items-center gap-3 ">
+                        
                         <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full font-mono">
                             {{ $order->order_code }}
                         </span>
@@ -41,19 +41,18 @@
         @endif
 
         <form wire:submit.prevent="save">
-            <div class="space-y-6">
+            <div class="space-y-1">
 
-                {{-- ════════════════════════════════════════════════════════════════
-                     SEKSI 1 — INFORMASI 
-                ════════════════════════════════════════════════════════════════ --}}
+               
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
                     <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                        <h2 class="text-lg font-semibold text-gray-900">Informasi </h2>
+                        <h2 class="text-lg font-semibold text-gray-900">Detail Pesanan</h2>
                     </div>
 
                     <div class="p-6 space-y-4">
 
-                        <div>
+                        {{-- Kategori --}}
+                         <div>
                             <label class="block text-sm font-semibold text-gray-800 mb-2">
                                 Nama  <span class="text-red-500">*</span>
                             </label>
@@ -93,39 +92,7 @@
                                 @enderror
                             </div>
                         </div>
-
-                    </div>
-                </div>
-
-                {{-- ════════════════════════════════════════════════════════════════
-                     SEKSI 2 — DETAIL ORDER
-                ════════════════════════════════════════════════════════════════ --}}
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                    <div class="bg-gradient-to-r from-slate-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                        <h2 class="text-lg font-semibold text-gray-900">Detail Pesanan</h2>
-                    </div>
-
-                    <div class="p-6 space-y-4">
-
-                        {{-- Kategori --}}
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                Kategori Pesanan <span class="text-red-500">*</span>
-                            </label>
-                            <select wire:model.live="category_id"
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer
-                                           @error('category_id') border-red-500 @enderror">
-                                <option value="">Pilih Kategori</option>
-                                @foreach($this->kategori as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->nama_jasa }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-
-                           
-                        </div>
+                       
 
                         {{-- Judul --}}
                         <div>
@@ -170,21 +137,23 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                    Satuan <span class="text-red-500">*</span>
-                                </label>
-                                <select wire:model="unit"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer">
-                                    <option value="pcs">Pcs</option>
-                                    <option value="lembar">Lembar</option>
-                                    <option value="meter">Meter</option>
-                                    <option value="set">Set</option>
-                                    <option value="box">Box</option>
-                                    <option value="rim">Rim</option>
-                                    <option value="roll">Roll</option>
-                                    <option value="unit">Unit</option>
-                                </select>
-                            </div>
+                            <label class="block text-sm font-semibold text-gray-800 mb-2">
+                                Kategori Pesanan <span class="text-red-500">*</span>
+                            </label>
+                            <select wire:model.live="category_id"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer
+                                           @error('category_id') border-red-500 @enderror">
+                                <option value="">Pilih Kategori</option>
+                                @foreach($this->kategori as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->nama_jasa }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+
+                           
+                        </div>
                         </div>
 
                       
@@ -263,13 +232,11 @@
                                    text-white font-semibold rounded-xl shadow-lg hover:shadow-xl
                                    transition-all duration-200 transform hover:scale-[1.01]">
                         <span class="flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
+                           
                             Simpan Perubahan
                         </span>
                     </button>
-                    <a href="{{ route('order-jasa.index') }}"
+                    <a href="{{ route('order-jasa.riwayat-pesanan') }}"
                        class="block w-full px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition-all text-center">
                         Batal
                     </a>
