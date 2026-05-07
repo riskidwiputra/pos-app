@@ -22,20 +22,23 @@ class IndexSupplier extends Component
     public $supplierId = null;
     public $message = '';
 
-    protected $updatesQueryString = ['search', 'perPage'];
-    protected $paginationTheme = 'tailwind'; 
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'perPage' => ['except' => 10],
+    ];
 
     #[Computed]
-    public function suppliers() 
+    public function suppliers()
     {
         return Supplier::where(function($query) {
             $query->where('nama_supplier', 'like', '%' . $this->search . '%')
                   ->orWhere('no_telepon', 'like', '%' . $this->search . '%');
-        })->latest()->paginate($this->perPage);
+        })->latest('created_at')->paginate($this->perPage);
     }
 
-
-    public function updatingSearch() { $this->resetPage(); }
+    public function updatingSearch() { 
+    $this->resetPage(); 
+    }
     public function updatingPerPage() { $this->resetPage(); }
 
 

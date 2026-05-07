@@ -19,7 +19,9 @@
         <div class="mb-6 animate-in slide-in-from-top fade-in">
             <div class="flex items-center justify-between gap-4 px-6 py-4 bg-gradient-to-r from-emerald-50 to-green-50 border-l-4 border-emerald-500 rounded-lg shadow-md backdrop-blur-sm">
                 <p class="text-sm font-medium text-emerald-800">{{ $message }}</p>
-                <button wire:click="$set('message','')" class="text-emerald-600 hover:text-emerald-800">✖</button>
+                <button wire:click="$set('message','')" class="text-emerald-600 hover:text-emerald-800"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg></button>
             </div>
         </div>
         @endif
@@ -60,10 +62,10 @@
                 </button>
             </div>
 
-            <!-- Progress bar animation -->
+            {{-- <!-- Progress bar animation -->
             <div class="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-emerald-400 to-green-500 animate-in" 
                  style="animation: slideOut 4s ease-in-out forwards;">
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -210,7 +212,7 @@
                                 <td colspan="6" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
                                         <!-- Icon Empty State -->
-                                        <div class="relative">
+                                        {{-- <div class="relative">
                                             <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                                                 <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
@@ -219,7 +221,7 @@
                                             <!-- Decorative circles -->
                                             <div class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-blue-100 animate-ping"></div>
                                             <div class="absolute -bottom-1 -left-1 w-4 h-4 rounded-full bg-indigo-100"></div>
-                                        </div>
+                                        </div> --}}
                                         
                                         <!-- Text -->
                                         <div class="space-y-2">

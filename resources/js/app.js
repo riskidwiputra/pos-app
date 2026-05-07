@@ -5,8 +5,8 @@ import './template/menu.js';
 import './template/main.js';
 import './template/apexcharts.js';
 
-import Alpine from 'alpinejs';
+// import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
-Alpine.start();
+// Alpine.start();

@@ -47,11 +47,11 @@
                         Nama unit <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <input 
                             type="text" 
                             wire:model="nama_unit" 
@@ -71,18 +71,18 @@
                 
 
                 <!-- Grid: Telepon & Email -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-12">
                     <!-- No Telepon -->
                     <div class="group">
                         <label class="block text-sm font-semibold text-gray-800 mb-2">
                             Singkatan <span class="text-red-500 font-bold">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                            </div>
+                            </div> --}}
                             <input 
                                 type="text" 
                                 wire:model="singkatan" 
@@ -117,13 +117,16 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
+                        type="submit" wire:loading.attr="disabled"
                         class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Simpan Perubahan
+                        
+                        <span wire:loading.remove>
+                            Simpan Perubahan
+                        </span>
+                        <span wire:loading>
+                            <i class='bx bx-time'></i>  Memproses...
+                        </span>
                     </button>
                 </div>
             </form>

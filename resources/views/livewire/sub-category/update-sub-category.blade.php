@@ -35,11 +35,11 @@
                         Kategori <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <select 
                             wire:model="category_id"
                             class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 cursor-pointer @error('category_id') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
@@ -69,11 +69,11 @@
                         Nama Sub Kategori <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <input 
                             type="text" 
                             wire:model="nama_subkategori" 
@@ -98,11 +98,11 @@
                         Deskripsi
                     </label>
                     <div class="relative">
-                        <div class="absolute top-4 left-0 pl-4 pointer-events-none">
+                        {{-- <div class="absolute top-4 left-0 pl-4 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <textarea 
                             wire:model="deskripsi" 
                             rows="4"

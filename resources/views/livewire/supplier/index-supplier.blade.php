@@ -19,7 +19,10 @@
         <div class="mb-6 animate-in slide-in-from-top fade-in">
             <div class="flex items-center justify-between gap-4 px-4 py-4 bg-gradient-to-r from-emerald-50 to-green-50 border-l-4 border-emerald-500 rounded-lg shadow-md backdrop-blur-sm">
                 <p class="text-sm font-medium text-emerald-800">{{ $message }}</p>
-                <button wire:click="$set('message','')" class="text-emerald-600 hover:text-emerald-800">✖</button>
+                <button wire:click="$set('message','')" class="text-emerald-600 hover:text-emerald-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg></button>
+                
             </div>
         </div>
         @endif
@@ -61,9 +64,9 @@
             </div>
 
             <!-- Progress bar animation -->
-            <div class="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-emerald-400 to-green-500 animate-in" 
+            {{-- <div class="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-emerald-400 to-green-500 animate-in" 
                  style="animation: slideOut 4s ease-in-out forwards;">
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -223,11 +226,7 @@
                                 <td colspan="6" class="px-3 py-16 text-center">
                                     <div class="flex flex-col items-center justify-center gap-4">
                                         <!-- Icon Empty State -->
-                                        <div class="relative">
-                                            
-                                            <div class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-blue-100 animate-ping"></div>
-                                            <div class="absolute -bottom-1 -left-1 w-4 h-4 rounded-full bg-indigo-100"></div>
-                                        </div>
+                                      
                                         
                                         <!-- Text -->
                                         <div class="space-y-2">

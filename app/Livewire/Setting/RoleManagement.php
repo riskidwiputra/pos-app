@@ -120,6 +120,7 @@ class RoleManagement extends Component
         $this->showDeleteModal = false;
         $this->deleteId = null;
     }
+    
 
     private function resetFields()
     {

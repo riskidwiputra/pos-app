@@ -31,11 +31,11 @@
                         Nama Kategori <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <input 
                             type="text" 
                             wire:model="nama_kategori" 
@@ -59,11 +59,11 @@
                         Deskripsi
                     </label>
                     <div class="relative">
-                        <div class="absolute top-4 left-0 pl-4 pointer-events-none">
+                        {{-- <div class="absolute top-4 left-0 pl-4 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <textarea 
                             wire:model="deskripsi" 
                             rows="4"
@@ -95,13 +95,16 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
+                        type="submit"  wire:loading.attr="disabled"
                         class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Perbarui Kategori
+                        <span wire:loading.remove>
+                            + Simpan Perubahan
+                        </span>
+                        <span wire:loading>
+                            
+                             <i class='bx bx-time'></i>  Memproses...
+                        </span>
                     </button>
                 </div>
             </form>

@@ -10,15 +10,42 @@
 
         {{-- Flash Message --}}
         @if (session()->has('success'))
-            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-lg">
-                <p class="text-green-800">✓ {{ session('success') }}</p>
+             <div class="mb-6 animate-in slide-in-from-top fade-in duration-500">
+            <div class="group relative overflow-hidden rounded-xl backdrop-blur-md bg-gradient-to-r from-emerald-50 via-green-50 to-emerald-50 border border-emerald-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400/20 via-green-300/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative px-6 py-4 flex items-start gap-4">
+                    <div class="flex-shrink-0 relative">
+                        <div class="absolute inset-0 bg-emerald-400 rounded-full blur-md opacity-30 animate-pulse"></div>
+                        <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <h3 class="text-sm font-bold text-emerald-900 mb-1">Berhasil!</h3>
+                        <p class="text-sm text-emerald-800/80 leading-relaxed">{{ session('message') }}</p>
+                    </div>
+                    <button wire:click="$set('message','')" class="flex-shrink-0 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-200/50 rounded-lg p-2 transition-all duration-200 hover:scale-110">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
+        </div>
         @endif
 
         @if (session()->has('error'))
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-lg">
-                <p class="text-red-800">✗ {{ session('error') }}</p>
+            
+             <div class="mb-6 animate-in slide-in-from-top fade-in">
+            <div class="flex items-center justify-between gap-4 px-6 py-4 bg-gradient-to-r from-red-50 to-pink-50 border-l-4 border-red-500 rounded-lg shadow-md backdrop-blur-sm">
+                <p class="text-sm font-medium text-red-800">{{ session('error') }}</p>
+                <button wire:click="$set('message','')" class="text-red-600 hover:text-red-800"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg></button>
             </div>
+        </div>
         @endif
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">

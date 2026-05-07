@@ -39,11 +39,11 @@
                         Nama Supplier <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <input 
                             type="text" 
                             wire:model="nama_supplier" 
@@ -67,12 +67,12 @@
                         Alamat <span class="text-red-500 font-bold">*</span>
                     </label>
                     <div class="relative">
-                        <div class="absolute top-4 left-0 pl-4 pointer-events-none">
+                        {{-- <div class="absolute top-4 left-0 pl-4 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                        </div>
+                        </div> --}}
                         <textarea 
                             wire:model="alamat" 
                             rows="4"
@@ -98,11 +98,11 @@
                             No Telepon <span class="text-red-500 font-bold">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v2M3 5v12a2 2 0 002 2h14a2 2 0 002-2V5m-5 8a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                            </div>
+                            </div> --}}
                             <input 
                                 type="number" 
                                 wire:model="no_telepon" 
@@ -126,11 +126,11 @@
                             Email
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            {{-- <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
-                            </div>
+                            </div> --}}
                             <input 
                                 type="email" 
                                 wire:model="email" 
@@ -180,7 +180,7 @@
                         </span>
                         <span wire:loading>
                             
-                            ⏳ Memproses...
+                            <i class='bx bx-time'></i> Memproses...
                         </span>
                     </button>
                      
