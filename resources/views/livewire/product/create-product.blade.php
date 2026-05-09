@@ -258,13 +258,16 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
+                        type="submit" wire:loading.attr="disabled"
                         class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Simpan Produk
+                        <span wire:loading.remove>
+                            + Simpan Produk
+                        </span>
+                        <span wire:loading>
+                            
+                            <i class='bx bx-time'></i> Memproses...
+                        </span>
                     </button>
                 </div>
             </form>

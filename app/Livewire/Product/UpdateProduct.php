@@ -42,7 +42,7 @@ class UpdateProduct extends Component
         'harga_jual' => 'required|numeric|min:0',
         'stok_minimum' => 'required|integer|min:0',
         'gambar_barang' => 'nullable|image|max:2048',
-        'status_product' => 'required|in:Tersedia,Tidak Tersedia',
+        'status_product' => 'required|in:Tersedia,Tidak-Tersedia',
     ];
 
     protected $messages = [

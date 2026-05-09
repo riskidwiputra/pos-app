@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('posisi');
             $table->string('tanggal_masuk');
-            $table->decimal('gaji', 15, 2);
+            $table->integer('gaji');
             $table->enum('status_pekerjaan', ['Aktif', 'Tidak Aktif', 'Cuti'])->default('Aktif');
             $table->softDeletes();
             $table->timestamps();

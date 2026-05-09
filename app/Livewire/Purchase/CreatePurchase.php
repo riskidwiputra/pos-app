@@ -30,6 +30,7 @@ class CreatePurchase extends Component
     // Calculated
     public $total_harga = 0;
     public $sisa_tagihan = 0;
+    public $kembalian = 0;
     public $status_pembayaran = 'Belum Lunas';
 
     protected $rules = [
@@ -106,25 +107,29 @@ class CreatePurchase extends Component
             }
         }
         
-        $this->sisa_tagihan = (int) $this->total_harga - (int) $this->jumlah_dibayar;
+        
         
         if ($this->jumlah_dibayar >= $this->total_harga) {
             $this->status_pembayaran = 'Lunas';
+            $this->sisa_tagihan = 0;
+            $this->kembalian = (int) $this->jumlah_dibayar - (int) $this->total_harga;
         } else {
+            $this->sisa_tagihan = (int) $this->total_harga - (int) $this->jumlah_dibayar;
             $this->status_pembayaran = 'Belum Lunas';
         }
     }
 
-    public function generatePurchaseCode()
+   public function generatePurchaseCode(): string
     {
         $date = Carbon::now()->format('Ymd');
-        $lastPurchase = Purchase::whereDate('created_at', Carbon::today())
-                                ->orderBy('id', 'desc')
-                                ->first();
         
-        $sequence = $lastPurchase ? intval(substr($lastPurchase->purchase_code, -3)) + 1 : 1;
-        
-        return 'PO-' . $date . '-' . str_pad($sequence, 3, '0', STR_PAD_LEFT);
+        do {
+            $random = str_pad(rand(10000, 99999), 5, '0', STR_PAD_LEFT);
+            $code = 'PO-' . $date . '-' . $random;
+            $exists = Purchase::where('purchase_code', $code)->exists();
+        } while ($exists);
+
+        return $code;
     }
 
     public function store()

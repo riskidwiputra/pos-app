@@ -25,6 +25,6 @@ class Employee extends Model
     protected $casts = [
         'tanggal_lahir' => 'date',
         'tanggal_masuk' => 'date',
-        'gaji' => 'decimal:2',
+        'gaji' => 'integer',
     ];
 }

@@ -243,17 +243,7 @@
                                     </span>
                                 </div>
                                 
-                                <!-- Progress Bar -->
-                                @php
-                                    $percentage = $purchase->total_harga > 0 ? ($purchase->jumlah_dibayar / $purchase->total_harga) * 100 : 0;
-                                @endphp
-                                <div class="mt-3">
-                                    <div class="flex justify-between text-xs text-gray-500 mb-1">
-                                        <span>Progress Pembayaran</span>
-                                        <span class="font-semibold">{{ number_format($percentage, 1) }}%</span>
-                                    </div>
-                                    
-                                </div>
+                                
                                 
                                 <div class="pt-3 flex justify-between items-center">
                                     <span class="text-sm font-bold text-gray-700">Sisa Tagihan</span>

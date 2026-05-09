@@ -12,19 +12,24 @@ use Livewire\Attributes\Computed;
 #[Title('Kelola Hak Akses Role')]
 class ManageRolePermissions extends Component
 {
-    public $selectedRoleId = null;
-    public $selectedRole = null;
-    public $rolePermissions = [];
+    public ?int $selectedRoleId = null;
+    public array $rolePermissions = [];
+    public ?string $flashSuccess = null;
+    public ?string $flashError = null;
 
     #[Computed]
     public function roles()
     {
-        // Hanya tampilkan admin dan karyawan (level 1)
-        // Super Admin dan Customer tidak bisa di-edit
         return Role::where('level', 1)
-            ->where('level', '!=', 0)
             ->orderBy('name')
             ->get();
+    }
+
+    #[Computed]
+    public function selectedRole()
+    {
+        if (!$this->selectedRoleId) return null;
+        return Role::find($this->selectedRoleId);
     }
 
     #[Computed]
@@ -38,25 +43,46 @@ class ManageRolePermissions extends Component
             ->get();
     }
 
-    public function selectRole($roleId)
+    public function selectRole(int $roleId): void
     {
         $this->selectedRoleId = $roleId;
-        $this->selectedRole = Role::with('permissions')->find($roleId);
-        $this->rolePermissions = $this->selectedRole->permissions->pluck('id')->toArray();
+        $this->flashSuccess = null;
+        $this->flashError = null;
+
+        $role = Role::with('permissions')->find($roleId);
+        $this->rolePermissions = $role->permissions->pluck('id')->toArray();
     }
 
-
-
-    public function savePermissions()
+    public function togglePermission(int $permissionId): void
     {
-        if (!$this->selectedRole) {
-            session()->flash('error', 'Pilih role terlebih dahulu');
+        if (in_array($permissionId, $this->rolePermissions)) {
+            $this->rolePermissions = array_values(
+                array_diff($this->rolePermissions, [$permissionId])
+            );
+        } else {
+            $this->rolePermissions[] = $permissionId;
+        }
+    }
+
+    public function clearSelection(): void
+    {
+        $this->selectedRoleId = null;
+        $this->rolePermissions = [];
+        $this->flashSuccess = null;
+        $this->flashError = null;
+    }
+
+    public function savePermissions(): void
+    {
+        if (!$this->selectedRoleId) {
+            $this->flashError = 'Pilih role terlebih dahulu';
             return;
         }
 
-        $this->selectedRole->permissions()->sync($this->rolePermissions);
+        $role = Role::find($this->selectedRoleId);
+        $role->permissions()->sync($this->rolePermissions);
 
-        session()->flash('success', 'Hak akses berhasil diperbarui');
+        $this->flashSuccess = 'Hak akses berhasil diperbarui untuk ' . $role->name;
     }
 
     public function render()

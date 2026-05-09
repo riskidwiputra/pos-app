@@ -69,7 +69,7 @@
                 </a>
                 @endif
                 {{-- Supplier --}}
-                @if(auth()->user()->hasPermission('supplier'))
+                @if(auth()->user()->hasPermission('supplier.view'))
                 <a 
                     href="{{ route('supplier.index') }}"
                     @click="closeSidebar()"
@@ -79,7 +79,7 @@
                 </a>
                 @endif
                 {{--  Produk --}}
-                @if(auth()->user()->hasPermission('produk'))
+                @if(auth()->user()->hasPermission('produk.view'))
                 <a 
                     href="{{ route('product.index') }}"
                     @click="closeSidebar()"
@@ -90,7 +90,7 @@
                 @endif
 
                 {{-- Pembelian --}}
-                @if(auth()->user()->hasPermission('pembelian'))
+                @if(auth()->user()->hasPermission('purchase.view'))
                 <a 
                     href="{{ route('purchase.index') }}"
                     @click="closeSidebar()"
@@ -99,7 +99,7 @@
                     <span>Pembelian</span>
                 </a>
                 @endif
-                @if(auth()->user()->hasPermission('penjualan'))
+                @if(auth()->user()->hasPermission('sale.view'))
                 {{-- Penjualan --}}
                 <a 
                     href="{{ route('sale.index') }}"
@@ -129,7 +129,7 @@
                 </a>
                  @endif
                 {{-- Order Jasa --}}
-                @if(auth()->user()->hasPermission('order-jasa'))
+                @if(auth()->user()->hasPermission('order-jasa.view'))
                 <a 
                     href="{{ route('order-jasa.index') }}"
                     @click="closeSidebar()"

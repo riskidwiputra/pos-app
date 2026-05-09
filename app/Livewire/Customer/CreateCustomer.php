@@ -50,7 +50,7 @@ class CreateCustomer extends Component
             'email' => $this->email,
             'username' => $this->username,
             'password' => Hash::make($this->password),
-            'role_id' => 2, // Default role_id for customers
+            'role_id' => 3, // Default role_id for customers
         ]);
 
         session()->flash('message', 'Pelanggan berhasil ditambahkan!');

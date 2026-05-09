@@ -253,7 +253,7 @@
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 hover:border-gray-300 cursor-pointer @error('status_product') border-red-500 focus:border-red-500 focus:ring-red-200 @enderror"
                         >
                             <option value="Tersedia">Tersedia</option>
-                            <option value="Tidak Tersedia">Tidak Tersedia</option>
+                            <option value="Tidak-Tersedia">Tidak Tersedia</option>
                         </select>
                         @error('status_product') 
                             <div class="mt-2 flex items-center gap-2 text-red-600 text-sm">
@@ -278,13 +278,16 @@
                         Batal
                     </a>
                     <button 
-                        type="submit"
+                        type="submit" wire:loading.attr="disabled"
                         class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Simpan Perubahan
+                        <span wire:loading.remove>
+                            + Simpan Perubahan
+                        </span>
+                        <span wire:loading>
+                            
+                             <i class='bx bx-time'></i>  Memproses...
+                        </span>
                     </button>
                 </div>
             </form>

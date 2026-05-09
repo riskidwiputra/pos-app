@@ -22,18 +22,17 @@ class IndexPurchase extends Component
     public $purchaseId = null;
     public $message = '';
     public $filterSupplier = '';
-    public $filterStatus = '';
     public $filterStatusPembayaran = '';
     public $startDate = '';
     public $endDate = '';
 
-    protected $updatesQueryString = ['search', 'perPage', 'filterSupplier', 'filterStatus', 'filterStatusPembayaran'];
+    protected $updatesQueryString = ['search', 'perPage', 'filterSupplier', 'filterStatusPembayaran'];
     protected $paginationTheme = 'tailwind';
 
     public function mount()
     {
-        $this->startDate = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->endDate = Carbon::now()->format('Y-m-d');
+        $this->startDate = '';
+        $this->endDate = '';
     }
 
     public function purchases()
@@ -46,13 +45,10 @@ class IndexPurchase extends Component
             ->when($this->filterSupplier, function($query) {
                 $query->where('supplier_id', $this->filterSupplier);
             })
-            ->when($this->filterStatus, function($query) {
-                $query->where('status', $this->filterStatus);
-            })
             ->when($this->filterStatusPembayaran, function($query) {
                 $query->where('status_pembayaran', $this->filterStatusPembayaran);
             })
-            ->when($this->startDate && $this->endDate, function($query) {
+            ->when($this->startDate !== '' && $this->endDate !== '', function($query) {
                 $query->whereBetween('tanggal_terima_barang', [$this->startDate, $this->endDate]);
             })
             ->latest('tanggal_terima_barang')
@@ -62,7 +58,6 @@ class IndexPurchase extends Component
     public function updatingSearch() { $this->resetPage(); }
     public function updatingPerPage() { $this->resetPage(); }
     public function updatingFilterSupplier() { $this->resetPage(); }
-    public function updatingFilterStatus() { $this->resetPage(); }
     public function updatingFilterStatusPembayaran() { $this->resetPage(); }
 
     public function confirmDelete($id)
@@ -96,16 +91,6 @@ class IndexPurchase extends Component
         $this->purchaseId = null;
     }
 
-    public function resetFilters()
-    {
-        $this->search = '';
-        $this->filterSupplier = '';
-        $this->filterStatus = '';
-        $this->filterStatusPembayaran = '';
-        $this->startDate = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->endDate = Carbon::now()->format('Y-m-d');
-        $this->resetPage();
-    }
 
     public function render()
     {

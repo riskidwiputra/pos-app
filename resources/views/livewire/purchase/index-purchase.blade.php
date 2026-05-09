@@ -44,6 +44,17 @@
             </div>
         </div>
         @endif
+         @if($message)
+        <div class="mb-6 animate-in slide-in-from-top fade-in">
+            <div class="flex items-center justify-between gap-4 px-6 py-4 bg-gradient-to-r from-red-50 to-pink-50 border-l-4 border-red-500 rounded-lg shadow-md backdrop-blur-sm">
+                <p class="text-sm font-medium text-red-800">{{ $message }}</p>
+                <button wire:click="$set('message','')" class="text-red-600 hover:text-red-800"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg></button>
+            </div>
+        </div>
+        @endif
+
 
         <!-- Alert Utang -->
         @if($totalBelumLunas > 0)

@@ -209,7 +209,7 @@
                                 <label class="block text-sm font-semibold text-gray-800 mb-2">
                                     Jumlah Dibayar <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" wire:model.live="jumlah_dibayar" placeholder="0" step="0.01" min="0" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 @error('jumlah_dibayar') border-red-500 @enderror">
+                                <input type="number" wire:model.live="jumlah_dibayar" placeholder="0" min="0" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 @error('jumlah_dibayar') border-red-500 @enderror">
                                 @error('jumlah_dibayar')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
@@ -227,6 +227,16 @@
                                     </span>
                                 </div>
                             </div>
+                           @if(isset($kembalian) && $kembalian > 0)
+                            <div class="pb-4 border-b border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600 font-semibold">Kembalian:</span>
+                                    <span class="text-xl font-bold {{ $kembalian > 0 ? 'text-green-600' : 'text-gray-600' }}">
+                                        Rp {{ number_format($kembalian, 0, ',', '.') }}
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
 
                             <!-- Status Pembayaran -->
                             <div class="bg-gradient-to-r {{ $status_pembayaran === 'Lunas' ? 'from-green-50 to-emerald-50' : 'from-amber-50 to-orange-50' }} rounded-xl p-4">
@@ -255,10 +265,15 @@
 
                             <!-- Action Buttons -->
                             <div class="space-y-3 pt-4">
-                                <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                                    <span class="flex items-center justify-center gap-2">
+                                <button type="submit" wire:loading.attr="disabled" class="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                                    <span wire:loading.remove class="flex items-center justify-center gap-2">
                                        
                                         Simpan Pembelian
+                                    </span>
+                                    
+                                    <span wire:loading>
+                                        
+                                        <i class='bx bx-time'></i> Memproses...
                                     </span>
                                 </button>
                                 
