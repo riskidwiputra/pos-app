@@ -79,7 +79,7 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('auth.loginUser');
-})->name('login');
+})->middleware('guest')->name('login');
 
 Route::get('/register', CustomerRegister::class)->name('register');
 
@@ -96,10 +96,10 @@ Route::middleware('customer')->group(function () {
         Route::get('/tambah-pesanan', CreateOrderCustomer::class)
             ->name('tambah-pesanan');
         
-        Route::get('/{id}/detail-pesanan', DetailOrderCustomer::class)
-            ->name('detail-pesanan');
+        Route::get('/detail-pesanan/{id}', DetailOrderCustomer::class)
+        ->name('detail-pesanan');
 
-        Route::get('/{id}/ubah-pesanan', UpdateOrderCustomer::class)
+        Route::get('/ubah-pesanan/{id}', UpdateOrderCustomer::class)
         ->name('ubah-pesanan');
 
                     

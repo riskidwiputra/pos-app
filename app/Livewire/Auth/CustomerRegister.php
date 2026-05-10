@@ -38,6 +38,7 @@ class CustomerRegister extends Component
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'confirmPassword' => 'required|same:password',
+            'terms' => 'accepted',
         ];
 
       
@@ -67,10 +68,9 @@ class CustomerRegister extends Component
         ]);
 
         event(new Registered($customer));
-
-        Auth::login($customer);
-
-        return redirect(RouteServiceProvider::HOME);
+        // redirect ke halaman login setelah registrasi berhasil
+        return redirect()->route('login')->with('status', 'Registrasi berhasil! Silakan login dengan akun Anda.');
+        
 
     }
 

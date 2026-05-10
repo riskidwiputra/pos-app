@@ -76,11 +76,7 @@
             {{-- Order Jasa --}}
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                 <div class="p-6">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
-                    </div>
+                    
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Order Jasa</h3>
                     <p class="text-gray-600 text-sm mb-4">Pesan layanan percetakan yang Anda butuhkan dengan mudah</p>
                     <a href="{{ route('order-jasa.tambah-pesanan') }}" class="inline-flex items-center text-indigo-600 font-semibold text-sm hover:text-indigo-700">
@@ -95,11 +91,7 @@
             {{-- History --}}
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                 <div class="p-6">
-                    <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
+                    
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Riwayat Order</h3>
                     <p class="text-gray-600 text-sm mb-4">Lihat dan lacak status pesanan Anda</p>
                     <a href="{{ route('order-jasa.index') }}" class="inline-flex items-center text-emerald-600 font-semibold text-sm hover:text-emerald-700">
@@ -114,11 +106,7 @@
             {{-- Profile --}}
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
                 <div class="p-6">
-                    <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                    </div>
+                    
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Profil Saya</h3>
                     <p class="text-gray-600 text-sm mb-4">Kelola informasi akun dan preferensi Anda</p>
                     <a href="{{ route('profile.edit') }}" class="inline-flex items-center text-purple-600 font-semibold text-sm hover:text-purple-700">
@@ -139,9 +127,9 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-2">Butuh Bantuan?</h3>
                 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="tel:08123456789" class="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all">
+                    <a href="https://wa.me/082283821173" class="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5 -.669 -.51 -.173 -.008 -.371 -.01 -.57 -.01 -.198 0 -.52 .074 -.792 .372 -.272 .297 -1.04 1.016 -1.04 2.479 0 1.462 1.065 2.875 1.2₁₃ 3.074 .₁₄₉ .₁₉₈ ₂₀₉₆ ₃.₂ ₅.₀₇₇ ₄.₄₈₇ .₇₀₉ .₃₀₆ ₁₂₆₂ .₄₈₉ ₁.₆₉₄ .₆₂⁵ .₇₁₂ .₂₂⁷ ₁.³⁶ .₁⁹⁵ ₁.⁸⁷₁ .₁¹⁸ .⁵⁷¹ -.₀⁸⁵ ₁.⁷⁵⁸ -.⁷¹⁹ ₂.₀₀⁶ -¹.{¹} .²⁴⁸ -.⁶⁹⁴ .²⁴⁸ -¹.{²} .₁⁷³ -¹.{³} -.₀⁷⁴ -.¹²⁴ -.²⁷² -.¹⁹ͺ -.五百 seventy -."/>
                         </svg>
                         WhatsApp
                     </a>

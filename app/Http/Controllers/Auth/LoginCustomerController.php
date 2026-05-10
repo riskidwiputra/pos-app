@@ -13,10 +13,16 @@ class LoginCustomerController extends Controller
 {
    public function store(LoginRequest $request): RedirectResponse
     {
+        
         $request->authenticate();
+        if (Auth::user()->hasRole('customer') == true) {
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOMECUST);
+            return redirect()->intended(RouteServiceProvider::HOMECUST);
+        }else{
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['email' => 'Akun tidak ditemukan.']);
+        }
+        
     }
 }

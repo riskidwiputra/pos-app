@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -55,16 +56,17 @@ class ServiceOrder extends Model
 
     public static function generateOrderCode()
     {
-        $date = now()->format('Ymd');
-        $lastOrder = self::whereDate('created_at', today())
-                         ->latest('id')
-                         ->first();
+         $date = Carbon::now()->format('Ymd');
         
-        $sequence = $lastOrder ? intval(substr($lastOrder->order_code, -4)) + 1 : 1;
-        
-        return 'ORD-' . $date . '-' . str_pad($sequence, 4, '0', STR_PAD_LEFT);
-    }
+        do {
+            $random = str_pad(rand(10000, 99999), 5, '0', STR_PAD_LEFT);
+            $code = 'ORD-' . $date . '-' . $random;
+            $exists = self::where('order_code', $code)->exists();
+        } while ($exists);
 
+        return $code;
+    }
+   
     // Relationships
     public function user()
     {

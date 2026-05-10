@@ -476,9 +476,13 @@
                 
             </div>
         </div>
+        {{-- Success dari Register --}}
 
         <!-- Right Side - Login Form -->
         <div class="auth-form-container">
+       
+
+       
             <div class="form-header">
                  
                 <h1>Masuk ke Akun Anda</h1>
@@ -492,6 +496,12 @@
                     {{ $errors->first() }}
                 </div>
             @endif
+             @if (session('status'))
+            <div class="alert" style="background: #e8f5e9; border: 1px solid #4caf50; color: #2e7d32;">
+                <strong>✓ Berhasil!</strong><br>
+                {{ session('status') }}
+            </div>
+        @endif
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
