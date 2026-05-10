@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\ProfileAdminsController;
 use App\Livewire\Cashier\Kasir;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\CreateAdmin;
@@ -43,6 +44,7 @@ use App\Livewire\Roles\ManagePermissions;
 use App\Livewire\Sale\CreateSale;
 use App\Livewire\Sale\DetailSale;
 
+
 use App\Livewire\Setting\MenuManagement;
 use App\Livewire\SubCategory\CreateSubCategory;
 use App\Livewire\SubCategory\IndexSubCategory;
@@ -57,6 +59,7 @@ use App\Livewire\Sale\IndexSale;
 use App\Livewire\Print\PrintNota;
 use App\Livewire\Sale\updateSale;
 use App\Livewire\Setting\RoleManagement;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,14 +114,17 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
   
     Route::get('/cashier', [KasirController::class, 'index'])
         ->name('cashier');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile-admin.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile-admin.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    Route::get('/profile', [ProfileAdminsController::class, 'edit'])->name('profile-admin.edit');
+    Route::patch('/profile', [ProfileAdminsController::class, 'update'])->name('profile-admin.update');
+    Route::put('/profile/password', [ProfileAdminsController::class, 'updatePassword'])->name('password.update');
+    Route::delete('/profile', [ProfileAdminsController::class, 'destroy'])->name('profile-admin.destroy');
     
     Route::get('/cashier/product/{id}', [KasirController::class, 'getProduct']);
     
     Route::post('/cashier/process', [KasirController::class, 'prosesPembayaran']);
+
+
 
     Route::get('/dashboard', Dashboard::class)->name('dashboard-admin');
     
@@ -257,7 +263,7 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
     });
     Route::get('/nota/{sale}', function($id) {
             $sale = \App\Models\Sale::with(['items.product'])->findOrFail($id);
-            return view('livewire.print.nota-content', compact('sale'));
+            return view('livewire.print.print-nota', compact('sale'));
         });
     Route::prefix('auth')->name('auth.')->middleware('permission:permission')->group(function () {
         Route::get('/permissions', ManageRolePermissions::class)->name('permissions');

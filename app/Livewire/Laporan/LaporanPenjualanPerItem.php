@@ -38,8 +38,8 @@ class LaporanPenjualanPerItem extends Component
 
     public function mount()
     {
-        $this->tanggalMulai = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->tanggalSelesai = Carbon::now()->format('Y-m-d');
+        $this->tanggalMulai = "";
+        $this->tanggalSelesai = "";
     }
 
     #[Computed]
@@ -49,7 +49,9 @@ class LaporanPenjualanPerItem extends Component
         $query = SaleItem::join('sales', 'sale_items.sale_id', '=', 'sales.id')
             ->join('products', 'sale_items.product_id', '=', 'products.id')
             ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
-            ->whereBetween('sales.transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->when($this->tanggalMulai !== '' && $this->tanggalSelesai !== '', function($query) {
+                $query->whereBetween('sales.transaction_date', [$this->tanggalMulai, $this->tanggalSelesai]);
+            })
             ->where('sales.status', 'Lunas')
             ->when($this->pencarian, function($q) {
                 $q->where('products.nama_produk', 'like', '%' . $this->pencarian . '%');

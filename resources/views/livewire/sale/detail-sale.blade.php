@@ -291,10 +291,13 @@
 
                         <!-- Action Buttons -->
                         <div class="space-y-3 pt-4 border-t border-gray-200">
-                            <button wire:click="printNota" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                                <span class="flex items-center justify-center gap-2">
+                            <button wire:click="printNota" wire:loading.attr="disabled" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                                <span wire:loading.remove class="flex items-center justify-center gap-2">
                                     
                                     Cetak Nota
+                                </span>
+                                <span wire:loading>
+                                    <i class='bx bx-time'></i> Memproses...
                                 </span>
                             </button>
                             
@@ -316,7 +319,7 @@
     }"
     x-on:print-nota.window="
         showPrintModal = true;
-        fetch('/nota/{{ $sale->id }}')
+        fetch('{{ route('print.nota', $sale->id) }}')
             .then(response => response.text())
             .then(html => {
                 printContent = html;

@@ -167,14 +167,16 @@ class KasirController extends Controller
 
     private function generateInvoice()
     {
-        $tanggal = now()->format('Ymd');
-        $terakhir = Sale::whereDate('created_at', today())
-                       ->latest('id')
-                       ->first();
-        
-        $urutan = $terakhir ? intval(substr($terakhir->invoice_number, -4)) + 1 : 1;
-        
-        return 'INV-' . $tanggal . '-' . str_pad($urutan, 4, '0', STR_PAD_LEFT);
+         $tanggal = now()->format('Ymd');
+        $prefix  = 'INV-' . $tanggal . '-';
+
+        do {
+            $random = str_pad(rand(10000, 99999), 5, '0', STR_PAD_LEFT);
+            $invoice = $prefix . $random;
+            $exists  = Sale::where('invoice_number', $invoice)->exists();
+        } while ($exists);
+
+        return $invoice;
     }
 
     private function defaultImage()

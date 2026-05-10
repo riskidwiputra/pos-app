@@ -5,28 +5,11 @@
         <div class="mb-8 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Laporan Penjualan Per Item
+                    Laporan Penjualan  Item
                 </h1>
                 
             </div>
-            <div class="flex gap-2">
-                <!-- <button 
-                    wire:click="exportPDF"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl shadow-lg transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    Export PDF
-                </button>
-                <button 
-                    wire:click="exportExcel"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    Excel
-                </button> -->
-            </div>
+           
         </div>
 
 
@@ -120,16 +103,8 @@
                                     @endif
                                 </button>
                             </th>
-                            <th class="px-6 py-4 text-right">
-                                <button wire:click="sortByColumn('total_keuntungan')" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-blue-600 ml-auto">
-                                    Total Keuntungan
-                                    @if($sortBy === 'total_keuntungan')
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $sortDirection === 'asc' ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7' }}"></path>
-                                        </svg>
-                                    @endif
-                                </button>
-                            </th>
+                          
+                            <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-widest text-gray-600">Total Keuntungan</th>
                            
                         </tr>
                     </thead>
@@ -191,9 +166,7 @@
                             <tr>
                                 <td colspan="8" class="px-6 py-12 text-center">
                                     <div class="flex flex-col items-center justify-center text-gray-400">
-                                        <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                        </svg>
+                                      
                                         <p class="text-lg font-semibold">Tidak ada data produk</p>
                                     </div>
                                 </td>

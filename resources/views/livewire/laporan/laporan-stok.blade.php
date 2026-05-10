@@ -104,7 +104,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {{-- Stok Habis --}}
             @if($this->ringkasanStok()['stok_habis'] > 0)
-            <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-lg p-6 text-white animate-pulse">
+            <div class="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-lg p-6 text-white ">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-3">
                         

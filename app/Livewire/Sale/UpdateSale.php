@@ -243,10 +243,11 @@ class UpdateSale extends Component
                     SaleItem::create([
                         'sale_id' => $this->sale->id,
                         'product_id' => $item['product_id'],
-                        'product_name' => $item['product_name'],
+                        'product_name' => $product->nama_produk,
                         'quantity' => $item['quantity'],
                         'unit' => $product->unit->singkatan ?? 'pcs',
                         'price' => $item['price'],
+                        'price_purchase' => $product->harga_beli ?? 0,
                         'subtotal' => $item['subtotal'],
                     ]);
 

@@ -169,22 +169,7 @@
                                 @enderror
                             </div>
 
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-800 mb-2">
-                                    Satuan <span class="text-red-500">*</span>
-                                </label>
-                                <select wire:model="unit"
-                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 cursor-pointer">
-                                    <option value="pcs">Pcs</option>
-                                    <option value="lembar">Lembar</option>
-                                    <option value="meter">Meter</option>
-                                    <option value="set">Set</option>
-                                    <option value="box">Box</option>
-                                    <option value="rim">Rim</option>
-                                    <option value="roll">Roll</option>
-                                    <option value="unit">Unit</option>
-                                </select>
-                            </div>
+                            
                         </div>
 
                         {{-- Tanggal --}}
@@ -358,12 +343,12 @@
                     <div class="p-6">
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                             @foreach([
-                                ['value' => 'pending',     'label' => 'Menunggu',   'icon' => '⏳'],
-                                ['value' => 'approved',    'label' => 'Disetujui',  'icon' => '✅'],
-                                ['value' => 'in_progress', 'label' => 'Diproses',   'icon' => '⚙️'],
-                                ['value' => 'completed',   'label' => 'Selesai',    'icon' => '🎉'],
-                                ['value' => 'rejected',    'label' => 'Ditolak',    'icon' => '❌'],
-                                ['value' => 'cancelled',   'label' => 'Dibatalkan', 'icon' => '🚫'],
+                                ['value' => 'pending',     'label' => 'Menunggu',   'icon' => ''],
+                                ['value' => 'approved',    'label' => 'Disetujui',  'icon' => ''],
+                                ['value' => 'in_progress', 'label' => 'Diproses',   'icon' => ''],
+                                ['value' => 'completed',   'label' => 'Selesai',    'icon' => ''],
+                                ['value' => 'rejected',    'label' => 'Ditolak',    'icon' => ''],
+                                ['value' => 'cancelled',   'label' => 'Dibatalkan', 'icon' => ''],
                             ] as $opt)
                                 <label class="cursor-pointer">
                                     <input type="radio" wire:model="status" value="{{ $opt['value'] }}" class="sr-only peer"/>
@@ -380,17 +365,20 @@
 
                 {{-- ── Tombol Aksi ─────────────────────────────────────────────── --}}
                 <div class="space-y-2 pb-8">
-                    <button type="submit"
+                    <button type="submit" wire:loading.attr="disabled"
                             class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600
                                    hover:from-blue-600 hover:to-indigo-700
                                    text-white font-semibold rounded-xl shadow-lg hover:shadow-xl
                                    transition-all duration-200 transform hover:scale-[1.01]">
-                        <span class="flex items-center justify-center gap-2">
+                        <span wire:loading.remove class="flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                             Simpan Perubahan
                         </span>
+                        <span wire:loading>
+                            <i class='bx bx-time'></i> Memproses...
+                        </span> 
                     </button>
                     <a href="{{ route('order-jasa.index') }}"
                        class="block w-full px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition-all text-center">

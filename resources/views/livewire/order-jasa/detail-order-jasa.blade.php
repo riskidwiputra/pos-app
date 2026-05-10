@@ -36,12 +36,7 @@
 
                 {{-- Tombol Aksi Header --}}
                 <div class="flex flex-wrap gap-2 shrink-0">
-                    <a href=""
-                       class="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-600
-                              text-white text-sm font-semibold rounded-xl transition-all">
-                        
-                        Edit
-                    </a>
+                    
 
                     @if($order->canBeApproved())
                         <button wire:click="$set('showApproveModal', true)"

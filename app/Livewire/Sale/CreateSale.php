@@ -31,6 +31,7 @@ class CreateSale extends Component
     // Calculated
     public $total = 0;
     public $change_amount = 0;
+    public $tagihan = 0;
 
     protected $rules = [
         'transaction_date' => 'required|date',
@@ -119,7 +120,14 @@ class CreateSale extends Component
             }
         }
       
-        $this->change_amount = (float) $this->paid_amount - (float) $this->total;
+        if ($this->paid_amount >= $this->total) {
+            $this->change_amount = (float) $this->paid_amount - (float) $this->total;
+           
+        } else {
+            $this->change_amount = 0;
+        }
+        
+
     }
 
     public function generateInvoiceNumber()

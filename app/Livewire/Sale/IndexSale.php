@@ -30,8 +30,8 @@ class IndexSale extends Component
 
     public function mount()
     {
-        $this->startDate = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->endDate = Carbon::now()->format('Y-m-d');
+        $this->startDate = '';
+        $this->endDate = '';
     }
 
     public function sales()
@@ -41,9 +41,10 @@ class IndexSale extends Component
             })->when($this->filterStatus, function($query) {
                 $query->where('status', $this->filterStatus);
             })
-            ->when($this->startDate && $this->endDate, function($query) {
+              ->when($this->startDate !== '' && $this->endDate !== '', function($query) {
                 $query->whereBetween('transaction_date', [$this->startDate, $this->endDate]);
             })
+             
             ->latest('transaction_date')
             ->paginate($this->perPage);
     }
@@ -95,22 +96,12 @@ class IndexSale extends Component
         $this->saleId = null;
     }
 
-    public function resetFilters()
-    {
-        $this->search = '';
-        $this->filterStatus = '';
-        $this->startDate = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->endDate = Carbon::now()->format('Y-m-d');
-        $this->resetPage();
-    }
+    
 
     public function render()
     {
         return view('livewire.sale.index-sale', [
             'sales' => $this->sales(),
-            // 'totalPenjualanHariIni' => Sale::whereDate('transaction_date', Carbon::today())
-            //                               ->where('status', 'Lunas')
-            //                               ->sum('total'),
         ]);
     }
 }

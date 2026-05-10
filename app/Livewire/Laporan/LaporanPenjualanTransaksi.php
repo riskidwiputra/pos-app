@@ -34,16 +34,17 @@ class LaporanPenjualanTransaksi extends Component
 
     public function mount()
     {
-        $this->tanggalMulai = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $this->tanggalSelesai = Carbon::now()->format('Y-m-d');
+        $this->tanggalMulai = '';
+        $this->tanggalSelesai = '';
     }
 
     #[Computed]
     public function laporanTransaksi()
     {
         return Sale::with(['users', 'items.product'])
-            ->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
-            ->when($this->pencarian, function($query) {
+            ->when($this->tanggalMulai !== '' && $this->tanggalSelesai !== '', function($query) {
+                $query->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai]);
+            })->when($this->pencarian, function($query) {
                 $query->where(function($q) {
                     $q->where('invoice_number', 'like', '%' . $this->pencarian . '%')
                       ->orWhereHas('users', function($cq) {
@@ -61,7 +62,9 @@ class LaporanPenjualanTransaksi extends Component
     #[Computed]
     public function ringkasanTransaksi()
     {
-        $sales = Sale::whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+        $sales = Sale::when($this->tanggalMulai !== '' && $this->tanggalSelesai !== '', function($query) {
+                $query->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai]);
+            })
             ->when($this->statusFilter, function($query) {
                 $query->where('status', $this->statusFilter);
             });
@@ -120,7 +123,9 @@ class LaporanPenjualanTransaksi extends Component
     public function exportPDF()
     {
         $sales = Sale::with(['users', 'items.product'])
-            ->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai])
+            ->when($this->tanggalMulai !== '' && $this->tanggalSelesai !== '', function($query) {
+                $query->whereBetween('transaction_date', [$this->tanggalMulai, $this->tanggalSelesai]);
+            })
             ->when($this->pencarian, function($query) {
                 $query->where(function($q) {
                     $q->where('invoice_number', 'like', '%' . $this->pencarian . '%')

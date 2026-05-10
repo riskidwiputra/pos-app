@@ -245,12 +245,14 @@
 
                             <!-- Action Buttons -->
                             <div class="space-y-3 pt-4">
-                                <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                                    <span class="flex items-center justify-center gap-2">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
+                                <button type="submit" wire:loading.attr="disabled" class="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                                    <span wire:loading.remove class="flex items-center justify-center gap-2">
+                                      
                                         Proses Penjualan
+                                    </span>
+                                     <span wire:loading>
+                                        
+                                        <i class='bx bx-time'></i> Memproses...
                                     </span>
                                 </button>
                                 

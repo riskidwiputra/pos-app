@@ -5,18 +5,33 @@
         <div class="mb-8 flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    Laporan Per Transaksi
+                    Laporan  Transaksi
                 </h1>
                 
             </div>
             <div class="flex gap-2">
                 <button 
                     wire:click="exportPDF"
+                    wire:loading.attr="disabled"
+                    wire:loading.class="opacity-70 cursor-not-allowed"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl shadow-lg transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    Cetak Laporan PDF
+                    
+                    {{-- Tampil saat normal --}}
+                    <span wire:loading.remove wire:target="exportPDF" class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        Cetak Laporan PDF
+                    </span>
+
+                    {{-- Tampil saat loading --}}
+                    <span wire:loading wire:target="exportPDF" class="flex items-center gap-2">
+                        <svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Memproses...
+                    </span>
+
                 </button>
             </div>
         </div>

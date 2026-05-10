@@ -275,10 +275,7 @@
 
         <!-- Summary -->
         <div class="summary-section">
-            <div class="summary-row">
-                <div class="summary-label">Subtotal:</div>
-                <div class="summary-value">Rp {{ number_format($sale->subtotal, 0, ',', '.') }}</div>
-            </div>
+          
 
             <div class="summary-row total-row">
                 <div class="summary-label">TOTAL:</div>
@@ -310,7 +307,7 @@
         </div>
     </div>
 
-    <!-- Print Buttons (hidden saat print) -->
+    {{-- <!-- Print Buttons (hidden saat print) -->
     <div class="print-buttons no-print">
         <button onclick="window.print()" class="btn btn-primary">
             🖨️ Cetak
@@ -318,7 +315,7 @@
         <a href="{{ route('sale.detail', $sale->id) }}" class="btn btn-secondary">
             ❌ Tutup
         </a>
-    </div>
+    </div> --}}
 
     <script>
         // Auto print saat halaman dibuka (opsional)
