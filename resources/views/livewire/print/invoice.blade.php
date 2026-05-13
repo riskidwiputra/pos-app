@@ -291,7 +291,7 @@
         <div class="header">
             <div class="company-name">
                 @php
-                    $path = public_path('img/logo/Logos.jpeg');
+                    $path = public_path('img/logo/logos.jpeg');
                     $type = pathinfo($path, PATHINFO_EXTENSION);
                     $data = file_get_contents($path);
                     $image = 'data:image/' . $type . ';base64,' . base64_encode($data);

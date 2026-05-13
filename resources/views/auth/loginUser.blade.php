@@ -461,7 +461,7 @@
             <div class="brand-content">
                 <div class="logo-container">
                      @php
-                    $path = public_path('img/logo/Logo-remove.png');
+                    $path = public_path('img/logo/logo-remove.png');
                     $type = pathinfo($path, PATHINFO_EXTENSION);
                     $data = file_get_contents($path);
                     $image = 'data:image/' . $type . ';base64,' . base64_encode($data);

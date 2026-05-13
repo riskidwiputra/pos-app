@@ -30,6 +30,7 @@ class Dashboard extends Component
             'minggu_ini' => [now()->startOfWeek(), now()->endOfWeek()],
             'bulan_ini' => [now()->startOfMonth(), now()->endOfMonth()],
             'tahun_ini' => [now()->startOfYear(), now()->endOfYear()],
+            'semua' => [null, null],
             default => [now()->startOfDay(), now()->endOfDay()],
         };
     }
@@ -39,15 +40,18 @@ class Dashboard extends Component
     {
         [$start, $end] = $this->dateRange();
 
-        $sales = Sale::whereBetween('transaction_date', [$start, $end]);
-
+        $query = Sale::with('items');
+        if ($start && $end) {
+            $query->whereBetween('transaction_date', [$start, $end]);
+        }
+        $sales = $query->get();
         $totalPenjualan = $sales->sum('total');
         $totalTransaksi = $sales->count();
         $totalLunas = $sales->where('status', 'lunas')->sum('total');
         
         // Hitung keuntungan
         $keuntungan = 0;
-        foreach($sales->get() as $sale) {
+        foreach($sales as $sale) {
             foreach($sale->items as $item) {
                 $profit = ($item->price - ($item->price_purchase ?? 0)) * $item->quantity;
                 $keuntungan += $profit;

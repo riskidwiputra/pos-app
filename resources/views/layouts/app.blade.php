@@ -68,12 +68,16 @@
                         <p class="text-sm font-medium text-gray-700 truncate">{{ auth()->user()->name }}</p>
                     </div>
                     
+
+                  
                     <a 
-                    href="{{ route('profile-admin.edit') }}"
+                    href="{{ auth()->user()->isCustomer() ? route('profile.edit') : route('profile-admin.edit') }}"
                     @click="closeSidebar()"
                     class="nav-item ">
                     <i class='bx bx-user'></i> 
                     <span>Profile</span>
+                   
+                    
                 </a>
                 </div>
             </div>

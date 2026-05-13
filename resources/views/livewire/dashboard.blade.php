@@ -18,6 +18,7 @@
                         <option value="minggu_ini">Minggu Ini</option>
                         <option value="bulan_ini">Bulan Ini</option>
                         <option value="tahun_ini">Tahun Ini</option>
+                        <option value="semua">Semua Periode</option>
                     </select>
                 </div>
             </div>

@@ -39,7 +39,7 @@ use App\Livewire\Product\UpdateProduct;
 use App\Livewire\Purchase\CreatePurchase;
 use App\Livewire\Purchase\DetailPurchase;
 use App\Livewire\Purchase\IndexPurchase;
-use App\Livewire\Purchase\updatePurchase;
+use App\Livewire\Purchase\UpdatePurchase;
 use App\Livewire\Roles\ManagePermissions;
 use App\Livewire\Sale\CreateSale;
 use App\Livewire\Sale\DetailSale;

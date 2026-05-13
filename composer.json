@@ -16,7 +16,6 @@
         "picqer/php-barcode-generator": "^3.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^4.0",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.1",
         "laravel/pint": "^1.14",

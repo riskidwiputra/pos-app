@@ -14,9 +14,8 @@ return new class extends Migration
          Schema::create('service_orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_code')->unique()->index();
-            $table->foreignId('user_id')->constrained('users')->nullable()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('restrict');
-            
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('category_id')->constrained('service_categories')->restrictOnDelete();
             // Customer Info
             $table->string('customer_name');
             $table->string('customer_phone');
