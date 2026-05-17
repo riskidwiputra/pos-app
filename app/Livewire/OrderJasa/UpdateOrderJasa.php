@@ -2,9 +2,11 @@
 
 namespace App\Livewire\OrderJasa;
 
+use App\Models\Sale;
+use App\Models\SaleItem;
 use App\Models\ServiceOrder;
 use App\Models\ServiceCategory;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -81,6 +83,25 @@ class UpdateOrderJasa extends Component
     {
         return ServiceCategory::orderBy('nama_jasa')->get();
     }
+    private function generateInvoiceNumber()
+    {
+        $date    = now()->format('Ymd');
+        $prefix  = 'INV-' . $date . '-';
+    
+        // Cari nomor urut terakhir hari ini berdasarkan prefix
+        $last = Sale::where('invoice_number', 'like', $prefix . '%')
+                    ->orderBy('id', 'desc')
+                    ->first();
+    
+        $sequence = $last
+            ? intval(substr($last->invoice_number, -4)) + 1
+            : 1;
+        
+        $uniqueId = substr(uniqid(), -4);
+        $sequence = $sequence . $uniqueId;
+    
+        return $prefix . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+    }
 
     public function save()
     {
@@ -119,7 +140,7 @@ class UpdateOrderJasa extends Component
             'design_file.mimes'                  => 'File harus berformat: pdf, jpg, jpeg, png, zip, rar, ai, psd, cdr.',
             'design_file.max'                    => 'Ukuran file maksimal 10MB.',
         ]);
-      
+        DB::beginTransaction();
 
         try {
             $designFilePath = $this->existing_design_file;
@@ -138,6 +159,146 @@ class UpdateOrderJasa extends Component
                 $designFilePath = $this->design_file->store('service-orders', 'public');
             }
             
+            // ── State saat ini ───────────────────────────────────────────────────
+            $statusYangKurangiStok  = ['in_progress', 'completed'];
+            $statusYangRollbackStok = ['cancelled', 'rejected'];
+    
+            $statusLama     = $this->order->status;
+            $statusBaru     = $this->status;
+            $sudahDikurangi = $this->order->stock_deducted;
+            $sudahAdaSale   = ! is_null($this->order->sale_id);
+    
+            // ── Load kategori + produk BOM (dipakai di beberapa kondisi) ─────────
+            $kategori = ServiceCategory::with('products')->find($this->category_id);
+            $adaProdukBOM = $kategori && $kategori->products->isNotEmpty();
+    
+            // ════════════════════════════════════════════════════════════════════
+            // KONDISI A: ROLLBACK STOK + HAPUS SALE
+            // Terjadi ketika:
+            // - Status baru = cancelled / rejected
+            // - Status lama = in_progress / completed (stok sudah pernah dikurangi)
+            // - stock_deducted = true (penanda stok memang sudah dikurangi)
+            // ════════════════════════════════════════════════════════════════════
+            $perluRollbackStok = in_array($statusBaru, $statusYangRollbackStok)
+                && in_array($statusLama, $statusYangKurangiStok)
+                && $sudahDikurangi;
+    
+            if ($perluRollbackStok && $adaProdukBOM) {
+    
+                // Kembalikan stok tiap produk
+                foreach ($kategori->products as $product) {
+                    $kebutuhan = $product->pivot->quantity * $this->quantity;
+                    $product->increment('stok_tersedia', $kebutuhan);
+                }
+    
+                // Hapus SaleItem dulu, baru Sale (jika ada)
+                if ($sudahAdaSale) {
+                    $sale = Sale::find($this->order->sale_id);
+                    if ($sale) {
+                        $sale->items()->delete(); // pastikan relasi items() ada di model Sale
+                        $sale->delete();
+                    }
+                }
+            }
+    
+            // ════════════════════════════════════════════════════════════════════
+            // KONDISI B: KURANGI STOK + BUAT SALE
+            // Terjadi ketika:
+            // - Status baru = in_progress / completed
+            // - Stok belum pernah dikurangi
+            // - Status lama bukan in_progress/completed
+            // ════════════════════════════════════════════════════════════════════
+            $perluKurangiStok = in_array($statusBaru, $statusYangKurangiStok)
+                && ! $sudahDikurangi
+                && ! in_array($statusLama, $statusYangKurangiStok);
+    
+            $perluBuatSale = $perluKurangiStok && ! $sudahAdaSale;
+            $saleId        = $sudahAdaSale ? $this->order->sale_id : null;
+            $invoiceNumber = null;
+    
+            if ($perluKurangiStok && $adaProdukBOM) {
+    
+                // Validasi stok semua produk dulu
+                foreach ($kategori->products as $product) {
+                    $kebutuhan = $product->pivot->quantity * $this->quantity;
+    
+                    if ($product->stok_tersedia < $kebutuhan) {
+                        DB::rollBack();
+                        session()->flash('error',
+                            "Stok produk \"{$product->nama_produk}\" tidak mencukupi! " .
+                            "Dibutuhkan: {$kebutuhan} {$product->satuan}, " .
+                            "Tersedia: {$product->stok_tersedia} {$product->satuan}."
+                        );
+                        return;
+                    }
+                }
+    
+                // Buat Sale jika belum ada
+                if ($perluBuatSale) {
+                    $totalHargaProduk = 0;
+                    foreach ($kategori->products as $product) {
+                        $kebutuhan         = $product->pivot->quantity * $this->quantity;
+                        $totalHargaProduk += ($product->harga_jual ?? 0) * $kebutuhan;
+                    }
+    
+                    $invoiceNumber = $this->generateInvoiceNumber();
+    
+                    $sale = Sale::create([
+                        'invoice_number'   => $invoiceNumber,
+                        'customer_id'      => null,
+                        'transaction_date' => $this->order_date,
+                        'payment_method'   => 'transfer',
+                        'notes'            => "Order Jasa: {$this->order_title} | Customer: {$this->customer_name} | Telp: {$this->customer_phone}",
+                        'total'            => $totalHargaProduk,
+                        'paid_amount'      => $this->payment,
+                        'change_amount'    => max(0, $this->payment - $totalHargaProduk),
+                        'status'           => ($this->total_price > 0 && $this->payment >= $this->total_price)
+                                                ? 'lunas'
+                                                : 'belum-lunas',
+                        'created_by'       => Auth::id(),
+                    ]);
+    
+                    $saleId = $sale->id;
+    
+                    foreach ($kategori->products as $product) {
+                        $kebutuhan = $product->pivot->quantity * $this->quantity;
+    
+                        SaleItem::create([
+                            'sale_id'        => $sale->id,
+                            'product_id'     => $product->id,
+                            'product_name'   => $product->nama_produk,
+                            'price'          => $product->harga_jual ?? 0,
+                            'price_purchase' => $product->harga_beli ?? 0,
+                            'quantity'       => $kebutuhan,
+                            'unit'           => $product->satuan ?? 'pcs',
+                            'subtotal'       => ($product->harga_jual ?? 0) * $kebutuhan,
+                        ]);
+                    }
+                }
+    
+                // Kurangi stok
+                foreach ($kategori->products as $product) {
+                    $kebutuhan = $product->pivot->quantity * $this->quantity;
+                    $product->decrement('stok_tersedia', $kebutuhan);
+                }
+            }
+    
+            // ── Tentukan nilai stock_deducted & sale_id untuk update ─────────────
+            // Jika rollback → reset keduanya ke false/null
+            // Jika kurangi  → set true dan isi sale_id
+            // Jika tidak ada perubahan → pertahankan nilai lama
+            if ($perluRollbackStok) {
+                $stockDeducted = false;
+                $saleId        = null;
+            } elseif ($perluKurangiStok) {
+                $stockDeducted = true;
+                // $saleId sudah di-set di atas
+            } else {
+                $stockDeducted = $sudahDikurangi;
+                $saleId        = $this->order->sale_id;
+            }
+
+ 
 
             $statusPembayaran = ($this->total_price > 0 && $this->payment >= $this->total_price)
                 ? 'lunas'
@@ -160,6 +321,8 @@ class UpdateOrderJasa extends Component
                 'notes'                     => $this->notes ?: null,
                 'status'                    => $this->status,
                 'status_pembayaran'         => $statusPembayaran,
+                'stock_deducted'            => $stockDeducted,
+                'sale_id'                   => $saleId,
                 'updated_by'                => Auth::id(),
             ];
 
@@ -169,12 +332,12 @@ class UpdateOrderJasa extends Component
             }
 
             $this->order->update($updateData);
+            DB::commit();
             
             session()->flash('success', 'Order jasa berhasil diperbarui.');
             return redirect()->route('order-jasa.index');
-            
-
         } catch (\Throwable $e) {
+            DB::rollBack();
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }

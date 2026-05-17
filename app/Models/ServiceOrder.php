@@ -31,6 +31,8 @@ class ServiceOrder extends Model
         'status',
         'rejection_reason',
         'status_pembayaran',
+        'stock_deducted',
+        'sale_id',
         'approved_by',
         'approved_at',
         'created_by',
@@ -40,6 +42,7 @@ class ServiceOrder extends Model
         'order_date' => 'date',
         'estimated_completion_date' => 'date',
         'approved_at' => 'datetime',
+        'stock_deducted' => 'boolean',
     ];
 
     protected static function boot()
@@ -50,7 +53,6 @@ class ServiceOrder extends Model
             if (empty($model->order_code)) {
                 $model->order_code = self::generateOrderCode();
             }
-            
         });
     }
 
@@ -78,7 +80,6 @@ class ServiceOrder extends Model
         return $this->belongsTo(ServiceCategory::class);
     }
 
-    
 
     public function approver()
     {

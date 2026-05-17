@@ -29,8 +29,6 @@ class ServiceCategory extends Model
         'is_active'            => 'boolean',
     ];
 
-    // ─── Scopes ────────────────────────────────────────────────────────────────
-
     public function scopeAktif($query)
     {
         return $query->where('is_active', true);
@@ -41,11 +39,10 @@ class ServiceCategory extends Model
         return $query->orderBy('nama_jasa');
     }
 
-    // ─── Relationships ──────────────────────────────────────────────────────────
 
     public function serviceOrders()
     {
-        return $this->hasMany(ServiceOrder::class, 'service_category_id');
+        return $this->hasMany(ServiceOrder::class, 'category_id');
     }
 
     public function creator()
@@ -58,7 +55,6 @@ class ServiceCategory extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    // ─── Accessors ──────────────────────────────────────────────────────────────
 
     public function getHargaFormatAttribute(): string
     {
@@ -66,6 +62,17 @@ class ServiceCategory extends Model
 
 
         return $harga;
+    }
+    public function categoryProducts()
+    {
+        return $this->hasMany(ServiceCategoryOrderProduct::class, 'category_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'service_category_order_products', 'category_id', 'product_id')
+                    ->withPivot('quantity', 'keterangan')
+                    ->withTimestamps();
     }
 
     public function getStatusBadgeAttribute(): array

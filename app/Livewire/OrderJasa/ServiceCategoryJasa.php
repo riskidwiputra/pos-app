@@ -18,22 +18,18 @@ class ServiceCategoryJasa extends Component
 {
     use WithPagination, WithFileUploads;
 
-    // ─── Filter & Search ────────────────────────────────────────────────────────
+
     public string $pencarian    = '';
     public string $filterStatus = '';
     public int    $perPage      = 10;
-
-    // ─── Modal State ────────────────────────────────────────────────────────────
     public bool $showFormModal   = false;
     public bool $showDetailModal = false;
     public bool $showDeleteModal = false;
     public bool $isEditMode      = false;
 
-    // ─── Selected Record ────────────────────────────────────────────────────────
     public ?int $selectedId  = null;
     public ?ServiceCategory $selectedRecord = null;
 
-    // ─── Form Fields ────────────────────────────────────────────────────────────
     public string  $nama_jasa              = '';
     public string  $deskripsi              = '';
     public int     $total_harga            = 0;
@@ -44,7 +40,7 @@ class ServiceCategoryJasa extends Component
 
     protected $queryString = ['pencarian', 'filterStatus'];
 
-    // ─── Computed ───────────────────────────────────────────────────────────────
+
 
     #[Computed]
     public function kategoris()
@@ -58,12 +54,10 @@ class ServiceCategoryJasa extends Component
             ->when($this->filterStatus !== '', fn($q) =>
                 $q->where('is_active', (bool) $this->filterStatus)
             )
-            ->orderBy('nama_jasa')
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
     }
 
-
-    // ─── Modal: Buka Tambah ──────────────────────────────────────────────────────
 
     public function openCreate(): void
     {
@@ -76,21 +70,7 @@ class ServiceCategoryJasa extends Component
 
     public function openEdit(int $id): void
     {
-        $kategori = ServiceCategory::findOrFail($id);
-        $this->resetForm();
-
-        $this->selectedId   = $id;
-        $this->isEditMode   = true;
-
-        // Isi fields
-        $this->nama_jasa              = $kategori->nama_jasa;
-        $this->deskripsi              = $kategori->deskripsi ?? '';
-        $this->total_harga            = $kategori->total_harga;
-        $this->keterangan_bahan       = $kategori->keterangan_bahan ?? '';
-        $this->is_active              = $kategori->is_active;
-        $this->gambar_existing        = $kategori->gambar_contoh;
-
-        $this->showFormModal = true;
+         $this->redirect(route('service-category.edit', $id), navigate: true);
     }
 
     // ─── Modal: Detail ───────────────────────────────────────────────────────────

@@ -4,6 +4,8 @@ namespace App\Livewire\OrderJasa;
 
 use App\Models\ServiceOrder;
 use App\Models\Category;
+use App\Models\Sale;
+use App\Models\SaleItem;
 use App\Models\ServiceCategory;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -13,7 +15,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Computed;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 
@@ -80,6 +82,25 @@ class CreateOrderJasa extends Component
     }
 }
 
+    private function generateInvoiceNumber()
+    {
+        $date    = now()->format('Ymd');
+        $prefix  = 'INV-' . $date . '-';
+    
+        // Cari nomor urut terakhir hari ini berdasarkan prefix
+        $last = Sale::where('invoice_number', 'like', $prefix . '%')
+                    ->orderBy('id', 'desc')
+                    ->first();
+    
+        $sequence = $last
+            ? intval(substr($last->invoice_number, -4)) + 1
+            : 1;
+    
+        $uniqueId = substr(uniqid(), -4);
+        $sequence = $sequence . $uniqueId;
+    
+        return $prefix . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+    }
     public function save()
     {
         $this->validate([
@@ -116,6 +137,7 @@ class CreateOrderJasa extends Component
             'design_file.mimes' => 'File harus berformat: pdf, jpg, jpeg, png, zip, rar, ai, psd, cdr',
             'design_file.max' => 'Ukuran file maksimal 10MB',
         ]);
+        DB::beginTransaction();
 
         try {
             $designFilePath = null;
@@ -140,6 +162,74 @@ class CreateOrderJasa extends Component
                 $statusPembayaran = 'belum_lunas';
             }
 
+            $statusYangKurangiStok = ['in_progress', 'completed'];
+            $perluKurangiStok      = in_array($this->status, $statusYangKurangiStok);
+            $saleId                = null;
+ 
+             if ($perluKurangiStok) {
+ 
+                $kategori = ServiceCategory::with('products')->find($this->category_id);
+    
+                if ($kategori && $kategori->products->isNotEmpty()) {
+    
+                    foreach ($kategori->products as $product) {
+                        $kebutuhan = $product->pivot->quantity * $this->quantity;
+    
+                        if ($product->stok_tersedia < $kebutuhan) {
+                            DB::rollBack();
+                            session()->flash('error',
+                                "Stok produk \"{$product->nama_produk}\" tidak mencukupi! " .
+                                "Dibutuhkan: {$kebutuhan} {$product->satuan}, " .
+                                "Tersedia: {$product->stok_tersedia} {$product->satuan}."
+                            );
+                            return;
+                        }
+                    }
+    
+                    $totalHargaProduk = 0;
+                    foreach ($kategori->products as $product) {
+                        $kebutuhan         = $product->pivot->quantity * $this->quantity;
+                        $totalHargaProduk += ($product->harga_jual ?? 0) * $kebutuhan;
+                    }
+    
+                 
+                    $invoiceNumber = $this->generateInvoiceNumber();
+    
+                    $sale = Sale::create([
+                        'invoice_number'   => $invoiceNumber,
+                        'customer_id'      => $userId !== Auth::id() ? $userId : null,
+                        'transaction_date' => $this->order_date,
+                        'payment_method'   => 'transfer',
+                        'notes'            => "Order Jasa: {$this->order_title} | Customer: {$this->customer_name} | Telp: {$this->customer_phone}",
+                        'total'            => $totalHargaProduk,
+                        'paid_amount'      => $this->payment,
+                        'change_amount'    => max(0, $this->payment - $totalHargaProduk),
+                        'status'           => $statusPembayaran === 'lunas' ? 'lunas' : 'belum-lunas',
+                        'created_by'       => Auth::id(),
+                    ]);
+    
+                    $saleId = $sale->id;
+    
+                    foreach ($kategori->products as $product) {
+                        $kebutuhan = $product->pivot->quantity * $this->quantity;
+                        $subtotal  = ($product->harga_jual ?? 0) * $kebutuhan;
+    
+                        SaleItem::create([
+                            'sale_id'        => $sale->id,
+                            'product_id'     => $product->id,
+                            'product_name'   => $product->nama_produk,
+                            'price'          => $product->harga_jual ?? 0,
+                            'price_purchase' => $product->harga_beli ?? 0,
+                            'quantity'       => $kebutuhan,
+                            'unit'           => $product->satuan ?? 'pcs',
+                            'subtotal'       => $subtotal,
+                        ]);
+
+                        $product->decrement('stok_tersedia', $kebutuhan);
+                    }
+                }
+            }
+
             ServiceOrder::create([
                 'user_id' => $userId,
                 'category_id' => $this->category_id,
@@ -158,13 +248,16 @@ class CreateOrderJasa extends Component
                 'notes' => $this->notes,
                 'status' => $this->status,
                 'status_pembayaran' => $statusPembayaran,
+                'stock_deducted'    => in_array($this->status, $statusYangKurangiStok),
+                'sale_id'          => $saleId,
                 'created_by' => Auth::id(),
             ]);
-
+            DB::commit();
             session()->flash('success', 'Order jasa berhasil ditambahkan');
             return redirect()->route('order-jasa.index');
 
         } catch (\Exception $e) {
+             DB::rollBack();
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
             dd($e->getMessage());
         }

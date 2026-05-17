@@ -145,6 +145,11 @@
                                             
                                             Lunas
                                         </span>
+                                    @elseif($sale->status === 'belum-lunas')
+                                        <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700">
+                                           
+                                            Belum Lunas
+                                        </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">
                                            

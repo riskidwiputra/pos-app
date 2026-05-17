@@ -1,9 +1,6 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
 
-        {{-- ═══════════════════════════════════════════════════════════════════════
-             HEADER
-        ═══════════════════════════════════════════════════════════════════════ --}}
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
 
@@ -106,9 +103,7 @@
             </div>
         </div>
 
-        {{-- ═══════════════════════════════════════════════════════════════════════
-             TABLE
-        ═══════════════════════════════════════════════════════════════════════ --}}
+  
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full">
@@ -183,11 +178,19 @@
                                        
 
                                         {{-- Edit --}}
-                                        <button wire:click="openEdit({{ $item->id }})"
+                                        {{-- <button wire:click="openEdit({{ $item->id }})"
                                                 title="Edit"
                                                 class="inline-flex items-center gap-1 px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all">
                                             Edit
-                                        </button>
+                                        </button> --}}
+                                        <a href="{{ route('order-jasa.service-category.edit', $item->id) }}" class="inline-flex items-center gap-1 px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all">
+                                            Edit
+                                        </a>
+                                            
+                                        {{-- wire:navigate
+                                        class="inline-flex items-center gap-1 px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all">
+                                            Edit
+                                        </a> --}}
 
                                         {{-- Hapus --}}
                                         <button wire:click="confirmDelete({{ $item->id }})"
