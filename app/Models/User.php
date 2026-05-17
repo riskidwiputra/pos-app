@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\ResetPassword;
 
 class User extends Authenticatable
 {
@@ -127,5 +128,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sale::class, 'customer_id');
     }
-   
+    
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPassword($token));
+    }
 }

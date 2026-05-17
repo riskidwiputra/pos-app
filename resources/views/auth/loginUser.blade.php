@@ -6,334 +6,14 @@
     <title>Login - Percetakan Matahari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://i.ibb.co.com/B5RDsQKQ/Logo-jpg.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #ff6b35;
-            --primary-dark: #e55a2b;
-            --secondary: #1F2937;
-            --secondary-dark: #111827;
-            --accent: #ffd23f;
-            --success: #4caf50;
-            --error: #f44336;
-            --text-dark: #1a1a1a;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --white: #ffffff;
-            --biru: #004e89;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            /* background: linear-gradient(135deg, #004e89 0%, #1a759f 100%); */
-                background-color: #f5f5f9;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            background: var(--white);
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Left Side - Branding */
-        .auth-brand {
-            background: linear-gradient(195deg, #0d1423, #17458f);
-            padding: 60px 40px;
-            color: var(--white);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* .auth-brand::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        } */
-
-        /* .auth-brand::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -20%;
-            width: 350px;
-            height: 350px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        } */
-
-        .brand-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .back-home {
-            position: absolute;
-            top: 30px;
-            left: 40px;
-            color: var(--white);
-            text-decoration: none;
-            font-size: 14px;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-            z-index: 2;
-        }
-
-        .back-home:hover {
-            opacity: 1;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--white);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
-        }
-
-        .logo-text .brand {
-            font-size: 24px;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .logo-text .tagline {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .brand-content h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .brand-content p {
-            font-size: 15px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            opacity: 0.9;
-        }
-
-        /* Right Side - Form */
-        .auth-form-container {
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .form-header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--biru);
-            margin-bottom: 10px;
-        }
-
-        .form-header p {
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .required {
-            color: var(--error);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
-            background: var(--white);
-        }
-
+        body { font-family: 'Poppins', sans-serif; }
         .form-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #ff6b35;
             box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
         }
-
-        .form-input.error {
-            border-color: var(--error);
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-icon {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .error-message {
-            font-size: 12px;
-            color: var(--error);
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-input {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .checkbox-label {
-            font-size: 14px;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-
-        .forgot-link {
-            font-size: 14px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
-        }
-
-        .form-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .form-divider {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-        }
-
         .form-divider::before {
             content: '';
             position: absolute;
@@ -343,231 +23,142 @@
             height: 1px;
             background: #e0e0e0;
         }
-
-        .form-divider span {
-            background: var(--white);
-            padding: 0 20px;
-            font-size: 13px;
-            color: var(--text-light);
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-login {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .social-button {
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            background: var(--white);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .social-button:hover {
-            border-color: var(--primary);
-            background: rgba(255, 107, 53, 0.05);
-        }
-
-        .auth-footer {
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-light);
-        }
-
-        .auth-footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-
-        .alert {
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .alert-error {
-            background: #ffebee;
-            border: 1px solid #f44336;
-            color: #c62828;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-            }
-
-            .auth-brand {
-                display: none;
-            }
-
-            .auth-form-container {
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 20px 15px;
-            }
-
-            .auth-form-container {
-                padding: 30px 20px;
-            }
-
-            .form-header h1 {
-                font-size: 24px;
-            }
-
-            .social-login {
-                grid-template-columns: 1fr;
-            }
-
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-        }
     </style>
 </head>
-<body>
-    <div class="auth-container">
-        <!-- Left Side - Branding -->
-        <div class="auth-brand">
-            <a href="/" class="back-home">
+<body class="min-h-screen bg-[#f5f5f9] flex items-center justify-center py-10 px-5">
+
+    <div class="w-full max-w-[900px] grid grid-cols-2 bg-white rounded-[30px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.15)] max-[968px]:grid-cols-1">
+
+        {{-- ======= LEFT SIDE - Branding ======= --}}
+        <div class="relative bg-gradient-to-b from-[#0d1423] to-[#17458f] px-10 py-[60px] text-white flex flex-col justify-center overflow-hidden max-[968px]:hidden">
+
+            <a href="/" class="absolute top-[30px] left-10 text-white text-sm opacity-90 hover:opacity-100 no-underline transition-opacity duration-300 z-10">
                 ← Kembali ke Beranda
             </a>
-            
-            <div class="brand-content">
-                <div class="logo-container">
-                     @php
-                    $path = public_path('img/logo/logo-remove.png');
-                    $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                @endphp
-                <img src="{{ $image }}" width="370">
-                   
+
+            <div class="relative z-10">
+                {{-- Logo --}}
+                <div class="flex items-center gap-4 mb-10">
+                    @php
+                        $path = public_path('img/logo/logo-remove.png');
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $image = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    @endphp
+                    <img src="{{ $image }}" width="370">
                 </div>
 
-                <h2>Selamat Datang Kembali!</h2>
-                <p>Login untuk melanjutkan pesanan Anda dan nikmati berbagai layanan percetakan.</p>
-
-                
+                <h2 class="text-[32px] font-bold mb-5 leading-snug">Selamat Datang Kembali!</h2>
+                <p class="text-[15px] opacity-90 mb-8 leading-[1.8]">
+                    Login untuk melanjutkan pesanan Anda dan nikmati berbagai layanan percetakan.
+                </p>
             </div>
         </div>
-        {{-- Success dari Register --}}
 
-        <!-- Right Side - Login Form -->
-        <div class="auth-form-container">
-       
+        {{-- ======= RIGHT SIDE - Form ======= --}}
+        <div class="px-[50px] py-[60px] flex flex-col justify-center max-[640px]:px-5 max-[640px]:py-8">
 
-       
-            <div class="form-header">
-                 
-                <h1>Masuk ke Akun Anda</h1>
-                <p>Masukkan email dan password untuk login</p>
+            {{-- Header --}}
+            <div class="text-center mb-10">
+                <h1 class="text-[28px] font-bold text-[#004e89] mb-2.5">Masuk ke Akun Anda</h1>
+                <p class="text-[#666] text-sm">Masukkan email dan password untuk login</p>
             </div>
 
-            <!-- Error Alert -->
+            {{-- Error Alert --}}
             @if ($errors->any())
-                <div class="alert alert-error">
-                    <strong> Login Gagal!</strong><br>
+                <div class="px-5 py-4 rounded-xl mb-6 text-sm bg-[#ffebee] border border-[#f44336] text-[#c62828]">
+                    <strong>Login Gagal!</strong><br>
                     {{ $errors->first() }}
                 </div>
             @endif
-             @if (session('status'))
-            <div class="alert" style="background: #e8f5e9; border: 1px solid #4caf50; color: #2e7d32;">
-                <strong>✓ Berhasil!</strong><br>
-                {{ session('status') }}
-            </div>
-        @endif
+
+            {{-- Success Alert --}}
+            @if (session('status'))
+                <div class="px-5 py-4 rounded-xl mb-6 text-sm bg-[#e8f5e9] border border-[#4caf50] text-[#2e7d32]">
+                    <strong>✓ Berhasil!</strong><br>
+                    {{ session('status') }}
+                </div>
+            @endif
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email or Phone -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Email atau Username <span class="required">*</span>
+                {{-- Email / Username --}}
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                        Email atau Username <span class="text-[#f44336]">*</span>
                     </label>
-                    <input 
-                        type="text" 
-                        class="form-input @error('email') error @enderror" 
+                    <input
+                        type="text"
                         name="email"
                         value="{{ old('email') }}"
                         placeholder="Masukkan email atau Username"
                         required
                         autofocus
-                    >
+                        class="form-input w-full px-[18px] py-3.5 border-2 rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white @error('email') border-[#f44336] @else border-[#e0e0e0] @enderror"/>
                     @error('email')
-                        <span class="error-message"> {{ $message }}</span>
+                        <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <!-- Password -->
-                <div class="form-group">
-                    <label class="form-label">
-                        Password <span class="required">*</span>
+               <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-sm font-semibold text-[#1a1a1a]">
+                        Password <span class="text-[#f44336]">*</span>
                     </label>
-                    <div class="input-group">
-                        <input 
-                            type="password" 
-                            class="form-input @error('password') error @enderror" 
-                            name="password"
-                            id="password"
-                            placeholder="Masukkan password"
-                            required
-                        >
-                        {{-- <span class="input-icon" onclick="togglePassword()">👁️</span> --}}
-                    </div>
-                    @error('password')
-                        <span class="error-message"> {{ $message }}</span>
-                    @enderror
+                    <a href="{{ route('password.request') }}" 
+                    class="text-xs text-[#ff6b35] font-semibold no-underline hover:underline">
+                        Lupa Password?
+                    </a>
                 </div>
+                <div class="relative">
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Masukkan password"
+                        required
+                        class="form-input w-full px-[18px] py-3.5 pr-12 border-2 rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white @error('password') border-[#f44336] @else border-[#e0e0e0] @enderror"/>
+                    <button type="button"
+                            onclick="togglePassword('password', 'eye-icon-password')"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-[#666] hover:text-[#004e89] transition-colors duration-200 focus:outline-none">
+                        <svg id="eye-icon-password" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                </div>
+                @error('password')
+                    <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                @enderror
+            </div>
 
-                
-
-                <!-- Submit Button -->
-                <button type="submit" class="form-submit">
-                     Login
+                {{-- Submit --}}
+                <button type="submit"
+                        class="w-full py-4 bg-gradient-to-r from-[#3B82F6] to-[#1E3A8A] text-white border-none rounded-xl text-base font-bold cursor-pointer transition-all duration-300 font-[Poppins] hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(255,107,53,0.3)]">
+                    Login
                 </button>
             </form>
 
-          
-            <!-- Footer -->
-            <div class="auth-footer mt-4" style="margin-top: 15px;">
-                Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a>
+            {{-- Footer --}}
+            <div class="text-center text-sm text-[#666] mt-4">
+                Belum punya akun? <a href="{{ route('register') }}" class="text-[#ff6b35] no-underline font-semibold hover:underline">Daftar di sini</a>
             </div>
+
         </div>
     </div>
 
     <script>
-        // Toggle Password Visibility
-        function togglePassword() {
-            const field = document.getElementById('password');
-            field.type = field.type === 'password' ? 'text' : 'password';
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon  = document.getElementById(iconId);
+            const isPassword = input.type === 'password';
+
+            input.type = isPassword ? 'text' : 'password';
+
+        
         }
     </script>
+
 </body>
 </html>

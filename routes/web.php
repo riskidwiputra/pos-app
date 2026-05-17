@@ -27,6 +27,7 @@ use App\Livewire\OrderJasa\CreateOrderCustomer;
 use App\Livewire\OrderJasa\CreateOrderJasa;
 use App\Livewire\OrderJasa\DetailOrderCustomer;
 use App\Livewire\OrderJasa\DetailOrderJasa;
+use App\Livewire\OrderJasa\EditServiceCategoryJasa;
 use App\Livewire\OrderJasa\IndexOrderCustomer;
 use App\Livewire\OrderJasa\IndexOrderJasa;
 use App\Livewire\OrderJasa\ServiceCategoryJasa;
@@ -76,6 +77,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('livewire.home.index');
 });
+
+// Route::get('/mail-preview', function () {
+//     $user = App\Models\User::first();
+//     $token = \Illuminate\Support\Facades\Password::createToken($user);
+//     $notification = new \Illuminate\Auth\Notifications\ResetPassword($token);
+//     return $notification->toMail($user);
+// });
+// Route::get('/mail-preview', function () {
+//     $user = App\Models\User::first();
+//     $token = \Illuminate\Support\Facades\Password::createToken($user);
+//     return (new \App\Notifications\ResetPassword($token))->toMail($user);
+// });
 
 Route::get('/login', function () {
     return view('auth.loginUser');
@@ -254,7 +267,10 @@ Route::prefix('sb-admin')->middleware('auth')->group(function () {
 
         Route::get('/{id}/detail', DetailOrderJasa::class)->name('detail');
 
-            Route::get('/setting-kategori', ServiceCategoryJasa::class)->name('setting-kategori');
+       Route::get('/service-category/{category}/edit', EditServiceCategoryJasa::class)
+            ->name('service-category.edit'); //
+
+        Route::get('/setting-kategori', ServiceCategoryJasa::class)->name('setting-kategori');
                     
     });
     Route::prefix('print')->name('print.')->group(function () {

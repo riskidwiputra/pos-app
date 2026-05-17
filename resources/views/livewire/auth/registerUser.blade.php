@@ -1,333 +1,175 @@
 <div>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --primary: #ff6b35;
-            --biru: #004e89;
-            --primary-dark: #e55a2b;
-            --secondary: #004e89;
-            --secondary-dark: #003d6b;
-            --accent: #ffd23f;
-            --success: #4caf50;
-            --error: #f44336;
-            --text-dark: #1a1a1a;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --white: #ffffff;
-            --shadow: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: #f5f5f9;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--white);
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .auth-form-container {
-            padding: 50px 40px;
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .form-header h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 6px;
-        }
-
-        .form-header p {
-            color: var(--text-light);
-            font-size: 13px;
-        }
-
-        .form-group { margin-bottom: 18px; }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-        }
-
-        .required { color: var(--error); }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s;
-            background: var(--white);
-        }
-
+        body { font-family: 'Poppins', sans-serif; }
         .form-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #ff6b35;
             box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-        }
-
-        .form-input.error { border-color: var(--error); }
-        .form-input.success-input { border-color: var(--success); }
-
-        .error-message {
-            font-size: 12px;
-            color: var(--error);
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .success-message {
-            font-size: 12px;
-            color: var(--success);
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .password-strength {
-            margin-top: 10px;
-            padding: 10px 12px;
-            background: var(--bg-light);
-            border-radius: 8px;
-        }
-
-        .strength-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-dark);
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .strength-bars {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 6px;
-        }
-
-        .strength-bar {
-            flex: 1;
-            height: 5px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-
-        .strength-bar.active { background: var(--success); }
-        .strength-bar.active.weak { background: var(--error); }
-        .strength-bar.active.medium { background: #ff9800; }
-
-        .strength-text { font-size: 11px; color: var(--text-light); }
-
-        .checkbox-group { display: flex; align-items: flex-start; gap: 8px; }
-
-        .checkbox-input { width: 16px; height: 16px; cursor: pointer; margin-top: 3px; flex-shrink: 0; }
-
-        .checkbox-label {
-            font-size: 13px;
-            color: var(--text-dark);
-            cursor: pointer;
-            line-height: 1.5;
-        }
-
-        .checkbox-label a { color: var(--primary); text-decoration: none; font-weight: 600; }
-        .checkbox-label a:hover { text-decoration: underline; }
-
-        .form-submit {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--biru);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-            font-family: 'Poppins', sans-serif;
-            margin-top: 8px;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 78, 137, 0.3);
-        }
-
-        .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-        .auth-footer {
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-light);
-            margin-top: 20px;
-        }
-
-        .auth-footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
-        .auth-footer a:hover { text-decoration: underline; }
-
-        @media (max-width: 640px) {
-            body { padding: 20px 15px; }
-            .auth-form-container { padding: 35px 25px; }
-            .form-header h1 { font-size: 22px; }
         }
     </style>
 
-    <div class="auth-container">
-        <div class="auth-form-container">
+    <div class="min-h-screen bg-[#f5f5f9] flex items-center justify-center py-10 px-5">
+        <div class="w-full max-w-[500px] bg-white rounded-[30px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
+            <div class="px-10 py-[50px]">
 
-            {{-- Header --}}
-            <div class="form-header">
-                <h1>Buat Akun Baru</h1>
-              
-            </div>
-
-            <form wire:submit.prevent="register">
-
-                {{-- Nama Lengkap --}}
-                <div class="form-group">
-                    <label class="form-label">
-                        Nama Lengkap <span class="required">*</span>
-                    </label>
-                    <input type="text"
-                           wire:model.blur="fullname"
-                           placeholder="Masukkan nama lengkap"
-                           autofocus
-                           class="form-input @error('fullname') error @enderror"/>
-                    @error('fullname')
-                        <span class="error-message"> {{ $message }}</span>
-                    @enderror
+                {{-- Header --}}
+                <div class="text-center mb-7">
+                    <h1 class="text-[26px] font-bold text-[#004e89] mb-1.5">Buat Akun Baru</h1>
                 </div>
 
-                {{-- Username --}}
-                <div class="form-group">
-                    <label class="form-label">
-                        Username <span class="required">*</span>
-                    </label>
-                    <input type="text"
-                           wire:model.blur="username"
-                           placeholder="Masukkan username"
-                           class="form-input @error('username') error @enderror"/>
-                    @error('username')
-                        <span class="error-message"> {{ $message }}</span>
-                    @enderror
-                </div>
+                <form wire:submit.prevent="register">
 
-                {{-- Email --}}
-                <div class="form-group">
-                    <label class="form-label">
-                        Email <span class="required">*</span>
-                    </label>
-                    <input type="email"
-                           wire:model.blur="email"
-                           placeholder="contoh@email.com"
-                           class="form-input @error('email') error @enderror @if($email && !$errors->has('email')) success-input @endif"/>
-                    @error('email')
-                        <span class="error-message"> {{ $message }}</span>
-                    @else
-                        @if($email && !$errors->has('email'))
-                            <span class="success-message">✓ Email valid</span>
-                        @endif
-                    @enderror
-                </div>
-
-                {{-- Password --}}
-                <div class="form-group">
-                    <label class="form-label">
-                        Password <span class="required">*</span>
-                    </label>
-                    <input type="password"
-                           wire:model.live="password"
-                           placeholder="Minimal 8 karakter"
-                           class="form-input @error('password') error @enderror"/>
-                    @error('password')
-                        <span class="error-message"> {{ $message }}</span>
-                    @enderror
-
-                    
-                </div>
-
-                {{-- Konfirmasi Password --}}
-                <div class="form-group">
-                    <label class="form-label">
-                        Konfirmasi Password <span class="required">*</span>
-                    </label>
-                    <input type="password"
-                           wire:model.live="confirmPassword"
-                           placeholder="Ulangi password"
-                           class="form-input @error('confirmPassword') error @enderror @if($confirmPassword && $confirmPassword === $password && !$errors->has('confirmPassword')) success-input @endif"/>
-                    @error('confirmPassword')
-                        <span class="error-message"> {{ $message }}</span>
-                    @else
-                        @if($confirmPassword && $confirmPassword === $password)
-                            <span class="success-message"> Password cocok</span>
-                        @endif
-                    @enderror
-                </div>
-
-                {{-- Terms & Conditions --}}
-                <div class="form-group">
-                    <div class="checkbox-group">
-                        <input type="checkbox"
-                               class="checkbox-input"
-                               id="terms"
-                               wire:model="terms"/>
-                        <label class="checkbox-label" for="terms">
-                            Saya setuju dengan
-                            <a href="#">Syarat & Ketentuan</a>
-                            dan
-                            <a href="#">Kebijakan Privasi</a>
-                            Percetakan Matahari
+                    {{-- Nama Lengkap --}}
+                    <div class="mb-[18px]">
+                        <label class="block text-[13px] font-semibold text-[#1a1a1a] mb-1.5">
+                            Nama Lengkap <span class="text-[#f44336]">*</span>
                         </label>
+                        <input type="text"
+                               wire:model.blur="fullname"
+                               placeholder="Masukkan nama lengkap"
+                               autofocus
+                               class="form-input w-full px-4 py-3 border-2 border-[#e0e0e0] rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white @error('fullname') border-[#f44336] @enderror"/>
+                        @error('fullname')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                        @enderror
                     </div>
-                    @error('terms')
-                        <span class="error-message">❌ {{ $message }}</span>
-                    @enderror
+
+                    {{-- Username --}}
+                    <div class="mb-[18px]">
+                        <label class="block text-[13px] font-semibold text-[#1a1a1a] mb-1.5">
+                            Username <span class="text-[#f44336]">*</span>
+                        </label>
+                        <input type="text"
+                               wire:model.blur="username"
+                               placeholder="Masukkan username"
+                               class="form-input w-full px-4 py-3 border-2 border-[#e0e0e0] rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white @error('username') border-[#f44336] @enderror"/>
+                        @error('username')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Email --}}
+                    <div class="mb-[18px]">
+                        <label class="block text-[13px] font-semibold text-[#1a1a1a] mb-1.5">
+                            Email <span class="text-[#f44336]">*</span>
+                        </label>
+                        <input type="email"
+                               wire:model.blur="email"
+                               placeholder="contoh@email.com"
+                               class="form-input w-full px-4 py-3 border-2 rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white
+                                   @error('email') border-[#f44336]
+                                   @else {{ $email && !$errors->has('email') ? 'border-[#4caf50]' : 'border-[#e0e0e0]' }}
+                                   @enderror"/>
+                        @error('email')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                        @else
+                            @if($email && !$errors->has('email'))
+                                <span class="flex items-center gap-1 text-xs text-[#4caf50] mt-1.5">✓ Email valid</span>
+                            @endif
+                        @enderror
+                    </div>
+
+                    {{-- Password --}}
+                    <div class="mb-[18px]">
+                        <label class="block text-[13px] font-semibold text-[#1a1a1a] mb-1.5">
+                            Password <span class="text-[#f44336]">*</span>
+                        </label>
+                        <div class="relative">
+                            <input id="password-input"
+                                   type="password"
+                                   wire:model.live="password"
+                                   placeholder="Minimal 8 karakter"
+                                   class="form-input w-full px-4 py-3 pr-11 border-2 border-[#e0e0e0] rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white @error('password') border-[#f44336] @enderror"/>
+                            <button type="button"
+                                    onclick="togglePassword()"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-[#666] hover:text-[#004e89] transition-colors duration-200 focus:outline-none">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                        @error('password')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Konfirmasi Password --}}
+                    <div class="mb-[18px]">
+                        <label class="block text-[13px] font-semibold text-[#1a1a1a] mb-1.5">
+                            Konfirmasi Password <span class="text-[#f44336]">*</span>
+                        </label>
+                        <div class="relative">
+                            <input id="confirm-password-input"
+                                   type="password"
+                                   wire:model.live="confirmPassword"
+                                   placeholder="Ulangi password"
+                                   class="form-input w-full px-4 py-3 pr-11 border-2 rounded-xl text-sm font-[Poppins] transition-all duration-300 bg-white
+                                       @error('confirmPassword') border-[#f44336]
+                                       @else {{ ($confirmPassword && $confirmPassword === $password && !$errors->has('confirmPassword')) ? 'border-[#4caf50]' : 'border-[#e0e0e0]' }}
+                                       @enderror"/>
+                              <button type="button"
+                                    onclick="togglePassword2()"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-[#666] hover:text-[#004e89] transition-colors duration-200 focus:outline-none">
+                                <i class="fa fa-eye"></i>
+                        </div>
+                        @error('confirmPassword')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">{{ $message }}</span>
+                        @else
+                            @if($confirmPassword && $confirmPassword === $password)
+                                <span class="flex items-center gap-1 text-xs text-[#4caf50] mt-1.5">Password cocok</span>
+                            @endif
+                        @enderror
+                    </div>
+
+                    {{-- Terms & Conditions --}}
+                    <div class="mb-[18px]">
+                        <div class="flex items-start gap-2">
+                            <input type="checkbox"
+                                   class="w-4 h-4 cursor-pointer mt-[3px] shrink-0"
+                                   id="terms"
+                                   wire:model="terms"/>
+                            <label class="text-[13px] text-[#1a1a1a] cursor-pointer leading-relaxed" for="terms">
+                                Saya setuju dengan
+                                <a href="#" class="text-[#ff6b35] no-underline font-semibold hover:underline">Syarat & Ketentuan</a>
+                                dan
+                                <a href="#" class="text-[#ff6b35] no-underline font-semibold hover:underline">Kebijakan Privasi</a>
+                                Percetakan Matahari
+                            </label>
+                        </div>
+                        @error('terms')
+                            <span class="flex items-center gap-1 text-xs text-[#f44336] mt-1.5">❌ {{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Submit --}}
+                    <button type="submit"
+                            class="w-full py-3.5 mt-2 bg-[#004e89] text-white border-none rounded-xl text-[15px] font-bold cursor-pointer transition-all duration-300 font-[Poppins] hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,78,137,0.3)] disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                            wire:loading.attr="disabled">
+                        <span wire:loading.remove wire:target="register">Daftar Sekarang</span>
+                        <span wire:loading wire:target="register">Memproses...</span>
+                    </button>
+
+                </form>
+
+                {{-- Footer --}}
+                <div class="text-center text-[13px] text-[#666] mt-5">
+                    Sudah punya akun? <a href="{{ route('login') }}" class="text-[#ff6b35] no-underline font-semibold hover:underline">Login di sini</a>
                 </div>
 
-                {{-- Submit --}}
-                <button type="submit"
-                        class="form-submit"
-                        wire:loading.attr="disabled">
-                    <span wire:loading.remove wire:target="register">Daftar Sekarang</span>
-                    <span wire:loading wire:target="register">Memproses...</span>
-                </button>
-
-            </form>
-
-            {{-- Footer --}}
-            <div class="auth-footer">
-                Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a>
             </div>
-
         </div>
     </div>
+
+    <script>
+      
+        function togglePassword() {
+            const field = document.getElementById('password-input');
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+        function togglePassword2() {
+            const field = document.getElementById('confirm-password-input');
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+ 
+    </script>
 </div>
